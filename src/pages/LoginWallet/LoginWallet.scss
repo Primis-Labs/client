@@ -1,0 +1,163 @@
+.LoginWallet{
+    // width: 80%;
+    padding-top: 48px;
+    max-height: 82vh;
+    overflow-y:scroll;
+    .top_{
+        width: 900px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 22px;
+        img{
+            width:40px;
+            height: 40px;
+            cursor: pointer;
+        }
+        span{
+            font-size: 20px;
+            font-weight: bold;
+            color: #FFFFFF;
+        }
+    }
+    .LoginWallet_c{
+        width: 900px;
+        // height: 222px;
+        margin: 0 auto;
+        background: url('../../images/waleet_bg.png');
+        background-size: 100% 100%;
+        p{
+            font-size: 24px;
+            font-weight: 400;
+            color: #FFFFFF;
+            width: 90%;
+            margin: 0 auto;
+            padding-top: 28px;
+            padding-bottom: 10px;
+        }
+        textarea{
+            width: 90%;
+            height: 192px;
+            margin: 0 auto;
+            display: block;
+            margin-top: 20px;
+            background: #111315;
+            opacity: 1;
+            border-radius: 16px;
+            border:none;
+            color: #fff;
+            resize: none;
+            
+        }
+        .key{
+            display: none;
+        }
+        ul{
+        display: flex;
+        justify-content:space-between;
+        border-bottom: 1px solid #707070;
+        width: 90%;
+        margin: 0 auto;
+        li{
+            font-size: 20px;
+            font-weight: 400;
+            color: #AAAAAA;  
+            padding-top: 28px;
+            padding-bottom: 24px;
+            width: 174px;
+            text-align: center;
+            margin-left: 40px;
+            margin-right: 40px;
+            position: relative;
+            cursor: pointer;
+            img{
+                width: 100%;
+                position: absolute;
+                bottom: 0px;
+                left:0px;
+                display: none;
+
+            }
+            .active{
+                color: #fff;
+                display: block;
+            }
+            
+        }
+        }
+        .Confirm_c{
+            display: flex;
+            justify-content: center;
+            padding-bottom: 30px;
+            padding-top: 60px;
+
+            .Cancel{
+                width: 200px;
+                height: 48px;
+                border: 1px solid #7D75FF;
+                opacity: 1;
+                border-radius: 16px;
+                background: rgba(0,0,0,0);
+                color: #7D75FF;
+                margin-right: 10px;
+                font-size: 18px;
+            }
+            .Confirm{
+                width: 200px;
+                height: 48px;
+                background: #7D75FF;
+                opacity: 1;
+                border-radius: 16px;
+                color: #fff;
+                border:none;
+                font-size: 18px;
+                margin-left: 10px;
+            }
+        }
+        .Uploads{
+            width: 90%;
+            height: 60px;
+            background: rgba(17,19,21,0.39);
+            opacity: 1;
+            border-radius: 16px;
+            margin: 0 auto;
+            margin-top: 20px;
+            overflow: hidden;
+            input{
+            width: 80%;
+            background: rgba(17,19,21,0.39);
+            height: 60px;
+            border:none;
+            }
+            .Upload_B{
+                width: 146px;
+                height: 50px;
+                background: linear-gradient(180deg, #7D75FF 0%, #8F8BDF 100%);
+                opacity: 1;
+                border-radius: 16px;
+                color: #fff;
+                border:none;
+
+            }
+        }
+        ._password{
+            width: 90%;
+            margin: 0 auto;
+            span{
+            font-size: 20px;
+            color: #FFFFFF;
+            display: block;
+            padding: 20px 0;
+            }
+            input{
+                width: 100%;
+                background: rgba(17,19,21,0.39);
+                height: 60px;
+                border:none;
+                border-radius: 16px;
+
+            }
+        }
+    }
+    
+}

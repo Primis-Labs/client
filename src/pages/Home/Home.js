@@ -7,8 +7,8 @@ const Home = () => {
     setCount(count+1)
   };
   useEffect(()=>{
-    //请求接口 异步渲染
-    document.title=`you ${count} number`;
+    //post
+    document.title=` ${count} `;
   },[count])
 
   return (

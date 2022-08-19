@@ -21,5 +21,4 @@ const mapStateToProps=(state)=>{
   console.log(state)
   return {age:state.age,name:state.name}
 }
-//redux建立连接  调用方法
 export default connect(mapStateToProps)(Header)

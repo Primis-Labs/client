@@ -12,18 +12,12 @@ import './Menu.scss';
 import logo from '../../images/logo.png';
 import setting from '../../images/setting.png';
 
-//导入需要配置路由的组件
 const items = [
   { label: 'Home', key: '/Home', icon: <HomeIcon /> }, // 菜单项务必填写 key
   { label: 'Wallet', key: '/Wallet', icon: <WalletIcon /> },
   { label: 'Chart', key: '/Chart', icon: <ChatIcon /> },
   { label: 'Subsoribe', key: '/Subsoribe', icon: <SubIcon /> },
   { label: 'Brower', key: '/Brower', icon: <BrowserIcon /> },
-  // {
-  //   label: '子菜单',
-  //   key: 'submenu',
-  //   children: [{ label: '子菜单项', key: 'submenu-item-1' }],
-  // },
 ];
 const SiderMenu = () => {
   const Navigate = useNavigate();

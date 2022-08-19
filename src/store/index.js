@@ -1,19 +1,16 @@
 import { createStore } from "redux";
-//引入公用的方法
 import { SET_NSME, SET_AGE } from './action'
 import { persistStore, persistReducer } from 'redux-persist';
-//  存储机制，可换成其他机制，当前使用sessionStorage机制
+//  sessionStorage
 import storageSession from 'redux-persist/lib/storage/session';
-// import storage from 'redux-persist/lib/storage'; //localStorage机制
+// import storage from 'redux-persist/lib/storage'; //localStorage
 //import { AsyncStorage } from 'react-native'; //react-native
-// 数据对象
 const storageConfig = {
-    key: 'root', // 必须有的
-    storage: storageSession, // 缓存机制
-    blacklist: [], // reducer 里不持久化的数据,除此外均为持久化数据
+    key: 'root', 
+    storage: storageSession, //
+    blacklist: [], // reducer
 };
 
-//传值 name:姓名    age:  年龄
 function user(state = { name: 'blue', age: 18 }, action) {
     switch (action.type) {
         case SET_AGE:

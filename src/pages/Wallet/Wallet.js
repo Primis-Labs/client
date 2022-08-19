@@ -19,10 +19,14 @@ function Wallets(props) {
         dispatch(setName('ice'))
     }
     const Navigate = useNavigate();
-    const MenuRouter = (props) => {
+    const CreatWalletRouter = (props) => {
       console.log(props)
       Navigate('/CreatWallet')
     };
+    const LoginWalletRouter = (props) => {
+        console.log(props)
+        Navigate('/LoginWallet')
+      };
     return (
         <div className="wallet" >
            {/* <span style={{color:'#fff'}} onClick={()=>test()}>wallet</span> 
@@ -31,14 +35,14 @@ function Wallets(props) {
             <div className='login_wallet'>
                 <h6>Welcome to Primis</h6>
                 <ul>
-                    <li onClick={MenuRouter}>
+                    <li onClick={CreatWalletRouter}>
                        <img src={creat_img}></img> 
                        <p>
                             <span>Create a wallet</span>
                             <a>Getting started with Primis</a>
                        </p>
                     </li>
-                    <li>
+                    <li onClick={LoginWalletRouter}>
                     <img src={import_img}></img> 
                        <p>
                             <span>Importing a wallet</span>

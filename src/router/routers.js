@@ -3,8 +3,10 @@ import Index from "../pages/Wallet/Wallet";
 import Chart from "../pages/Chart/chart";
 import Home from "../pages/Home/Home";
 import CreatWallte from '../pages/CreatWallte/CreatWallte';
-//路由配置选项效果然后挂载到对应的节点即可
+import LoginWallet from '../pages/LoginWallet/LoginWallet';
+//The routing configuration
 const routes =  [
+
     {
     path:'/Wallet',
     component: Index,
@@ -14,7 +16,7 @@ const routes =  [
     {
         lable:'Home',
         key:'Home',
-        path: "/Home",
+        path: "/",
         component: Home,
         exact: true,
     },
@@ -32,6 +34,12 @@ const routes =  [
         component: CreatWallte,
         exact: true,
         key:'CreatWallte',
-    }
+    },
+    {
+        path: "/LoginWallet",
+        component: LoginWallet,
+        exact: true,
+        key:'LoginWallet',
+    },
 ]
 export default routes;

@@ -1,8 +1,6 @@
 import React from "react";
 import './supperChain.scss';
-//引入react-redux
 import { connect ,useDispatch, useSelector} from 'react-redux';
-//引入公共方法
 import { setAge,setName } from '../../store/action';
 import pol_img from '../../images/pol.png';
 import kus_img from '../../images/kus.png';
@@ -42,5 +40,4 @@ const mapDispatchToProps= () =>{
         setAge, setName 
     }
 }
-//建立连接  调用方法
 export default connect(mapDispatchToProps)(SuperChain)

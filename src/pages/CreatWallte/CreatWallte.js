@@ -1,18 +1,24 @@
 import React from "react";
 import './CreatWallte.scss';
-//引入react-redux
+//react-redux
 import { connect ,useDispatch, useSelector} from 'react-redux';
-//引入公共方法
 import { setAge,setName } from '../../store/action';
-import SuperChain from '../SuperChain/SuperChain'
+import SuperChain from '../SuperChain/SuperChain';
+import { useNavigate } from 'react-router-dom';
 import Top from '../../images/router.png';
 import Warring from '../../images/warring.png';
+import CreatWalletFile from '../CreatWalletFile/CreatWalletFile'
 import { Button } from 'antd';
 function CreatWallte() {
+    const Navigate = useNavigate();
+    const outWalletRouter = (props) => {
+      console.log(props)
+      Navigate('/Wallet')
+    };
     return (
         <div className="CreatWallet" >
             <div className='top_'>
-                <img src={Top}></img>
+                <img onClick={outWalletRouter} src={Top}></img>
                 <span>Create wallet</span>
             </div>
             <div className='CreatWallet_c'>
@@ -28,6 +34,8 @@ function CreatWallte() {
                 </div>
             </from>
             </div>
+
+            <CreatWalletFile></CreatWalletFile>
             <SuperChain></SuperChain>
 
             </div>
@@ -39,5 +47,4 @@ const mapDispatchToProps= () =>{
         setAge, setName 
     }
 }
-//建立连接  调用方法
 export default connect(mapDispatchToProps)(CreatWallte)
