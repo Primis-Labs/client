@@ -1,0 +1,36 @@
+
+.header{
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background: #1A1C1E;
+    height: 120px;
+    width: 100%;
+    color:#fff;
+    .Search_Input{
+        margin: 0 auto;
+        width: 90%;
+        height: 60px;
+ 
+background: #272C31;
+        box-shadow: 0px 0px 27px rgba(95,88,204,0.13);
+        opacity: 1;
+        border-radius: 16px;
+        border:none;
+        .ant-input{
+ 
+background: #272C31;
+        color: #fff;
+        font-size: 18px;
+
+        }
+        .ant-input::placeholder{
+            color: #40444A;
+            font-size: 18px;
+            }
+        .anticon{
+            font-size: 18px !important;
+            color: #64686E;
+        }
+    }
+}
