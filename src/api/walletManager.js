@@ -25,11 +25,10 @@ async function postWallet(network,type,data) {
 
 async function main (){
     await initWallet(1);
-    const seed = await postWallet(1,'pol.mnemonicGenerate',{});
     const {
       address,
-      sk
-    } = await postWallet(1,'pol.seedCreateAddress',{seed});
+      seed
+    } = await postWallet(1,'pol.seedCreateAddress',{});
 
     const genesisHash = knownGenesis.acala[0];
     const name = "test";
@@ -46,7 +45,7 @@ async function main (){
 
     assert(f,"create account fail ..");
 
-    console.log(`create address ${address} , seed ${seed.toString()}`)
+    console.log(`create address ${address} , ${seed.toString()}`)
     const newPass = "12345678";
   
     // update passwd
