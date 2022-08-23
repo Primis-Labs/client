@@ -5,6 +5,7 @@ const  _crypto = require('@polkadot/util-crypto');
 const { assert, isHex } = require('@polkadot/util');
 const { ApiPromise, WsProvider } = require('@polkadot/api');
 const { ContractPromise } = require('@polkadot/api-contract'); 
+const axios = require('./fetherAxios'); 
 const {
   ScProvider,
   WellKnownChain,
@@ -13,6 +14,7 @@ const { async } = require('rxjs');
 const _type = "sr25519";
 const ETH_DERIVE_DEFAULT = "/m/44'/60'/0'/0/0";
 let provider,polkadotApi;
+let NFT
 
 // // Construct
 // const wsProvider = new WsProvider('wss://rpc.polkadot.io');
@@ -97,15 +99,14 @@ function saveAccountsCreate(data) {
     let {
       genesisHash,
       name,
-      password,
       seed,
-      type
+      address,
+      oldpasswd
     } = data;
-   _uiKeyring.addUri(getSuri(seed, type), password, {
+   let r = _uiKeyring.addUri(getSuri(seed, _type), oldpasswd, {
      genesisHash,
      name
    }, _type);
-
    return true;
  }
 
@@ -217,6 +218,14 @@ async function transfer(data){
   const txHash = await polkadotApi.tx.balances
       .transfer(to, balance)
       .signAndSend(pair);
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////       nft        //////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+async function nftByAddress(data){
+  let { address } = data;
+  return axios()
 }
 
 async function handle(type,data) {

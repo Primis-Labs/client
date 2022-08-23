@@ -31,8 +31,8 @@ async function main (){
     } = await postWallet(1,'pol.seedCreateAddress',{});
 
     const genesisHash = knownGenesis.acala[0];
-    const name = "test";
-    const oldpasswd = "123456";
+    const name = "xxx";
+    const oldpasswd = "1234"
 
     const data =  {
       genesisHash,
@@ -46,19 +46,19 @@ async function main (){
     assert(f,"create account fail ..");
 
     console.log(`create address ${address} , ${seed.toString()}`)
-    const newPass = "12345678";
+    const newPass = "1234";
   
     // update passwd
-    const ps1 = {
-      address,
-      newPass,
-      oldpasswd
-    } 
-    const r = await postWallet(1,'pol.accountsChangePassword',ps1)
+    // const ps1 = {
+    //   address,
+    //   newPass,
+    //   oldpasswd
+    // } 
+    // const r = await postWallet(1,'pol.accountsChangePassword',ps1)
 
-    assert(r,"update passwd fail.....");
+    // assert(r,"update passwd fail.....");
 
-    console.log(`update passwd  ${address} , newpd ${newPass.toString()}`)
+    // console.log(`update passwd  ${address} , newpd ${newPass.toString()}`)
 
     const ps2 = {
       address,
