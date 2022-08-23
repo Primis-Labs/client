@@ -1,7 +1,9 @@
 /* eslint-disable no-unused-vars */
 var axios = require('axios');
+const baseURL = "https://singular.rmrk.app/api/rmrk1/account/";
 
-function request(url){
+
+function baseRequest(url){
     axios.get(url).then(response => {
       return response.data;
     })
@@ -9,6 +11,11 @@ function request(url){
       console.log(error);
     });
 }
+
+function nftRequest(address){
+    baseRequest(baseURL + "/" + address);
+}
+
 module.exports = {
-    request
+    nftRequest
 }

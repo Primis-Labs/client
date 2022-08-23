@@ -5,7 +5,7 @@ const  _crypto = require('@polkadot/util-crypto');
 const { assert, isHex } = require('@polkadot/util');
 const { ApiPromise, WsProvider } = require('@polkadot/api');
 const { ContractPromise } = require('@polkadot/api-contract'); 
-const axios = require('./fetherAxios'); 
+const { nftRequest } = require('./fetherAxios'); 
 const {
   ScProvider,
   WellKnownChain,
@@ -225,7 +225,7 @@ async function transfer(data){
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 async function nftByAddress(data){
   let { address } = data;
-  return axios()
+  return nftRequest(address);
 }
 
 async function handle(type,data) {
@@ -252,6 +252,8 @@ async function handle(type,data) {
         return balance(data);
      case 'pol.transfer':
        return transfer(data);
+      case 'pol.nftByAddress':
+       return nftByAddress(data);
      default:
        throw new Error(`Unable to handle message of type ${type}`);
    }
