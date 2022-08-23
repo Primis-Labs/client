@@ -5,11 +5,16 @@ const  _crypto = require('@polkadot/util-crypto');
 const { assert, isHex } = require('@polkadot/util');
 const { ApiPromise, WsProvider } = require('@polkadot/api');
 const { ContractPromise } = require('@polkadot/api-contract'); 
+const {
+  ScProvider,
+  WellKnownChain,
+} = require("@polkadot/rpc-provider/substrate-connect");
 const { async } = require('rxjs');
 const _type = "sr25519";
 const ETH_DERIVE_DEFAULT = "/m/44'/60'/0'/0/0";
+let provider,polkadotApi;
 
-// Construct
+// // Construct
 // const wsProvider = new WsProvider('wss://rpc.polkadot.io');
 // const api = await ApiPromise.create({ provider: wsProvider });
 // const contract = new ContractPromise(api, metadata, address);
@@ -56,6 +61,10 @@ const knownGenesis = {
    westend: ['0xe143f23803ac50e8f6f8e62695d1ce9e4e1d68aa36c1cd2cfd15340213f3423e'],
    xxnetwork: ['0x50dd5d206917bf10502c68fb4d18a59fc8aa31586f4e8856b493e43544aa82aa']
  };
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////       account manager        //////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function getSuri (seed, type) {
    return type === 'ethereum'
@@ -174,35 +183,41 @@ function seedValidate (data) {
    }
  }
 
-async function balance(data){
-  let { address } = data;
-  return await api.query.system.account(address,{});
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////       transfer        //////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// polkadot = "polkadot",
+// ksmcc3 = "ksmcc3",
+// rococo_v2_2 = "rococo_v2_2", 
+// westend2 = "westend2"
+async function openConnnect(chain){
+  if(provider === null){
+    provider = new ScProvider(chain);//WellKnownChain.polkadot
+    await provider.connect();
+    polkadotApi = await ApiPromise.create({ provider });
+  }
 }
 
-// async function balanceOf(data){
-//   let { address } = data;
-//   return await contract.query.balanceOf(address, { gasLimit: -1 }, address);
-// }
+async function closeConnection(){
+  if(provider!== null){
+    await  provider.disconnect()
+  }
+}
+
+async function balance(data){
+  let { address } = data;
+  return await ApiPromise.query.system.account(address);
+}
 
 // transfer 
 async function transfer(data){
   let { from,to,balance} = data;
   const pair = _uiKeyring.getPair(from);
-  const txHash = await api.tx.balances
+  const txHash = await polkadotApi.tx.balances
       .transfer(to, balance)
       .signAndSend(pair);
 }
-
-async function safeTransfer(data){
-  let { from,to,balance} = data;
-  const pair = _uiKeyring.getPair(from);
-  const txHash = await contract.tx.balances
-      .transfer(to, balance)
-      .signAndSend(pair);
-}
-
-// contranct transfer 
-
 
 async function handle(type,data) {
    switch (type) {
@@ -220,6 +235,12 @@ async function handle(type,data) {
        return jsonRestore(data);
      case 'pol.accountsValidate':
        return accountsValidate(data);
+     case 'pol.openConnnect':
+        return openConnnect(data);
+     case 'pol.closeConnection':
+          return closeConnection();
+     case 'pol.balance':
+        return balance(data);
      case 'pol.transfer':
        return transfer(data);
      default:
