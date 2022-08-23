@@ -17,8 +17,24 @@ function CreatWalletFile() {
                 <span>Private Key</span>
             </div>
             <div className='CreatWallet_c'>
+            <h6>Secret Phrase</h6>
             <from>
-                <p><input placeholder='Private Key'></input> <img src={files}></img></p>
+                <div className='SecretPhrase'>
+                     <ul>
+                        <li><span>1111111</span><a>1</a></li>
+                        <li>1111111</li>
+                        <li>1111111</li>
+                        <li>1111111</li>
+                        <li>1111111</li>
+                        <li>1111111</li>
+                        <li>1111111</li>
+                        <li>1111111</li>
+                        <li>1111111</li>
+                        <li>1111111</li>
+                        <li>1111111</li>
+                        <li>1111111</li>
+
+                    </ul> <img src={files}></img></div>
                 <p><input  placeholder='Download Keyfile'></input> <img src={down}></img></p>
                 <h6><img src={Warring}></img>Note: Never disclose this Secret Phrase.</h6>
                 <div className='Confirm_c'>
