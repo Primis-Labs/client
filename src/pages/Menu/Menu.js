@@ -23,7 +23,7 @@ const SiderMenu = () => {
   const Navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
   const MenuRouter = (props) => {
-    console.log(props)
+    // console.log(props)
     Navigate(props.key)
   };
 

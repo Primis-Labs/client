@@ -84,7 +84,7 @@ async function main (){
 
     console.log(`import account success`)
  }
- main();
+//  main();
 module.exports = {
     postWallet,initWallet
 
