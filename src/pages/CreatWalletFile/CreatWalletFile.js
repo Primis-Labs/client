@@ -20,7 +20,7 @@ function CreatWalletFile() {
             <from>
                 <p><input placeholder='Private Key'></input> <img src={files}></img></p>
                 <p><input  placeholder='Download Keyfile'></input> <img src={down}></img></p>
-                <h6><img src={Warring}></img>Note: Never disclose this private key.</h6>
+                <h6><img src={Warring}></img>Note: Never disclose this Secret Phrase.</h6>
                 <div className='Confirm_c'>
                 <Button className='Confirm'>Confirm</Button>
                 </div>

@@ -1,8 +1,9 @@
 @font-face {  font-family: SpaceMono;  src: url('./style/font/SpaceMono-Bold.ttf');}
+@font-face {  font-family: SpaceMonoIt;  src: url('./style/font/Space-Mono-Regular-NH.ttf');}
 
 .App {
   /* text-align: center; */
-  font-family: 'SpaceMono';
+  font-family: 'SpaceMonoIt';
 }
 
 .App-logo {
@@ -66,7 +67,7 @@ time, mark, audio, video {
    border: 0;
    font-size: 100%;
    font: inherit;
-   font-family: 'SpaceMono';
+   font-family: 'SpaceMonoIt';
    vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */

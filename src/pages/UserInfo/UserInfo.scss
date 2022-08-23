@@ -1,0 +1,88 @@
+.UserInfo{
+    padding-top: 40px;
+    .user_wallet{
+        width: 800px;
+        padding: 0 50px;
+        height: 165px;
+        padding-top: 40px;
+        margin: 0 auto;
+        background: url('../../images/wallet_home_bg.png');
+        background-size: 100% 100%;
+        .avatar{
+            width: 82px ;
+            height: 82px;
+            border-radius: 50%;
+            float: left;
+            margin-right: 24px;
+        }
+        .address_ehem{
+            float: left;
+            .select_main{
+                width: 157px;
+                // height: 46px;
+                border: 1px solid #AAAAAA;
+                opacity: 1;
+                border-radius: 16px;
+                margin-bottom: 20px;
+
+                .ant-select-selector{
+                // height: 46px;
+                background: rgba(0,0,0,0);
+                border:none;
+                color: #fff;
+                &:after{
+                    color: #fff;
+                }
+                }
+                .ant-select-arrow{
+                    color: #fff;
+                }
+            }
+            p{
+                color: #AAAAAA;
+                font-size: 18px;
+                img{
+                    width: 23px;
+                    height: 23px;
+                    cursor: pointer;
+                }
+            }
+
+        }
+        .not{
+            float: right;
+            img{
+                width: 42px;
+                height: 42px;
+                margin-left: 20px;
+                cursor: pointer;
+            }
+        }
+    }
+
+}
+.ant-select-dropdown{
+    width: 137px;
+    background: rgba(26,28,30,0.39);
+    border: 1px solid #AAAAAA;
+    opacity: 1;
+    border-radius: 16px;
+    .ant-select-item-option-active{
+        .ant-select-item-option-content{
+        color: #fff;
+    
+        }
+    }
+   
+    .ant-select-item-option-selected{
+        .ant-select-item-option-content{
+        color: #fff;
+        }
+
+    }
+    .ant-select-item{
+        // color: #fff;
+        color: #AAAAAA;
+        background: rgba(0,0,0,0);
+    }
+}

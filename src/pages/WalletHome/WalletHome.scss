@@ -1,0 +1,230 @@
+.WalletHome{
+    padding-top: 20px;
+    max-height: 82vh;
+    overflow-y:scroll;
+    .LoginWallet_c{
+        width: 800px;
+        // height: 222px;
+        margin: 0 auto;
+        p{
+            font-size: 24px;
+            font-weight: 400;
+            color: #FFFFFF;
+            width: 90%;
+            margin: 0 auto;
+            padding-top: 28px;
+            padding-bottom: 10px;
+        }
+        .key{
+            display: none;
+     
+        }
+        .tabs{
+        display: flex;
+        justify-content:flex-start;
+        // border-bottom: 1px solid #707070;
+        width: 90%;
+        margin: 0 auto;
+        li{
+            font-size: 20px;
+            font-weight: 400;
+            color: #AAAAAA;  
+            padding-top: 28px;
+            padding-bottom: 24px;
+            width: 104px;
+            text-align: center;
+            margin-left: 40px;
+            margin-right: 40px;
+            position: relative;
+            cursor: pointer;
+            img{
+                width: 100%;
+                position: absolute;
+                bottom: 0px;
+                left:0px;
+                display: none;
+
+            }
+            .active{
+                color: #fff;
+                display: block;
+
+
+            }
+            
+        }
+        }
+        .Confirm_c{
+            display: flex;
+            justify-content: center;
+            padding-bottom: 30px;
+            padding-top: 60px;
+           
+        }
+        ._password{
+            width: 90%;
+            margin: 0 auto;
+            span{
+            font-size: 20px;
+            color: #FFFFFF;
+            display: block;
+            padding: 20px 0;
+            }
+            input{
+                width: 100%;
+                background: rgba(17,19,21,0.39);
+                height: 60px;
+                border:none;
+                border-radius: 16px;
+
+            }
+        }
+
+
+        .Assets_record{
+            border-radius: 16px;
+            border: 1px solid #666666;
+            padding-bottom: 20px;
+            li{
+                overflow: hidden;
+                background:#272C31;
+                height: 58px;
+                width: 90%;
+                margin: 0 auto;
+                margin-bottom: 12px;
+                border-radius: 5px;
+                p{
+                     width: 30%; 
+                     padding-top: 10px;
+                    font-size: 20px;
+                    color: #fff;
+                    float: left;
+                    text-align: center;
+                }
+                .button{
+                height: 37px;
+                background: #14191D;
+                box-shadow: 0px 3px 6px rgba(0,0,0,0.3);
+                opacity: 1;
+                color: #fff;
+                border-radius: 15px;
+                border:none;
+                margin-left: 20px;
+                }
+                img{
+                    width: 75px;
+                    // height: 33px;
+                }
+            }
+            .title{
+            font-size: 20px;
+            background: rgba(0,0,0,0);
+            p{
+               width: 30%; 
+               font-size: 20px;
+                color: #AAAAAA;
+            }
+            }
+        }
+        .Nft_ul{
+            padding-top: 20px;
+            border-radius: 16px;
+            border: 1px solid #666666;
+            padding-bottom: 20px;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-around;
+            padding-left: 20px;
+            padding-right: 20px;
+
+            li{
+                width: 23%;
+                height: 254px;
+                position: relative;
+                &:hover .seting_btn{
+                    opacity: 1;
+                    transition: .5s;
+                    
+                }
+                .setings{
+                    position:absolute;
+                    top: 0;
+                    right: 0;
+                    z-index: 1;
+                    text-align: right;
+                    cursor: pointer;
+                    &:hover .setting_l{
+                        display: block;
+                    }
+                    img{
+                        width: 24px;
+                        height: 24px;
+                        margin-right: 10px;
+                        margin-top: 10px;
+                 
+                    }
+                    .setting_l{
+                        width: 120px;
+                        height: 70px;
+                        border: 0px solid #AAAAAA;
+                        opacity: 1;
+                        background: rgba(0,0,0,0.4);
+                        border-radius: 10px 0px 10px 10px;
+                        margin-right: 10px;
+                        display: none;
+
+                    }
+                    p{
+                        width: 100%;
+                        text-align: center;
+                        font-size: 12px;
+                        padding-top: 10px;
+                        padding-bottom: 0;
+                        cursor: pointer;
+                        color: #fff;
+                        &:hover{
+                          color:   #3CDFDD;
+                        }
+                    }
+
+                }
+                .bg{
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    z-index: 0;
+                    left: 0;
+                    top: 0;
+              
+                }
+                .seting_btn{
+                    background: rgba(26,28,30,0.5);
+                    opacity: 1;
+                    padding-top: 15px;
+                    padding-bottom: 15px;
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-around;
+                    opacity:0;
+                
+                    .btn{
+                        width: 83px;
+                        height: 26px;
+                        border: 1px solid #7D75FF;
+                        opacity: 1;
+                        border-radius: 16px;
+                        background: rgba(0,0,0,0);
+                        color: #fff;
+                        font-size: 12px;
+                    }
+                    .Recieve{
+                        background: #7D75FF;
+                    }
+                }
+            }
+        }
+    }
+}

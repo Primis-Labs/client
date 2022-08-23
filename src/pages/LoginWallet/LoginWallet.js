@@ -17,6 +17,10 @@ function LoginWallet() {
       console.log(props)
       Navigate('/Wallet')
     };
+    const WalletHomeRouter = (props) => {
+        console.log(props)
+        Navigate('/WalletHome')
+      };
     const handleTab = (index) => {
     }
 
@@ -84,7 +88,7 @@ function LoginWallet() {
                     <Input  placeholder='PassWord'></Input>
                 </div>
                 <div className='Confirm_c'>
-                    <Button className='Confirm'>Confirm</Button>
+                    <Button className='Confirm' onClick={WalletHomeRouter}>Confirm</Button>
                 </div>
                 </div>
 

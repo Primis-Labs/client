@@ -13,7 +13,7 @@ import logo from '../../images/logo.png';
 import setting from '../../images/setting.png';
 
 const items = [
-  { label: 'Home', key: '/Home', icon: <HomeIcon /> }, // 菜单项务必填写 key
+  { label: 'Home', key: '/', icon: <HomeIcon /> }, // 菜单项务必填写 key
   { label: 'Wallet', key: '/Wallet', icon: <WalletIcon /> },
   { label: 'Chart', key: '/Chart', icon: <ChatIcon /> },
   { label: 'Subsoribe', key: '/Subsoribe', icon: <SubIcon /> },
