@@ -76,7 +76,7 @@ function mnemonicGenerate(){
 } 
 // Create address
 function seedCreateAddress(data){
-   let { seed } = data;
+   let seed = mnemonicGenerate();
    let address =  _uiKeyring.createFromUri(seed, {}, _type).address;
    return {
       address: address,
