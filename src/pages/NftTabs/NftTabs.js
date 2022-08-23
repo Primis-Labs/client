@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import './NftTabs.scss';
 //react-redux
 import { connect, useDispatch, useSelector } from 'react-redux';
-import { setAge, setName } from '../../store/action';
+import { setAccount, setName } from '../../store/action';
 import { useNavigate } from 'react-router-dom';
 import { Button ,Input,Modal} from 'antd';
 import Top from '../../images/router.png';
@@ -119,7 +119,7 @@ const NftTabs = () => {
 }
 const mapDispatchToProps = () => {
     return {
-        setAge, setName
+        setAccount, setName
     }
 }
 export default connect(mapDispatchToProps)(NftTabs)

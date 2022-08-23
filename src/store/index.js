@@ -1,5 +1,5 @@
 import { createStore } from "redux";
-import { SET_NSME, SET_AGE } from './action'
+import { SET_NSME, SET_ACCOUNT } from './action'
 import { persistStore, persistReducer } from 'redux-persist';
 //  sessionStorage
 import storageSession from 'redux-persist/lib/storage/session';
@@ -11,12 +11,12 @@ const storageConfig = {
     blacklist: [], // reducer
 };
 
-function user(state = { name: 'blue', age: 18 }, action) {
+function user(state, action) {
     switch (action.type) {
-        case SET_AGE:
+        case SET_ACCOUNT:
             return {
                 ...state,
-                age: state.age + action.age,
+                account: action.account ,
             }
         case SET_NSME:
             return {

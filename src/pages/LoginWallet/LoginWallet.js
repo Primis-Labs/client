@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import './LoginWallet.scss';
 //react-redux
 import { connect, useDispatch, useSelector } from 'react-redux';
-import { setAge, setName } from '../../store/action';
+import { setAccount, setName } from '../../store/action';
 import SuperChain from '../SuperChain/SuperChain';
 import { useNavigate } from 'react-router-dom';
 import Top from '../../images/router.png';
@@ -100,7 +100,7 @@ function LoginWallet() {
 }
 const mapDispatchToProps = () => {
     return {
-        setAge, setName
+        setAccount, setName
     }
 }
 export default connect(mapDispatchToProps)(LoginWallet)

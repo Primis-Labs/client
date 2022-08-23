@@ -2,7 +2,7 @@ import React from "react";
 import './UserInfo.scss';
 //react-redux
 import { connect ,useDispatch, useSelector} from 'react-redux';
-import { setAge,setName } from '../../store/action';
+import { setAccount,setName } from '../../store/action';
 import { useNavigate } from 'react-router-dom';
 import Top from '../../images/router.png';
 import File from '../../images/file.png';
@@ -44,7 +44,7 @@ const UserInfo = () => {
 }
 const mapDispatchToProps= () =>{ 
     return {
-        setAge, setName 
+        setAccount, setName 
     }
 }
 export default connect(mapDispatchToProps)(UserInfo)

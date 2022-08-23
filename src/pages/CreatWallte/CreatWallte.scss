@@ -3,6 +3,9 @@
     padding-top: 48px;
     max-height: 82vh;
     overflow-y:scroll;
+    .singe{
+        display: none;
+    }
     .top_{
         width: 800px;
         margin: 0 auto;
@@ -26,6 +29,51 @@
         margin: 0 auto;
         background: url('../../images/waleet_bg.png');
         background-size: 100% 100%;
+        .networks{
+            width: 90%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        img{
+            width: 28px;
+            margin-right: 10px;
+        }
+        span{
+        font-size: 20px;
+        color: #FFFFFF;
+        }
+
+        .select_main{
+            width: 150px;
+            height: 40px;
+            border: 1px solid #AAAAAA;
+            opacity: 1;
+            border-radius: 16px;
+            .ant-select-selector{
+            height: 40px;
+            font-size:12px;
+            background: rgba(0,0,0,0);
+            border:none;
+            color: #fff;
+            &:after{
+                color: #fff;
+            }
+            }
+            .ant-select-selection-item{
+            font-size:14px;
+            height: 40px;
+            line-height:40px;
+            }
+            .ant-select-arrow{
+            color: #fff;
+            }
+            .ant-select-suffix{
+            font-size:12px;
+
+            }
+        }
+        }
         p{
             font-size: 24px;
             font-weight: 400;

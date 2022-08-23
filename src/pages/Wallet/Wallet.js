@@ -5,15 +5,15 @@ import { connect ,useDispatch, useSelector} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 //引入公共方法
-import { setAge,setName } from '../../store/action';
+import { setAccount,setName } from '../../store/action';
 import creat_img from '../../images/creat.png';
 import import_img from '../../images/impot.png';
 import SuperChain from '../SuperChain/SuperChain';
 function Wallets(props) {
     console.log(props)
-    const {setAge,setName,dispatch} =props
+    const {setAccount,setName,dispatch} =props
     const test=()=>{
-        dispatch(setAge(2))
+        dispatch(setAccount(2))
     }
     const test1=()=>{
         dispatch(setName('ice'))
@@ -59,7 +59,7 @@ function Wallets(props) {
 }
 const mapDispatchToProps= () =>{ 
     return {
-        setAge, setName 
+        setAccount, setName 
     }
 }
 //建立连接  调用方法

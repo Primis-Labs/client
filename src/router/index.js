@@ -2,7 +2,7 @@
 import { HashRouter as Router, Route, Switch,Redirect } from 'react-router-dom';
 
 import routers from "./routers";
-console.log(Switch)
+// console.log(Switch)
 //routers
 function Routes() {
     return (

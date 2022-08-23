@@ -33,7 +33,6 @@ function App() {
                 <Routes>
                   {
                     routers.map((item, index) => {
-                      console.log(item)
                       return (
                         <Route key={index} path={item.path} exact={item.exact} element={<item.component></item.component>}></Route>
                       )

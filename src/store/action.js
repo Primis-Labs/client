@@ -1,12 +1,12 @@
 //age
-export const SET_AGE = 'set_age'
+export const SET_ACCOUNT = 'set_Account'
 //name
 export const SET_NSME='set_name'
 //age  n  get  age
-export function setAge(age) {
+export function setAccount(account) {
     return {
-        type: SET_AGE,
-        age: age
+        type: SET_ACCOUNT,
+        account: account
     }
 }
 //  get name
