@@ -12,9 +12,9 @@ const {
 } = require("@polkadot/rpc-provider/substrate-connect");
 const { async } = require('rxjs');
 const _type = "sr25519";
+const SEED_DEFAULT_LENGTH = 12;
 const ETH_DERIVE_DEFAULT = "/m/44'/60'/0'/0/0";
 let provider,polkadotApi;
-let NFT
 
 // // Construct
 // const wsProvider = new WsProvider('wss://rpc.polkadot.io');
@@ -82,15 +82,15 @@ async function cryptoWaitReady(){
 
 // Randomly generated mnemonic
 function mnemonicGenerate(){
-   let seed = _crypto.mnemonicGenerate();
+   let seed = _crypto.mnemonicGenerate(SEED_DEFAULT_LENGTH);
    return seed;
 } 
 // Create address
 function seedCreateAddress(data){
    let seed = mnemonicGenerate();
-   let address =  _uiKeyring.createFromUri(seed, {}, _type).address;
+   let address =  _uiKeyring.createFromUri(getSuri(seed, _type), {}, _type).address;
    return {
-      address: address,
+      address,
       seed
    };
 }
@@ -179,8 +179,10 @@ function seedValidate (data) {
    } = data;
    try {
       _uiKeyring.restoreAccount(json, newPass);
+      return true;
    } catch (error) {
-     throw new Error(error);
+      return false;
+    //  throw new Error(error);
    }
  }
 
@@ -258,7 +260,6 @@ async function handle(type,data) {
        throw new Error(`Unable to handle message of type ${type}`);
    }
  }
-
 module.exports = {
    knownGenesis,
    handle,
