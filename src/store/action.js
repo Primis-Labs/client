@@ -1,7 +1,7 @@
 //age
 export const SET_ACCOUNT = 'set_Account'
 //name
-export const SET_NSME='set_name'
+export const SET_SEED='set_Seed'
 //age  n  get  age
 export function setAccount(account) {
     return {
@@ -10,9 +10,9 @@ export function setAccount(account) {
     }
 }
 //  get name
-export function setName(name) {
+export function setSeed(seed) {
     return {
-        type: SET_NSME,
-        name: name
+        type: SET_SEED,
+        seed: seed
     }
 }

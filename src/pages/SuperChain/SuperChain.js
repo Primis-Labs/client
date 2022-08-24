@@ -1,7 +1,7 @@
 import React from "react";
 import './supperChain.scss';
 import { connect ,useDispatch, useSelector} from 'react-redux';
-import { setAccount,setName } from '../../store/action';
+import { setAccount,setSeed } from '../../store/action';
 import pol_img from '../../images/pol.png';
 import kus_img from '../../images/kus.png';
 import aca_img from '../../images/acalc.png';
@@ -37,7 +37,7 @@ function SuperChain() {
 }
 const mapDispatchToProps= () =>{ 
     return {
-        setAccount, setName 
+        setAccount, setSeed 
     }
 }
 export default connect(mapDispatchToProps)(SuperChain)

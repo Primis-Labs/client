@@ -11,20 +11,30 @@ import { useNavigate } from 'react-router-dom';
 import './Menu.scss';
 import logo from '../../images/logo.png';
 import setting from '../../images/setting.png';
+import { connect} from 'react-redux';
 
-const items = [
-  { label: 'Home', key: '/', icon: <HomeIcon /> }, // 菜单项务必填写 key
-  { label: 'Wallet', key: '/Wallet', icon: <WalletIcon /> },
-  { label: 'Chart', key: '/Chart', icon: <ChatIcon /> },
-  { label: 'Subsoribe', key: '/Subsoribe', icon: <SubIcon /> },
-  { label: 'Brower', key: '/Brower', icon: <BrowserIcon /> },
-];
-const SiderMenu = () => {
+const SiderMenu = (props) => {
+  const {account}=props;
+  console.log(account)
+  const items = [
+    { label: 'Home', key: '/', icon: <HomeIcon /> }, // 菜单项务必填写 key
+    { label: 'Wallet', key: '/Wallet', icon: <WalletIcon /> },
+    { label: 'Chart', key: '/Chart', icon: <ChatIcon /> },
+    { label: 'Subsoribe', key: '/Subsoribe', icon: <SubIcon /> },
+    { label: 'Brower', key: '/Brower', icon: <BrowserIcon /> },
+  ];
   const Navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
-  const MenuRouter = (props) => {
-    // console.log(props)
-    Navigate(props.key)
+  const MenuRouter = (routers) => {
+    if(account){
+      if(routers.key=='/Wallet'){
+        Navigate('/WalletHome')
+      }else{
+        Navigate(routers.key)
+      }
+    }else{
+      Navigate(routers.key)
+    }
   };
 
   return (
@@ -44,5 +54,8 @@ const SiderMenu = () => {
     </div>
   );
 };
-
-export default SiderMenu;
+const mapStateToProps=(state)=>{
+  console.log(state)
+  return {account:state.account}
+}
+export default connect(mapStateToProps)(SiderMenu);

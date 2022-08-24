@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import './CreatWalletFile.scss';
 import { connect, useDispatch, useSelector } from 'react-redux';
-import { setAccount, setName } from '../../store/action';
+import { setAccount, setSeed } from '../../store/action';
 // import SuperChain from '../SuperChain/SuperChain'
 import Top from '../../images/router.png';
 import Warring from '../../images/warring.png';
@@ -77,7 +77,8 @@ const CreatWalletFile = (props) => {
                     </ul>
                     <img onClick={copySeed} src={files}></img></div>
                 <p><input placeholder='Download Keyfile' disabled></input> <img onClick={()=>{Downloads(account,password)}} src={down}></img></p>
-                <h6><img src={Warring}></img>Note: Never disclose this Secret Phrase.</h6>
+                <h6><img src={Warring}></img>Note: Primis will not keep Secret Phrase, which is only displayed here once. Anyone who has Secret Phrase will have access to all your digital assets. 
+Please securely store the Secret Phrase.</h6>
                 <div className='Confirm_c'>
                     <Button onClick={walletHome} className='Confirm'>Confirm</Button>
                 </div>
@@ -88,7 +89,7 @@ const CreatWalletFile = (props) => {
 }
 const mapDispatchToProps = () => {
     return {
-        setAccount, setName
+        setAccount, setSeed
     }
 }
 const mapStateToProps=(state)=>{

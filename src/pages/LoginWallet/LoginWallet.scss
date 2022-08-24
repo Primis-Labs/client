@@ -123,11 +123,13 @@
             margin: 0 auto;
             margin-top: 20px;
             overflow: hidden;
+            display: flex;
             input{
             width: 80%;
             background: rgba(17,19,21,0.39);
             height: 60px;
             border:none;
+            color: #fff;
             }
             .Upload_B{
                 width: 146px;
@@ -155,6 +157,7 @@
                 height: 60px;
                 border:none;
                 border-radius: 16px;
+                color: #fff;
 
             }
         }

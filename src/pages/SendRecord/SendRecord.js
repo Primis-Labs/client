@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import './SendRecord.scss';
 //react-redux
 import { connect ,useDispatch, useSelector} from 'react-redux';
-import { setAccount,setName } from '../../store/action';
+import { setAccount,setSeed } from '../../store/action';
 import { useNavigate } from 'react-router-dom';
 import UserInfo from '../UserInfo/UserInfo'
 import Dot_IMF from '../../images/dot.png';
@@ -92,7 +92,7 @@ const SendRecord = () => {
 }
 const mapDispatchToProps= () =>{ 
     return {
-        setAccount, setName 
+        setAccount, setSeed 
     }
 }
 export default connect(mapDispatchToProps)(SendRecord)

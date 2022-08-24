@@ -2,31 +2,40 @@ import React, { useState } from "react";
 import './LoginWallet.scss';
 //react-redux
 import { connect, useDispatch, useSelector } from 'react-redux';
-import { setAccount, setName } from '../../store/action';
+import { setAccount, setSeed } from '../../store/action';
 import SuperChain from '../SuperChain/SuperChain';
 import { useNavigate } from 'react-router-dom';
 import Top from '../../images/router.png';
 import tabActive from '../../images/tba_active.png';
 import { Button, message, Upload,Input } from 'antd';
-
+import { postWallet, initWallet } from '../../api/walletManager';
 const { TextArea } = Input;
-function LoginWallet() {
-    const [tabType, setTabType] = useState(true)
+function LoginWallet(props){
+    const { setAccount, dispatch } = props
+    const [tabType, setTabType] = useState(true);
+    const [filesContent, setFilesContent] = useState('')
+    const [fileName, setFileName] = useState('')
+    const [passwords, setPasswords] = useState('')
+    const [seedValue, setSeedValue] = useState('')
+    const [loadings, setLoadings] = useState(false);
+
     const Navigate = useNavigate();
-    const outWalletRouter = (props) => {
-      console.log(props)
+    const outWalletRouter = () => {
       Navigate('/Wallet')
     };
-    const WalletHomeRouter = (props) => {
-        console.log(props)
+    const WalletHomeRouter = () => {
         Navigate('/WalletHome')
       };
-    const handleTab = (index) => {
-    }
-
-    const props = {
+    const printFile=(file)=> {
+        var reader = new FileReader();
+        reader.onload = evt => {
+            setFilesContent(evt.target.result);
+        };
+        reader.readAsText(file);
+      };
+    const FileProps = {
         name: 'file',
-        action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+        action: '',
         headers: {
           authorization: 'authorization-text',
         },
@@ -34,15 +43,55 @@ function LoginWallet() {
         onChange(info) {
           if (info.file.status !== 'uploading') {
             console.log(info.file, info.fileList);
+            setFileName(info.file.name);
+            printFile(info.file.originFileObj);
           }
-      
-          if (info.file.status === 'done') {
-            message.success(`${info.file.name} file uploaded successfully`);
-          } else if (info.file.status === 'error') {
-            message.error(`${info.file.name} file upload failed.`);
-          }
+        //   if (info.file.status === 'done') {
+        //     message.success(`${info.file.name} file uploaded successfully`);
+        //   } 
         },
       };
+      const PassClick=(e)=>{
+        setPasswords(e.target.value);
+      }
+      const ConfirmLogin= async()=>{
+        setLoadings(true)
+        if(!filesContent){
+            message.error(`Not upload File!`);
+            setLoadings(false)
+            return;
+        }
+        if(!passwords){
+            message.error(`Password mistake！`);
+             setLoadings(false)
+            return;
+        }
+        let ps4 = {
+            'json':JSON.parse(filesContent),
+            'newPass':passwords
+          }
+          await postWallet(1,'pol.jsonRestore',ps4).then(res=>{
+              console.log(res)
+              if(res){
+                dispatch(setAccount(JSON.parse(filesContent).address))
+                Navigate('/WalletHome')
+             }else{
+                message.error(`Password mistake！`);
+                setLoadings(false)
+             }
+          });
+      
+      }
+      const seed=(e)=>{
+          console.log(e.target.value)
+        setSeedValue(e.target.value)
+      }
+    const Secret=async()=>{
+        postWallet(1,'pol.seedCreateAddress',seedValue).then(res=>{
+            dispatch(setAccount(res.address))
+            Navigate('/WalletHome')            
+        });
+    }
     return (
         <div className="LoginWallet" >
             <div className='top_'>
@@ -55,7 +104,7 @@ function LoginWallet() {
                         setTabType(true)
                     }}
                     >
-                        <span  className={tabType?'active':''} >Private key</span>
+                        <span  className={tabType?'active':''} >Secret Phrase</span>
                         <img className={tabType?'active':''} src={tabActive}></img>
                     </li>
                     <li  onClick={()=>{
@@ -67,28 +116,26 @@ function LoginWallet() {
                 </ul>
 
                 <div  className={tabType?'active':'key'}>
-                    <from>
-                        <TextArea rows={6} maxLength={6} ></TextArea>
+                        <TextArea onChange={seed} rows={6}  ></TextArea>
                         <div className='Confirm_c'>
-                            <Button className='Cancel'>Cancel</Button>
-                            <Button className='Confirm'>Confirm</Button>
+                            {/* <Button className='Cancel'>Cancel</Button> */}
+                            <Button onClick={Secret} className='Confirm'>Confirm</Button>
                         </div>
-                    </from>
                 </div>
 
                 <div  className={!tabType?'active':'key'}>
                 <div className='Uploads'>
-                 <Input disabled placeholder='File Name'></Input>
-                <Upload {...props} >
+                 <Input disabled placeholder='File Name' value={fileName}></Input>
+                <Upload {...FileProps} >
                     <Button className='Upload_B'>Select File</Button>
                 </Upload>
                 </div>
                 <div className='_password'>
                     <span>Enter password</span>
-                    <Input  placeholder='PassWord'></Input>
+                    <Input type='password'  placeholder='PassWord' onChange={PassClick}></Input>
                 </div>
                 <div className='Confirm_c'>
-                    <Button className='Confirm' onClick={WalletHomeRouter}>Confirm</Button>
+                    <Button loading={loadings}  onClick={()=>ConfirmLogin()} className='Confirm' >Confirm</Button>
                 </div>
                 </div>
 
@@ -100,7 +147,8 @@ function LoginWallet() {
 }
 const mapDispatchToProps = () => {
     return {
-        setAccount, setName
+        setAccount,
+        setSeed
     }
 }
 export default connect(mapDispatchToProps)(LoginWallet)

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import './AssetsTabs.scss';
 //react-redux
 import { connect, useDispatch, useSelector } from 'react-redux';
-import { setAccount, setName } from '../../store/action';
+import { setAccount, setSeed } from '../../store/action';
 import { useNavigate } from 'react-router-dom';
 import { Button ,Input,Modal} from 'antd';
 import Top from '../../images/router.png';
@@ -115,7 +115,7 @@ const AssetsTab = () => {
 }
 const mapDispatchToProps = () => {
     return {
-        setAccount, setName
+        setAccount, setSeed
     }
 }
 export default connect(mapDispatchToProps)(AssetsTab)

@@ -5,18 +5,18 @@ import { connect ,useDispatch, useSelector} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 //引入公共方法
-import { setAccount,setName } from '../../store/action';
+import { setAccount,setSeed } from '../../store/action';
 import creat_img from '../../images/creat.png';
 import import_img from '../../images/impot.png';
 import SuperChain from '../SuperChain/SuperChain';
 function Wallets(props) {
     console.log(props)
-    const {setAccount,setName,dispatch} =props
+    const {setAccount,setSeed,dispatch} =props
     const test=()=>{
         dispatch(setAccount(2))
     }
     const test1=()=>{
-        dispatch(setName('ice'))
+        dispatch(setSeed('ice'))
     }
     const Navigate = useNavigate();
     const CreatWalletRouter = (props) => {
@@ -59,7 +59,7 @@ function Wallets(props) {
 }
 const mapDispatchToProps= () =>{ 
     return {
-        setAccount, setName 
+        setAccount, setSeed 
     }
 }
 //建立连接  调用方法

@@ -1,8 +1,8 @@
 import { createStore } from "redux";
-import { SET_NSME, SET_ACCOUNT } from './action'
+import { SET_SEED, SET_ACCOUNT } from './action'
 import { persistStore, persistReducer } from 'redux-persist';
 //  sessionStorage
-import storageSession from 'redux-persist/lib/storage/session';
+import storageSession from 'redux-persist/lib/storage';
 // import storage from 'redux-persist/lib/storage'; //localStorage
 //import { AsyncStorage } from 'react-native'; //react-native
 const storageConfig = {
@@ -18,10 +18,10 @@ function user(state, action) {
                 ...state,
                 account: action.account ,
             }
-        case SET_NSME:
+        case SET_SEED:
             return {
                 ...state,
-                name: action.name
+                seed: action.seed
             }
         default:
             return state;

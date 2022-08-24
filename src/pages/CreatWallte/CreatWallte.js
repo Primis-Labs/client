@@ -2,7 +2,7 @@ import React, { useState, useEffect ,createContext} from "react";
 import './CreatWallte.scss';
 //react-redux
 import { connect, useDispatch, useSelector } from 'react-redux';
-import { setAccount, setName } from '../../store/action';
+import { setAccount, setSeed } from '../../store/action';
 import SuperChain from '../SuperChain/SuperChain';
 import { useNavigate } from 'react-router-dom';
 import Top from '../../images/router.png';
@@ -38,7 +38,7 @@ function CreatWallte(props) {
                 postWallet(1, 'pol.seedCreateAddress', { res }).then(res => {
                     dispatch(setAccount(res.address))
                     setSeed(res.seed)
-                    let genesisHash = knownGenesis.acala[0];
+                    let genesisHash = '';
                     CreatWallet(genesisHash, 'xxx', res.seed, res.address, passwordv)
                 })
             });
