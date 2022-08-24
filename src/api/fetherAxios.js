@@ -2,7 +2,6 @@
 var axios = require('axios');
 const baseURL = "https://singular.rmrk.app/api/rmrk1/account/";
 
-
 function baseRequest(url){
     axios.get(url).then(response => {
       return response.data;
