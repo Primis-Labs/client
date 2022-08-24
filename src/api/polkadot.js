@@ -86,14 +86,15 @@ function mnemonicGenerate(){
    return seed;
 } 
 // Create address
-function seedCreateAddress(data){
-   let seed = mnemonicGenerate();
+function seedCreateAddress(mnemonic){
+   let seed = ( typeof data === 'undefined' ? mnemonicGenerate() : mnemonic );
    let address =  _uiKeyring.createFromUri(getSuri(seed, _type), {}, _type).address;
    return {
       address,
       seed
    };
 }
+
 // save account
 function saveAccountsCreate(data) {
     let {
