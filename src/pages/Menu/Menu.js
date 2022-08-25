@@ -15,7 +15,7 @@ import { connect} from 'react-redux';
 
 const SiderMenu = (props) => {
   const {account}=props;
-  console.log(account)
+  // console.log(account)
   const items = [
     { label: 'Home', key: '/', icon: <HomeIcon /> }, // 菜单项务必填写 key
     { label: 'Wallet', key: '/Wallet', icon: <WalletIcon /> },
@@ -55,7 +55,7 @@ const SiderMenu = (props) => {
   );
 };
 const mapStateToProps=(state)=>{
-  console.log(state)
+  // console.log(state)
   return {account:state.account}
 }
 export default connect(mapStateToProps)(SiderMenu);

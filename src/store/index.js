@@ -10,9 +10,11 @@ const storageConfig = {
     storage: storageSession, //
     blacklist: [], // reducer
 };
-
-function user(state, action) {
-    console.log(action)
+const defaultState={
+    keys:0
+}
+function user(state=defaultState, action) {
+    console.log(state)
     switch (action.type) {
         case SET_ACCOUNT:
             return {
@@ -22,7 +24,8 @@ function user(state, action) {
         case SET_SEED:
             return {
                 ...state,
-                seed: action.seed
+                keys:action.seed,
+                seed:action.seed
             }
         case SET_ADDRESS:
             return {

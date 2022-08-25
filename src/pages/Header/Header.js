@@ -8,7 +8,7 @@ import {SearchIcon} from '../../style/iconfont'
 //引入react-redux
 function Header(props) {
   const {age,name} =props;
-  console.log(age)
+  // console.log(age)
   const onSearch = (value) => console.log(value);
     return (
       <div className='header'>
@@ -18,7 +18,7 @@ function Header(props) {
     )
 }  
 const mapStateToProps=(state)=>{
-  console.log(state)
+  // console.log(state)
   return {age:state.age,name:state.name}
 }
 export default connect(mapStateToProps)(Header)
