@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import './WalletHome.scss';
 //react-redux
 import { connect ,useDispatch, useSelector} from 'react-redux';
@@ -11,17 +11,30 @@ import Nft_IMG from '../../images/nft.png';
 import Set_IMG from '../../images/set.png';
 import {NftAsset} from '../NftAssets/NftAssets'
 import { Button } from 'antd';
+import { postWallet } from '../../api/walletManager';
 
 const handleChange = (value) => {
     console.log(`selected ${value}`);
   };
-const WalletHome = () => {
+const WalletHome = (props) => {
+    const { account, setAccount } = props;
     const [tabType, setTabType] = useState(true)
     const Navigate = useNavigate();
     const Recieve_click = (props) => {
         console.log(props)
         Navigate('/AssetsTabs')
     };
+    useEffect(() => {
+        const ps2 = {
+            'address':account,
+          }
+          postWallet(1,'pol.balance',ps2).then(res=>{
+             console.log(res)
+        });;
+        return () => {
+            
+        }
+    }, [])
     return (
         <div className="WalletHome" >
             <UserInfo></UserInfo>
@@ -126,4 +139,7 @@ const mapDispatchToProps= () =>{
         setAccount, setSeed 
     }
 }
-export default connect(mapDispatchToProps)(WalletHome)
+const mapStateToProps = (state) => {
+    return { account: state.account }
+}  
+export default connect(mapDispatchToProps,mapStateToProps)(WalletHome)

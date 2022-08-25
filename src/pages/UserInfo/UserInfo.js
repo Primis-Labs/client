@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import './UserInfo.scss';
 //react-redux
 import { connect, useDispatch, useSelector } from 'react-redux';
-import { setAccount, setSeed } from '../../store/action';
+import { setAccount, setSeed,setAddress } from '../../store/action';
 import { useNavigate } from 'react-router-dom';
 import Top from '../../images/router.png';
 import File from '../../images/file.png';
@@ -13,17 +13,17 @@ import { Button, Select, message, Input } from 'antd';
 import closeUrl from '../../images/close.png';
 import keyDowload from '../../images/keyDowload.png';
 import { postWallet } from '../../api/walletManager';
-
+import {knownSubstrate} from '../../api/network'
 const { Option } = Select;
-const handleChange = (value) => {
-    console.log(`selected ${value}`);
-};
+
 const UserInfo = (props) => {
-    const { account, setAccount } = props;
+    // console.log(knownSubstrate)
+    const { account, setAccount,setSeed,seed ,setAddress,address} = props;
     const Navigate = useNavigate();
     const [tabType, setTabType] = useState(false);
     const [passFILE, setPassFILE] = useState(false);
     const [passType, setPassType] = useState(false);
+
     
     const copyAddress = () => {
         let copyContent = account;
@@ -61,7 +61,7 @@ const UserInfo = (props) => {
           }
          await postWallet(1,'pol.accountsExport',ps2).then(res=>{
           funDownload(JSON.stringify(res), `keyFile.json`);
-        setPassType(false);
+            setPassType(false);
         });;
     }
     const funDownload = (content, filename) => {
@@ -78,17 +78,47 @@ const UserInfo = (props) => {
         // 然后移除
         document.body.removeChild(eleLink);
     };
+
+    const handleChange = async (value) => {
+        const ps3 = {
+            'address':account,
+            'prefix':value
+          }
+        await postWallet(1,'pol.formatAddressByChain',ps3).then(res=>{
+            setSeed(value);
+            setAddress(res);
+            // postWallet(1,'pol.closeConnection','').then(res=>{
+            //     console.log(res)
+            // })
+            knownSubstrate.map(item=>{
+                if(value==item.prefix){
+                    console.log(item)
+                    postWallet(1,'pol.openConnnect',item.rpc).then(data=>{
+                        console.log(data)
+                    }) 
+                }
+            })
+         
+          });
+    
+    }
     return (
         <div className="UserInfo" >
             <div className='user_wallet'>
                 <img className='avatar' src={Top}></img>
                 <div className='address_ehem'>
-                    <Select className='select_main' defaultValue="lucy" style={{ width: 120 }} onChange={handleChange}>
-                        <Option value="jack">Jack</Option>
-                        <Option value="lucy">Lucy</Option>
-                        <Option value="Yiminghe">yiminghe</Option>
+                    <Select className='select_main' defaultValue={seed} style={{ width: 120 }} onChange={handleChange}>
+                       {
+                           knownSubstrate.map(item=>{
+                           return <Option value={item.prefix} key={item.prefix}>{item.network}</Option>
+                           })
+                       }
                     </Select>
-                    <p>Address：{account.slice(0, 4)}****{account.slice(account.length - 4, account.length)}<img onClick={copyAddress} src={File}></img></p>
+                    <p>Address：
+                    <span>{address?address.slice(0, 4):account.slice(0, 4)}</span>
+                    *****
+                    <span>{address?address.slice(address.length - 4, address.length):account.slice(account.length - 4, account.length)}</span>
+                    <img onClick={copyAddress} src={File}></img></p>
                 </div>
                 <div className='not'>
                     <img src={not}></img>
@@ -128,10 +158,16 @@ const UserInfo = (props) => {
 }
 const mapDispatchToProps = (dispatch) => { 
    return {
-    setAccount:(account) => dispatch(setAccount(account)) 
+    setAccount:(account) => dispatch(setAccount(account)),
+    setSeed:(data) => dispatch(setSeed(data)),
+    setAddress:(address) => dispatch(setAddress(address))
     }
 }
 const mapStateToProps = (state) => {
-    return { account: state.account }
+    return { 
+        account: state.account ,
+        seed:state.seed,
+        address:state.address
+    }
 }  
 export default  connect(mapStateToProps,mapDispatchToProps)(UserInfo)
