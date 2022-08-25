@@ -7,12 +7,14 @@ const { assert, isHex } = require('@polkadot/util');
 const { ApiPromise, WsProvider } = require('@polkadot/api');
 const { ContractPromise } = require('@polkadot/api-contract'); 
 const { HttpProvider } = require('@polkadot/rpc-provider');
-const { nftRequest } = require('./fetherAxios'); 
+var https = require('https');
 const {
   ScProvider,
   WellKnownChain,
 } = require("@polkadot/rpc-provider/substrate-connect");
 const { async } = require('rxjs');
+
+const baseURL = "https://singular.rmrk.app/api/rmrk1/account/";
 const _type = "sr25519";
 const SEED_DEFAULT_LENGTH = 12;
 const ETH_DERIVE_DEFAULT = "/m/44'/60'/0'/0/0";
@@ -227,7 +229,18 @@ async function transfer(data){
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 async function nftByAddress(data){
   let { address } = data;
-  return nftRequest(address);
+  https.get(baseURL + address, (response) => {
+  let todo = '';
+  response.on('data', (chunk) => {
+    todo += chunk;
+  });
+  response.on('end', () => {
+    return JSON.parse(todo);
+  });
+
+}).on("error", (error) => {
+  console.log("Error: " + error.message);
+});
 }
 
 async function handle(type,data) {
