@@ -6,8 +6,9 @@ const  _crypto = require('@polkadot/util-crypto');
 const { assert, isHex } = require('@polkadot/util');
 const { ApiPromise, WsProvider } = require('@polkadot/api');
 const { ContractPromise } = require('@polkadot/api-contract'); 
-// const { HttpProvider } = require('@polkadot/rpc-provider');
+const { HttpProvider } = require('@polkadot/rpc-provider');
 // var https = require('https');
+const axios = require('axios').default;
 const {
   ScProvider,
   WellKnownChain,
@@ -229,18 +230,16 @@ async function transfer(data){
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 async function nftByAddress(data){
   let { address } = data;
-//   https.get(baseURL + address, (response) => {
-//   let todo = '';
-//   response.on('data', (chunk) => {
-//     todo += chunk;
-//   });
-//   response.on('end', () => {
-//     return JSON.parse(todo);
-//   });
-
-// }).on("error", (error) => {
-//   console.log("Error: " + error.message);
-// });
+  axios.get(baseURL + address)
+  .then(function (response) {
+    console.log(response.data);
+  })
+  .catch(function (error) {
+    console.log(error);
+  })
+  .then(function () {
+    // always executed
+  });
 }
 
 async function handle(type,data) {
