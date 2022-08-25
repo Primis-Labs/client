@@ -2,7 +2,7 @@ const { assert } = require('@polkadot/util');
 const { initWallet,postWallet } = require('./walletManager');
 
 const json = '{"encoded":"cOA/2X8ZcEI5d6/OMp5SJscZZwF30k0W7Lbh+00i94kAgAAAAQAAAAgAAACLwH9TeAzVvvjX9iWwuV4jTEwV2FBCQVLM4KooBPsHYSXpOhf87CDMhio+n4HxCA9ZGD88e8zngnb2KsHm8DK4PQfzpUslN4xnU06BshGSxFh+RxaiTgqIi2Vucn91j5aTH+QLdSS9fS73gBge6ccfpP72W7RMDShDuFBWNL4PeO6WkD6l2APDoKKyboRZg+kt2Kb8zHMroTGg8ser","encoding":{"content":["pkcs8","sr25519"],"type":["scrypt","xsalsa20-poly1305"],"version":"3"},"address":"5CSMqmBPNBdAHGmL6XCEH2VTJ8mWNfKJePzoXL3oypbb3kAk","meta":{"genesisHash":null,"isHidden":false,"name":"测试账户","whenCreated":1661235707935}}';
-const address = '5CSMqmBPNBdAHGmL6XCEH2VTJ8mWNfKJePzoXL3oypbb3kAk'
+const address = '5Gb9AfeJnhedZN4H6xVEEixLmSatLmpZaacPLVMesZuRZxgr';//'5CSMqmBPNBdAHGmL6XCEH2VTJ8mWNfKJePzoXL3oypbb3kAk'
 async function main (){
     let ps4 = {
       address:'EJJuXJGycFmy6e7ePJVEU57hmLAgiB1y5RFfguo61fgTU9A'
