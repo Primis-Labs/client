@@ -223,4 +223,15 @@ export const knownSubstrate = [
       website: 'https://parallel.fi/',
       genesis: ['0xe61a41c53f5dcd0beb09df93b34402aada44cb05117b71059cce40a2723a4e97'],
     },
+    {
+      decimals: [12],
+      displayName: 'Rococo Test',
+      network: 'rococo',
+      prefix: 172,
+      standardAccount: '*25519',
+      symbols: ['ROC'],
+      website: 'https://rococo.subscan.io/',
+      genesis: [],
+      rpc:'wss://rococo-rpc.polkadot.io'
+    },
   ]

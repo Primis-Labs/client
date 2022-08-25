@@ -6,6 +6,7 @@ const  _crypto = require('@polkadot/util-crypto');
 const { assert, isHex } = require('@polkadot/util');
 const { ApiPromise, WsProvider } = require('@polkadot/api');
 const { ContractPromise } = require('@polkadot/api-contract'); 
+const { HttpProvider } = require('@polkadot/rpc-provider');
 const { nftRequest } = require('./fetherAxios'); 
 const {
   ScProvider,
@@ -178,9 +179,16 @@ function seedValidate (data) {
 // rococo_v2_2 = "rococo_v2_2", 
 // westend2 = "westend2"
 async function openConnnect(chain){
-  if(provider === null){
-    provider = new ScProvider(chain);//WellKnownChain.polkadot
-    await provider.connect();
+  if(typeof provider === 'undefined'){
+    provider = new WsProvider(chain);
+    // provider = new HttpProvider(chain);
+    // provider = new ScProvider(chain);//WellKnownChain.polkadot
+    try {
+      await provider.connect();
+    } catch (error) {
+      closeConnection();
+      throw new Error('connect is invalid');
+    }
     polkadotApi = await ApiPromise.create({ provider });
   }
 }
@@ -193,16 +201,25 @@ async function closeConnection(){
 
 async function balance(data){
   let { address } = data;
-  return await ApiPromise.query.system.account(address);
+  return await polkadotApi.query.system.account(address);
 }
 
 // transfer 
 async function transfer(data){
-  let { from,to,balance} = data;
+  let { from,passwd,to,balance} = data;
   const pair = _uiKeyring.getPair(from);
-  const txHash = await polkadotApi.tx.balances
-      .transfer(to, balance)
-      .signAndSend(pair);
+  if(pair.isLocked){
+    pair.unlock(passwd)
+  }
+  try {
+    const txHash = await polkadotApi.tx.balances
+    .transfer(to, balance)
+    .signAndSend(pair);
+    return txHash;
+  } catch (error) {
+    throw new Error('trans fail');
+  }
+ 
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
