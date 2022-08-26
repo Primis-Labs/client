@@ -175,48 +175,21 @@ function seedValidate (data) {
 ////////////////////////////////////////////////////       transfer        //////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// polkadot = "polkadot",
-// ksmcc3 = "ksmcc3",
-// rococo_v2_2 = "rococo_v2_2", 
-// westend2 = "westend2"
-async function openConnnect(chain){
-  if(typeof provider === 'undefined'){
-    // provider = new HttpProvider(chain);
-    // provider = new ScProvider(chain);//WellKnownChain.polkadot
-    try {
-      provider = new WsProvider(chain);
-      polkadotApi = await ApiPromise.create({ provider });
-      await provider.connect();
-      return true;
-    } catch (error) {
-      closeConnection();
-      throw new Error('connect is invalid');
-    }
-  }
-}
-
-async function closeConnection(){
-  if(typeof provider !== 'undefined'){
-    await  provider.disconnect()
-  }
-}
-
 async function balance(data){
-  let { address } = data;
-  if(typeof polkadotApi === 'undefined'){
-     polkadotApi = await ApiPromise.create({ provider });
-  }
+  let { address,chain } = data;
+  polkadotApi = await ApiPromise.create({ provider:new WsProvider(chain) });
   return await polkadotApi.query.system.account(address);
 }
 
 // transfer 
 async function transfer(data){
-  let { from,passwd,to,balance} = data;
+  let { from,passwd,to,balance,chain} = data;
   const pair = _uiKeyring.getPair(from);
   if(pair.isLocked){
     pair.unlock(passwd)
   }
   try {
+    polkadotApi = await ApiPromise.create({ provider:new WsProvider(chain) });
     const txHash = await polkadotApi.tx.balances
     .transfer(to, balance)
     .signAndSend(pair);
@@ -264,10 +237,6 @@ async function handle(type,data) {
        return jsonRestore(data);
      case 'pol.accountsValidate':
        return accountsValidate(data);
-     case 'pol.openConnnect':
-        return openConnnect(data);
-     case 'pol.closeConnection':
-          return closeConnection();
      case 'pol.balance':
         return balance(data);
      case 'pol.transfer':
