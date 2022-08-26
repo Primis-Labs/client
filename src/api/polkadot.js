@@ -7,14 +7,12 @@ const { assert, isHex } = require('@polkadot/util');
 const { ApiPromise, WsProvider } = require('@polkadot/api');
 const { ContractPromise } = require('@polkadot/api-contract'); 
 const { HttpProvider } = require('@polkadot/rpc-provider');
-// var https = require('https');
 const axios = require('axios').default;
 const {
   ScProvider,
   WellKnownChain,
 } = require("@polkadot/rpc-provider/substrate-connect");
 const { async } = require('rxjs');
-
 const baseURL = "https://singular.rmrk.app/api/rmrk1/account/";
 const _type = "sr25519";
 const SEED_DEFAULT_LENGTH = 12;
@@ -183,16 +181,16 @@ function seedValidate (data) {
 // westend2 = "westend2"
 async function openConnnect(chain){
   if(typeof provider === 'undefined'){
-    provider = new WsProvider(chain);
     // provider = new HttpProvider(chain);
     // provider = new ScProvider(chain);//WellKnownChain.polkadot
     try {
+      provider = new WsProvider(chain);
+      polkadotApi = await ApiPromise.create({ provider });
       await provider.connect();
     } catch (error) {
       closeConnection();
       throw new Error('connect is invalid');
     }
-    polkadotApi = await ApiPromise.create({ provider });
   }
 }
 

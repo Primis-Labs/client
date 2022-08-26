@@ -12,6 +12,7 @@ import store from './store'
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistor } from './store/index';
 import { initWallet } from '../src/api/walletManager';
+import { initJsStore } from "../src/store/idb_service";
 
 const _WindowWrapper = styled.div`
   overflow: hidden;
@@ -24,7 +25,8 @@ const _WindowWrapper = styled.div`
 `;
 function App() {
   useEffect(()=>{
-    initWallet(1)
+    initWallet(1);
+    initJsStore();
   },[])
   return (
     <Router>
