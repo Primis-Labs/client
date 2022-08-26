@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import './UserInfo.scss';
-//react-redux
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { setAccount, setSeed,setAddress } from '../../store/action';
 import { useNavigate } from 'react-router-dom';
@@ -18,7 +17,7 @@ const { Option } = Select;
 
 const UserInfo = (props) => {
     // console.log(knownSubstrate)
-    const { account, setAccount,setSeed,seed ,setAddress,address} = props;
+    const { account, setAccount,setSeed,seed ,setAddress,address,keys} = props;
     const Navigate = useNavigate();
     const [tabType, setTabType] = useState(false);
     const [passFILE, setPassFILE] = useState(false);
@@ -65,20 +64,15 @@ const UserInfo = (props) => {
         });;
     }
     const funDownload = (content, filename) => {
-        // 创建隐藏的可下载链接
         var eleLink = document.createElement("a");
         eleLink.download = filename;
         eleLink.style.display = "none";
-        // 字符内容转变成blob地址
         var blob = new Blob([content]);
         eleLink.href = URL.createObjectURL(blob);
-        // 触发点击
         document.body.appendChild(eleLink);
         eleLink.click();
-        // 然后移除
         document.body.removeChild(eleLink);
     };
-
     const handleChange = async (value) => {
         const ps3 = {
             'address':account,
@@ -167,7 +161,8 @@ const mapStateToProps = (state) => {
     return { 
         account: state.account ,
         seed:state.seed,
-        address:state.address
+        address:state.address,
+        keys:state.keys
     }
 }  
 export default  connect(mapStateToProps,mapDispatchToProps)(UserInfo)

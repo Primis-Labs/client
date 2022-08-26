@@ -12,29 +12,48 @@ import Set_IMG from '../../images/set.png';
 import {NftAsset} from '../NftAssets/NftAssets'
 import { Button } from 'antd';
 import { postWallet } from '../../api/walletManager';
+import {knownSubstrate} from '../../api/network'
 
 const handleChange = (value) => {
     console.log(`selected ${value}`);
   };
 const WalletHome = (props) => {
-    const { account, setAccount } = props;
-    const [tabType, setTabType] = useState(true)
+    const { account, setAccount ,keys} = props;
+    const [tabType, setTabType] = useState(true);
+    const [previousFrees, setPreviousFrees] = useState();
+    const [tokenName, setTokenName] = useState();
+    const [tokenNumber, setTokenNumber] = useState();
+
     const Navigate = useNavigate();
     const Recieve_click = (props) => {
         console.log(props)
-        Navigate('/AssetsTabs')
+        Navigate('/AssetsTabs',{state:{datas:previousFrees,number:tokenNumber},replace:true})
     };
-    useEffect(() => {
-        const ps2 = {
-            'address':account,
-          }
-          postWallet(1,'pol.balance',ps2).then(res=>{
-             console.log(res)
-        });;
-        return () => {
-            
-        }
-    }, [])
+    const GetBlance =  () =>{
+        postWallet(1,'pol.closeConnection').then(res=>{
+            console.log(res)
+        })
+        knownSubstrate.map( (item)=>{
+            if(keys==item.prefix){
+                setTokenName(item.displayName)
+                postWallet(1,'pol.openConnnect',item.rpc).then(async (res)=>{
+                console.log(res)
+                const ps2 = {
+                    address:account
+                  }
+                 let { data: { free: previousFree }, nonce: previousNonce } =await postWallet(1,'pol.balance',ps2);
+                 console.log(`${previousFree}`)
+                 setTokenNumber(`${previousFree}`)
+                 setPreviousFrees(`${previousFree}`/item.decimals)
+                //  await postWallet(1,'pol.nftByAddress',account).then( (nftData)=>{
+                //      console.log(nftData)
+                // })
+               })
+            }})
+    }
+    useEffect( () => {
+        GetBlance()
+    }, [keys])
     return (
         <div className="WalletHome" >
             <UserInfo></UserInfo>
@@ -63,14 +82,14 @@ const WalletHome = (props) => {
                        <p></p> 
                     </li>
                     <li>
-                       <p><img src={Dot_IMF}></img></p> 
-                       <p>100</p> 
+                       <p>{tokenName}</p> 
+                       <p>{previousFrees}</p> 
                        <p>
                            <Button onClick={Recieve_click} className='button'>Recieve</Button>
                            <Button onClick={Recieve_click} className='button'>Send</Button>
                         </p> 
                     </li>
-                    <li>
+                    {/* <li>
                        <p><img src={Dot_IMF}></img></p> 
                        <p>100</p> 
                        <p>
@@ -101,13 +120,13 @@ const WalletHome = (props) => {
                            <Button onClick={Recieve_click} className='button'>Recieve</Button>
                            <Button onClick={Recieve_click} className='button'>Send</Button>
                         </p> 
-                    </li>
+                    </li> */}
                 </ul>
                 </div>
                 <div  className={!tabType?'active':'key'}>
                 <div className='Nft'>
                     <ul className='Nft_ul'>
-                        {/* <li>
+                        <li>
                             <div className='setings'>
                                 <img src={Set_IMG}></img>
                                 <div className='setting_l'>
@@ -120,9 +139,9 @@ const WalletHome = (props) => {
                                 <Button className='btn Recieve'>Recieve</Button>
                                 <Button className='btn'>Send</Button>
                             </p>
-                            </li> */}
+                            </li>
 
-                    <NftAsset></NftAsset>
+                    {/* <NftAsset></NftAsset> */}
 
                     </ul>
 
@@ -140,6 +159,10 @@ const mapDispatchToProps= () =>{
     }
 }
 const mapStateToProps = (state) => {
-    return { account: state.account }
+    console.log(state.account)
+    return {
+         account: state.account,
+         keys:state.keys
+        }
 }  
-export default connect(mapDispatchToProps,mapStateToProps)(WalletHome)
+export default connect(mapStateToProps,mapDispatchToProps)(WalletHome)
