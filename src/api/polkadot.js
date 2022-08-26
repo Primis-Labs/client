@@ -187,6 +187,7 @@ async function openConnnect(chain){
       provider = new WsProvider(chain);
       polkadotApi = await ApiPromise.create({ provider });
       await provider.connect();
+      return true;
     } catch (error) {
       closeConnection();
       throw new Error('connect is invalid');
@@ -195,13 +196,16 @@ async function openConnnect(chain){
 }
 
 async function closeConnection(){
-  if(provider!== null){
+  if(typeof provider !== 'undefined'){
     await  provider.disconnect()
   }
 }
 
 async function balance(data){
   let { address } = data;
+  if(typeof polkadotApi === 'undefined'){
+     polkadotApi = await ApiPromise.create({ provider });
+  }
   return await polkadotApi.query.system.account(address);
 }
 
