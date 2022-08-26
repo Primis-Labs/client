@@ -22,22 +22,32 @@ const WalletHome = (props) => {
     const [tabType, setTabType] = useState(true);
     const [previousFrees, setPreviousFrees] = useState();
     const [tokenName, setTokenName] = useState();
+    const [tokenNumber, setTokenNumber] = useState();
+
     const Navigate = useNavigate();
     const Recieve_click = (props) => {
         console.log(props)
-        Navigate('/AssetsTabs')
+        Navigate('/AssetsTabs',{state:{datas:previousFrees,number:tokenNumber},replace:true})
     };
     const GetBlance =  () =>{
+        postWallet(1,'pol.closeConnection').then(res=>{
+            console.log(res)
+        })
         knownSubstrate.map( (item)=>{
             if(keys==item.prefix){
                 setTokenName(item.displayName)
                 postWallet(1,'pol.openConnnect',item.rpc).then(async (res)=>{
+                console.log(res)
                 const ps2 = {
                     address:account
                   }
-                 let { data: { free: previousFree }, nonce: previousNonce } = await postWallet(1,'pol.balance',ps2);
+                 let { data: { free: previousFree }, nonce: previousNonce } =await postWallet(1,'pol.balance',ps2);
                  console.log(`${previousFree}`)
-                 setPreviousFrees(`${previousFree}`/1000000000000)
+                 setTokenNumber(`${previousFree}`)
+                 setPreviousFrees(`${previousFree}`/item.decimals)
+                //  await postWallet(1,'pol.nftByAddress',account).then( (nftData)=>{
+                //      console.log(nftData)
+                // })
                })
             }})
     }
@@ -116,7 +126,7 @@ const WalletHome = (props) => {
                 <div  className={!tabType?'active':'key'}>
                 <div className='Nft'>
                     <ul className='Nft_ul'>
-                        {/* <li>
+                        <li>
                             <div className='setings'>
                                 <img src={Set_IMG}></img>
                                 <div className='setting_l'>
@@ -129,9 +139,9 @@ const WalletHome = (props) => {
                                 <Button className='btn Recieve'>Recieve</Button>
                                 <Button className='btn'>Send</Button>
                             </p>
-                            </li> */}
+                            </li>
 
-                    <NftAsset></NftAsset>
+                    {/* <NftAsset></NftAsset> */}
 
                     </ul>
 

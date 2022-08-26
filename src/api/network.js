@@ -16,7 +16,7 @@
 // https://github.com/automata-network/polkadot-json-common/blob/master/packages/networks/src/substrate.ts
 export const knownSubstrate = [
     {
-      decimals: [10],
+      decimals: 10000000000,
       displayName: 'Polkadot Relay Chain',
       network: 'polkadot',
       prefix: 0,
@@ -27,7 +27,7 @@ export const knownSubstrate = [
       rpc:'wss://polkadot.api.onfinality.io'
     },
     {
-      decimals: [12],
+      decimals: 1000000000000,
       displayName: 'Kusama Relay Chain',
       network: 'kusama',
       prefix: 2,
@@ -41,7 +41,7 @@ export const knownSubstrate = [
       rpc:'wss://kusama.public.curie.radiumblock.xyz/ws'
     },
     {
-      decimals: [12],
+      decimals: 1000000000000,
       displayName: 'Acala',
       network: 'acala',
       prefix: 10,
@@ -52,7 +52,7 @@ export const knownSubstrate = [
       rpc:'wss://acala.polkawallet.io'
     },
     {
-      decimals: [12],
+      decimals: 1000000000000,
       displayName: 'Basilisk',
       network: 'basilisk',
       prefix: 10041,
@@ -63,7 +63,7 @@ export const knownSubstrate = [
       rpc:'wss://basilisk-rpc.dwellir.com'
     },
     {
-      decimals: [12],
+      decimals: 1000000000000,
       displayName: 'Bifrost',
       network: 'bifrost',
       prefix: 6,
@@ -84,7 +84,7 @@ export const knownSubstrate = [
     //   genesis: ['0x742a2ca70c2fda6cee4f8df98d64c4c670a052d9568058982dad9d5a7a135c5b'],
     // },
     {
-      decimals: [12],
+      decimals: 1000000000000,
       displayName: 'Karura',
       network: 'karura',
       prefix: 8,
@@ -135,7 +135,7 @@ export const knownSubstrate = [
     //   genesis: ['0x6bfe24dca2a3be10f22212678ac13a6446ec764103c0f3471c71609eac384aae', '0xf73467c6544aa68df2ee546b135f955c46b90fa627e9b5d7935f41061bb8a5a9'],
     // },
     {
-      decimals: null,
+      decimals: 1,
       displayName: 'Subsocial',
       network: 'subsocial',
       prefix: 28,
@@ -156,7 +156,7 @@ export const knownSubstrate = [
     //   genesis: ['0xb3db41421702df9a7fcac62b53ffeac85f7853cc4e689e0b93aeb3db18c09d82', '0x67dddf2673b69e5f875f6f25277495834398eafd67f492e09f3f3345e003d1b5'],
     // },
     {
-      decimals: [18],
+      decimals: 1000000000000000000,
       displayName: 'Nodle Chain',
       network: 'nodle',
       prefix: 37,
@@ -212,7 +212,7 @@ export const knownSubstrate = [
     //   genesis: ['0x6f1a800de3daff7f5e037ddf66ab22ce03ab91874debeddb1086f5f7dbd48925'],
     // },
     {
-      decimals: [18],
+      decimals: 1000000000000000000,
       displayName: 'SORA Network',
       network: 'sora',
       prefix: 69,
@@ -222,19 +222,19 @@ export const knownSubstrate = [
       genesis: ['0x7e4e32d0feafd4f9c9414b0be86373f9a1efa904809b683453a9af6856d38ad5'],
       rpc:'wss://ws.parachain-collator-1.c1.sora2.soramitsu.co.jp'
     },
+    // {
+    //   decimals: [12],
+    //   displayName: 'Parallel',
+    //   network: 'parallel',
+    //   prefix: 172,
+    //   standardAccount: '*25519',
+    //   symbols: ['PARA'],
+    //   website: 'https://parallel.fi/',
+    //   genesis: ['0xe61a41c53f5dcd0beb09df93b34402aada44cb05117b71059cce40a2723a4e97'],
+    //   rpc:'wss://parallel-heiko.api.onfinality.io/public-ws'
+    // },
     {
-      decimals: [12],
-      displayName: 'Parallel',
-      network: 'parallel',
-      prefix: 172,
-      standardAccount: '*25519',
-      symbols: ['PARA'],
-      website: 'https://parallel.fi/',
-      genesis: ['0xe61a41c53f5dcd0beb09df93b34402aada44cb05117b71059cce40a2723a4e97'],
-      rpc:'wss://parallel-heiko.api.onfinality.io/public-ws'
-    },
-    {
-      decimals: [12],
+      decimals: 1000000000000,
       displayName: 'Rococo Test',
       network: 'rococo',
       prefix: 172,
