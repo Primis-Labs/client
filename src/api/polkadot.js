@@ -48,7 +48,6 @@ function mnemonicGenerate(){
 // Create address
 function seedCreateAddress(mnemonic){
    let seed = ( typeof mnemonic === 'undefined' ? mnemonicGenerate() : mnemonic );
-   console.log(seed);
    let address =  _uiKeyring.createFromUri(getSuri(seed, _type), {}, _type).address;
    return {
       address,
@@ -110,7 +109,6 @@ function accountsChangePassword(data){
       }
       pair.decodePkcs8(oldPass);
     } catch (error) {
-      console.log(error);
       throw new Error('oldPass is invalid');
     }
     _uiKeyring.encryptAccount(pair, newPass);
@@ -207,10 +205,9 @@ async function nftByAddress(data){
   let { address } = data;
   axios.get(baseURL + address)
   .then(function (response) {
-    console.log(response.data);
+    return response.data;
   })
   .catch(function (error) {
-    console.log(error);
   })
   .then(function () {
     // always executed
