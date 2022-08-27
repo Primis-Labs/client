@@ -33,15 +33,15 @@ const getDatabase = () => {
                 dataType: DATA_TYPE.String
             },
             formatFrom:{
-                notNull: true,
+                notNull: false,
                 dataType: DATA_TYPE.String
             },
             to: {
                 dataType: DATA_TYPE.String,
-                notNull: true,
+                notNull: false,
             },
             balance: {
-                notNull: true,
+                notNull: false,
                 dataType: DATA_TYPE.Number
             },
             symbols :{
@@ -50,7 +50,7 @@ const getDatabase = () => {
             },
             status: {
                 dataType: DATA_TYPE.String,
-                notNull: true
+                notNull: false
             },
             desc: {
                 dataType: DATA_TYPE.String,
@@ -58,7 +58,7 @@ const getDatabase = () => {
             },
             createTime :{
                 dataType: DATA_TYPE.DateTime,
-                notNull: true
+                notNull: false
             }
         }
     };

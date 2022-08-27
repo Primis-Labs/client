@@ -1,13 +1,16 @@
+import { legacy_createStore } from "redux";
+
 const { idbCon } = require("./idb_service");
 
 export class TransferService {
 
     constructor() {
         this.tableName = "Transfers";
+
     }
 
-    getTransfers(address) {
-        return idbCon.select({
+    async getTransfers(address) {
+        return await idbCon.select({
             from: this.tableName,
             where:{
                 from:address
@@ -15,17 +18,17 @@ export class TransferService {
         })
     }
 
-    add(transfer) {
-        console.log('obj :' + idbCon)
-        return idbCon.insert({
+    async add(transfer) {
+        return await idbCon.insert({
             into: this.tableName,
             values: [transfer],
             return: true
         })
     }
 
-    getById(id) {
-        return idbCon.select({
+    async getById(id) {
+        alert('-'+this.tableName+"-");
+        return await idbCon.select({
             from: this.tableName,
             where: {
                 id: id
@@ -33,8 +36,8 @@ export class TransferService {
         })
     }
 
-    remove(id) {
-        return idbCon.remove({
+    async remove(id) {
+        return await idbCon.remove({
             from: this.tableName,
             where: {
                 id: id
@@ -42,8 +45,8 @@ export class TransferService {
         })
     }
 
-    updateById(id, updateData) {
-        return idbCon.update({
+    async updateById(id, updateData) {
+        return await idbCon.update({
             in: this.tableName,
             set: updateData,
             where: {
