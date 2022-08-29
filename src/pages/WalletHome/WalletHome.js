@@ -57,7 +57,7 @@ const WalletHome = (props) => {
                 address:'EJJuXJGycFmy6e7ePJVEU57hmLAgiB1y5RFfguo61fgTU9A',
               }
             postWallet(1,'pol.nftByAddress',ps4).then(res=>{
-                  console.log(res)
+                  console.log(res.data)
               }).catch(err=>{
               })
     }

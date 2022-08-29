@@ -203,15 +203,8 @@ async function transfer(data){
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 async function nftByAddress(data){
   let { address } = data;
-   await axios.get(baseURL + address)
-  .then(function (response) {
-    return response.data;
-  })
-  .catch(function (error) {
-  })
-  .then(function () {
-    // always executed
-  });
+   return axios.get(baseURL + address)
+ 
 }
 
 async function handle(type,data) {
