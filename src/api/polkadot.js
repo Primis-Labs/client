@@ -29,9 +29,10 @@ let provider,polkadotApi;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function getSuri (seed, type) {
-   return type === 'ethereum'
+   var s = (type === 'ethereum'
      ? `${seed}${ETH_DERIVE_DEFAULT}`
-     : seed;
+     : seed);
+   return s;
  }
 
 // init crypto
@@ -42,13 +43,17 @@ async function cryptoWaitReady(){
 
 // Randomly generated mnemonic
 function mnemonicGenerate(){
-   let seed = _crypto.mnemonicGenerate(SEED_DEFAULT_LENGTH);
+   const seed = _crypto.mnemonicGenerate(SEED_DEFAULT_LENGTH);
+  
    return seed;
 } 
 // Create address
 function seedCreateAddress(mnemonic){
-   let seed = ( typeof mnemonic === 'undefined' ? mnemonicGenerate() : mnemonic );
-   let address =  _uiKeyring.createFromUri(getSuri(seed, _type), {}, _type).address;
+   var seed = mnemonicGenerate() ;
+   if( typeof mnemonic === 'undefined'){
+      seed = mnemonic;
+   }
+   const address =  _uiKeyring.createFromUri(getSuri( seed, _type), {}, _type).address;
    return {
       address,
       seed
