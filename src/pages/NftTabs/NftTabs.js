@@ -3,7 +3,7 @@ import './NftTabs.scss';
 //react-redux
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { setAccount, setSeed } from '../../store/action';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate ,useLocation} from 'react-router-dom';
 import { Button ,Input,Modal} from 'antd';
 import Top from '../../images/router.png';
 import UserInfo from '../UserInfo/UserInfo'
@@ -12,17 +12,20 @@ import Loding from '../../images/loding.png';
 import Success from '../../images/success.png';
 import Error from '../../images/error.png';
 import QR from '../../images/QR.png';
+import QRCode from 'qrcode.react';
 
-const NftTabs = () => {
+const NftTabs = (props) => {
+    const {account,keys} = props
     const [tabType, setTabType] = useState(true)
     const Navigate = useNavigate();
+    const useLocations=useLocation()
+    console.log(useLocations)
     const outWalletRouter = (props) => {
         console.log(props)
         Navigate('/WalletHome')
     };
-    const [isModalVisible, setIsModalVisible] = useState(true);
+    const [isModalVisible, setIsModalVisible] = useState(false);
     const [isModalVisibleLoading, setIsModalVisibleLoading] = useState(false);
-
     const showModal = () => {
         setIsModalVisible(true);
       };    
@@ -60,11 +63,12 @@ const NftTabs = () => {
 
                     <div className={tabType ? 'active' : 'key'}>
                         <div className='Recieve'>
+                        <img src={QR}></img>
                             <div className="QR_CODE">
-
+                            <QRCode value={account} size={170}></QRCode>
                             </div>
                             <p> Your Address </p>
-                            <span>xxxxxxxxxxxxxxxxxxxxx</span>
+                            <span>{account}</span>
                         </div>
                     </div>
                     <div className={!tabType ? 'active' : 'key'}>
@@ -82,7 +86,9 @@ const NftTabs = () => {
             <Modal wrapClassName='ModalSend' title="Transaction Confirm" width='500px' visible={isModalVisible} onCancel={handleCancel}>
                         <ul>
                             <li>
-                                <p></p>
+                                <p>
+                                    <img src={useLocations.state.datas}></img>
+                                </p>
                                 <span>Send</span>
                             </li>                            <li>
                                 <p>oxcccvv
@@ -122,4 +128,10 @@ const mapDispatchToProps = () => {
         setAccount, setSeed
     }
 }
-export default connect(mapDispatchToProps)(NftTabs)
+const mapStateToProps = (state) => {
+    return { 
+        account: state.account ,
+        keys:state.keys
+    }
+}  
+export default connect(mapStateToProps,mapDispatchToProps)(NftTabs)

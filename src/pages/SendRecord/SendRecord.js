@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import './SendRecord.scss';
 //react-redux
 import { connect ,useDispatch, useSelector} from 'react-redux';
@@ -9,19 +9,27 @@ import Dot_IMF from '../../images/dot.png';
 import status_s from '../../images/status_s.png';
 import status_fail from '../../images/status_fail.png';
 import Top from '../../images/router.png';
-
 import { Button } from 'antd';
-
+const { TransferService }  = require("../../store/transfer_service");
 const handleChange = (value) => {
     console.log(`selected ${value}`);
   };
-const SendRecord = () => {
-    const [tabType, setTabType] = useState(true)
+const SendRecord = (props) => {
+    const {account,keys} = props
+    const [record, setRecord] = useState([])
+
     const Navigate = useNavigate();
-    const outWalletRouter = (props) => {
-      console.log(props)
-      Navigate('/Wallet')
+    const outWalletRouter = () => {
+    //   console.log(props)
+      Navigate('/WalletHome')
     };
+    useEffect(() => {
+        var indexdb = new TransferService();
+        var query = indexdb.getTransfers(account).then(res=>{
+            console.log(res)
+            setRecord(res)
+    });
+    }, []);
     return (
         <div className="SendRecord" >
             <UserInfo></UserInfo>
@@ -40,48 +48,22 @@ const SendRecord = () => {
                        <p className='Date'>Date</p> 
                        <p className='Status'>Status</p> 
                     </li>
-                    <li>
-                       <p className='token'>DOT</p> 
-                       <p className='Amount'>100</p> 
-                       <p className='Hash'>dfhuofh..ghgjkggkg</p> 
-                       <p className='Date'>05-17-2022 19:02:34</p> 
-                       <p className='Status'><img src={status_s}></img></p> 
-                    </li>
-                    <li>
-                       <p className='token'>DOT</p> 
-                       <p className='Amount'>100</p> 
-                       <p className='Hash'>dfhuofh..ghgjkggkg</p> 
-                       <p className='Date'>05-17-2022 19:02:34</p> 
-                       <p className='Status'><img src={status_fail}></img></p> 
-                    </li>
-                    <li>
-                       <p className='token'>DOT</p> 
-                       <p className='Amount'>100</p> 
-                       <p className='Hash'>dfhuofh..ghgjkggkg</p> 
-                       <p className='Date'>05-17-2022 19:02:34</p> 
-                       <p className='Status'><img src={status_fail}></img></p> 
-                    </li>
-                    <li>
-                       <p className='token'>DOT</p> 
-                       <p className='Amount'>100</p> 
-                       <p className='Hash'>dfhuofh..ghgjkggkg</p> 
-                       <p className='Date'>05-17-2022 19:02:34</p> 
-                       <p className='Status'><img src={status_s}></img></p> 
-                    </li>
-                    <li>
-                       <p className='token'>DOT</p> 
-                       <p className='Amount'>100</p> 
-                       <p className='Hash'>dfhuofh..ghgjkggkg</p> 
-                       <p className='Date'>05-17-2022 19:02:34</p> 
-                       <p className='Status'><img src={status_s}></img></p> 
-                    </li>
-                    <li>
-                       <p className='token'>DOT</p> 
-                       <p className='Amount'>100</p> 
-                       <p className='Hash'>dfhuofh..ghgjkggkg</p> 
-                       <p className='Date'>05-17-2022 19:02:34</p> 
-                       <p className='Status'><img src={status_s}></img></p> 
-                    </li>
+
+                    {
+                        record.map((item,index)=>{
+                        
+                        return  <li key={index}>
+                        <p className='token'>{item.symbols}</p> 
+                        <p className='Amount'>{item.balance}</p> 
+                        <p className='Hash'>{item.hash}</p> 
+                        <p className='Date'>{new Date(parseInt((item.createTime).getTime())).toLocaleString()}</p> 
+                        <p className='Status'><img src={item.status==1?status_s:status_fail}></img></p> 
+                     </li>
+                        })
+                    }
+               
+             
+                 
 
                 </ul>
                 </div>
@@ -95,4 +77,10 @@ const mapDispatchToProps= () =>{
         setAccount, setSeed 
     }
 }
-export default connect(mapDispatchToProps)(SendRecord)
+const mapStateToProps = (state) => {
+    return { 
+        account: state.account ,
+        keys:state.keys
+    }
+}  
+export default connect(mapStateToProps,mapDispatchToProps)(SendRecord)

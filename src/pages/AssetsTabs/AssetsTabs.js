@@ -15,7 +15,6 @@ import Error from '../../images/error.png';
 import { postWallet } from '../../api/walletManager';
 import {knownSubstrate} from '../../api/network';
 import QRCode from 'qrcode.react';
-const  { initJsStore } = require("../../store/idb_service");
 const { TransferService }  = require("../../store/transfer_service");
 const AssetsTab = (props) => {
     const useLocations=useLocation()
@@ -34,7 +33,7 @@ const AssetsTab = (props) => {
     const [toeknBalnce, setTokenBalance] = useState(true);
     const [decimal, setDecimal] = useState(true);
     const [rpc, setRpc] = useState('');
-
+    const [tokenName,setTokenName]=useState('')
     
     const showModal = () => {
         setIsModalVisible(true);
@@ -68,24 +67,14 @@ const AssetsTab = (props) => {
                  let { data: { free: previousFree }, nonce: previousNonce } = await postWallet(1,'pol.balance',ps2);
                  setTokenBalance(`${previousFree}`/item.decimals);
                  setDecimal(item.decimals);
-                 setRpc(item.rpc)
+                 setRpc(item.rpc);
+                 setTokenName(item.displayName);
             //    })
             }})
     }
-     const addData = (data) => {
-            let DBAddRequest = window.indexedDB.open("test");
-            console.log(DBAddRequest)
-            DBAddRequest.onsuccess = function (event) {
-                let transaction = DBAddRequest.result.transaction(["data"], "readwrite");
-                let objectStore = transaction.objectStore("data");
-            };
-        };
+
     
     useEffect( () => {
-        var indexdb = new TransferService();
-        var query = indexdb.getTransfers(account).then(res=>{
-            console.log(res)
-        });
         GetBlance()
     }, [keys])
       const SendToken= async()=>{
@@ -103,24 +92,38 @@ const AssetsTab = (props) => {
         try{
             await postWallet(1,'pol.transfer',ps2).then(async(res)=>{
                 console.log(res)
-                await initJsStore();
+                // await initJsStore();
                 GetBlance()
                 setIsLoding(1);
                 GetBlance();
                 var obj = {
-                  hash:'123456',
-                  from:account,
-                  to:tokenAddress,
-                  formatFrom:'gkKej1RjUhsfLCzVc4wHzd3mLCNet7EcvrC4n2FjU7fasSmzC',
-                  balance:tokenAccount,
-                  symbols:'roc',
-                  status:'1',
-                  desc:'',
-                  createTime:new Date()
-                }
-                addData(obj)
+                    hash:res.toString(),
+                    from:account,
+                    to:tokenAddress,
+                    formatFrom:account,
+                    balance:tokenAccount*1,
+                    symbols:tokenName,
+                    status:'1',
+                    desc:'',
+                    createTime:new Date(),
+                  }
+                  var indexdb = new TransferService();
+                  var r = indexdb.add(obj);
               });;
         }catch(e){
+            var obj = {
+                hash:'xxx',
+                from:account,
+                to:tokenAddress,
+                formatFrom:account,
+                balance:tokenAccount*1,
+                symbols:tokenName,
+                status:'2',
+                desc:'',
+                createTime:new Date(),
+              }
+              var indexdb = new TransferService();
+              var r = indexdb.add(obj);
             setIsLoding(2)
         }
       

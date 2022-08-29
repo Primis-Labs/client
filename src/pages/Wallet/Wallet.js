@@ -45,7 +45,7 @@ function Wallets(props) {
                     <li onClick={LoginWalletRouter}>
                     <img src={import_img}></img> 
                        <p>
-                            <span>Importing a wallet</span>
+                            <span>Log in Wallet</span>
                             <a>Getting started with Primis</a>
                        </p>
                     </li>
