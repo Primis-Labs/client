@@ -84,14 +84,14 @@ const UserInfo = (props) => {
             // postWallet(1,'pol.closeConnection','').then(res=>{
             //     console.log(res)
             // })
-            knownSubstrate.map(item=>{
-                if(value==item.prefix){
-                    console.log(item)
-                    postWallet(1,'pol.openConnnect',item.rpc).then(data=>{
-                        console.log(data)
-                    }) 
-                }
-            })
+            // knownSubstrate.map(item=>{
+            //     if(value==item.prefix){
+            //         console.log(item)
+            //         postWallet(1,'pol.openConnnect',item.rpc).then(data=>{
+            //             console.log(data)
+            //         }) 
+            //     }
+            // })
          
           });
     

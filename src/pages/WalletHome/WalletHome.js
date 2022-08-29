@@ -29,30 +29,41 @@ const WalletHome = (props) => {
         console.log(props)
         Navigate('/AssetsTabs',{state:{datas:previousFrees,number:tokenNumber},replace:true})
     };
+    const Nft_click = (props) => {
+        console.log(props)
+        Navigate('/NftTabs')
+    };
     const GetBlance =  () =>{
-        postWallet(1,'pol.closeConnection').then(res=>{
-            console.log(res)
-        })
-        knownSubstrate.map( (item)=>{
+        // postWallet(1,'pol.closeConnection').then(res=>{
+        //     console.log(res)
+        // })
+        knownSubstrate.map( async(item)=>{
             if(keys==item.prefix){
                 setTokenName(item.displayName)
-                postWallet(1,'pol.openConnnect',item.rpc).then(async (res)=>{
-                console.log(res)
+                // postWallet(1,'pol.openConnnect',item.rpc).then(async (res)=>{
+                // console.log(res)
                 const ps2 = {
-                    address:account
+                    address:account,
+                    chain:item.rpc
                   }
-                 let { data: { free: previousFree }, nonce: previousNonce } =await postWallet(1,'pol.balance',ps2);
-                 console.log(`${previousFree}`)
+                //   =
+                let { data: { free: previousFree }, nonce: previousNonce }  =await postWallet(1,'pol.balance',ps2)
+                //  console.log(`${previousFree}`)
                  setTokenNumber(`${previousFree}`)
                  setPreviousFrees(`${previousFree}`/item.decimals)
-                //  await postWallet(1,'pol.nftByAddress',account).then( (nftData)=>{
-                //      console.log(nftData)
-                // })
-               })
+            //    })
             }})
+            let ps4 = {
+                address:'EJJuXJGycFmy6e7ePJVEU57hmLAgiB1y5RFfguo61fgTU9A',
+              }
+            postWallet(1,'pol.nftByAddress',ps4).then(res=>{
+                  console.log(res)
+              }).catch(err=>{
+              })
     }
     useEffect( () => {
         GetBlance()
+    
     }, [keys])
     return (
         <div className="WalletHome" >
@@ -136,8 +147,8 @@ const WalletHome = (props) => {
                             </div>
                             <img  className='bg' src={Nft_IMG}></img>
                             <p className='seting_btn'>
-                                <Button className='btn Recieve'>Recieve</Button>
-                                <Button className='btn'>Send</Button>
+                                <Button onClick={Nft_click} className='btn Recieve'>Recieve</Button>
+                                <Button onClick={Nft_click}  className='btn'>Send</Button>
                             </p>
                             </li>
 

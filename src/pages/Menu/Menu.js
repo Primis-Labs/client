@@ -6,8 +6,8 @@ import {
   SubIcon,
 } from '../../style/iconfont';
 import { Button, Menu } from 'antd';
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState,useEffect } from 'react';
+import { useNavigate,useLocation } from 'react-router-dom';
 import './Menu.scss';
 import logo from '../../images/logo.png';
 import setting from '../../images/setting.png';
@@ -24,7 +24,32 @@ const SiderMenu = (props) => {
     { label: 'Brower', key: '/Brower', icon: <BrowserIcon /> },
   ];
   const Navigate = useNavigate();
+  const Location = useLocation();
   const [collapsed, setCollapsed] = useState(false);
+  const [activeMenu, setActiveMenu] = useState('');
+
+  useEffect(() => {
+  console.log(Location.pathname)
+
+    if(Location.pathname=='/WalletHome'||Location.pathname=='/AssetsTabs'||Location.pathname=='/NftTabs'){
+      setActiveMenu('/Wallet')
+      console.log(activeMenu)
+    }
+    if(Location.pathname=='/'){
+      setActiveMenu('/')
+    }
+    if(Location.pathname=='/Chart'){
+      setActiveMenu('/Chart')
+    }
+    if(Location.pathname=='/Subsoribe'){
+      setActiveMenu('/Subsoribe')
+    }
+    if(Location.pathname=='/Brower'){
+      setActiveMenu('/Brower')
+    }
+    return () => {
+    }
+  }, [Location.pathname])
   const MenuRouter = (routers) => {
     if(account){
       if(routers.key=='/Wallet'){
@@ -35,6 +60,8 @@ const SiderMenu = (props) => {
     }else{
       Navigate(routers.key)
     }
+
+ 
   };
 
   return (
@@ -46,7 +73,7 @@ const SiderMenu = (props) => {
       }}
     >
       <p className='Logo'><img src={logo}></img></p>
-      <Menu className='menu' onClick={MenuRouter} mode="inline" items={items} />
+      <Menu className='menu' selectedKeys={[activeMenu]} onClick={MenuRouter} mode="inline" items={items} />
 
       <div className='setting'>
           <button > <img src={setting}></img> Setting</button>

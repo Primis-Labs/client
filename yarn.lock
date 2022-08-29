@@ -7755,9 +7755,9 @@ jsprim@^1.2.2:
     json-schema "0.4.0"
     verror "1.10.0"
 
-jsstore@^4.0.0:
+jsstore@^4.4.3:
   version "4.4.3"
-  resolved "https://registry.npmmirror.com/jsstore/-/jsstore-4.4.3.tgz#12c3f7c748632e43c0451d2cc216319f60f77fe2"
+  resolved "https://registry.yarnpkg.com/jsstore/-/jsstore-4.4.3.tgz#12c3f7c748632e43c0451d2cc216319f60f77fe2"
   integrity sha512-frqlBZ7k/QxLBGE/FRS9vUghrkreMRJl3DfFp9wMENcIPddohAB7PEDOaUKGTfDG0GhBJj/4qVgrnUAfoXShww==
 
 "jsx-ast-utils@^2.4.1 || ^3.0.0", jsx-ast-utils@^3.3.2:

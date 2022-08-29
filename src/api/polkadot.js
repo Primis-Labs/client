@@ -203,7 +203,7 @@ async function transfer(data){
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 async function nftByAddress(data){
   let { address } = data;
-  axios.get(baseURL + address)
+   await axios.get(baseURL + address)
   .then(function (response) {
     return response.data;
   })
@@ -239,7 +239,7 @@ async function handle(type,data) {
      case 'pol.transfer':
        return transfer(data);
       case 'pol.nftByAddress':
-       return nftByAddress(data);
+       return await nftByAddress(data);
      default:
        throw new Error(`Unable to handle message of type ${type}`);
    }

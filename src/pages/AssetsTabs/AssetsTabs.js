@@ -15,14 +15,14 @@ import Error from '../../images/error.png';
 import { postWallet } from '../../api/walletManager';
 import {knownSubstrate} from '../../api/network';
 import QRCode from 'qrcode.react';
-console.log(QRCode)
+const  { initJsStore } = require("../../store/idb_service");
+const { TransferService }  = require("../../store/transfer_service");
 const AssetsTab = (props) => {
     const useLocations=useLocation()
     const {account,keys} = props
     const [tabType, setTabType] = useState(true)
     const Navigate = useNavigate();
     const outWalletRouter = (props) => {
-        console.log(props)
         Navigate('/WalletHome')
     };
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -30,9 +30,11 @@ const AssetsTab = (props) => {
     const [tokenAccount, setTokenAccount] = useState('');
     const [tokenAddress, setTokenAddress] = useState('');
     const [passwords, setPasswords] = useState('');
-    const [isLoding, setIsLoding] = useState(true);
+    const [isLoding, setIsLoding] = useState('3');
     const [toeknBalnce, setTokenBalance] = useState(true);
     const [decimal, setDecimal] = useState(true);
+    const [rpc, setRpc] = useState('');
+
     
     const showModal = () => {
         setIsModalVisible(true);
@@ -56,37 +58,70 @@ const AssetsTab = (props) => {
         }
       }
       const GetBlance =  () =>{
-        knownSubstrate.map( (item)=>{
+        knownSubstrate.map( async(item)=>{
             if(keys==item.prefix){
-                postWallet(1,'pol.openConnnect',item.rpc).then(async (res)=>{
+                // postWallet(1,'pol.openConnnect',item.rpc).then(async (res)=>{
                 const ps2 = {
-                    address:account
+                    address:account,
+                    chain:item.rpc
                   }
                  let { data: { free: previousFree }, nonce: previousNonce } = await postWallet(1,'pol.balance',ps2);
                  setTokenBalance(`${previousFree}`/item.decimals);
                  setDecimal(item.decimals);
-               })
+                 setRpc(item.rpc)
+            //    })
             }})
     }
+     const addData = (data) => {
+            let DBAddRequest = window.indexedDB.open("test");
+            console.log(DBAddRequest)
+            DBAddRequest.onsuccess = function (event) {
+                let transaction = DBAddRequest.result.transaction(["data"], "readwrite");
+                let objectStore = transaction.objectStore("data");
+            };
+        };
+    
     useEffect( () => {
+        var indexdb = new TransferService();
+        var query = indexdb.getTransfers(account).then(res=>{
+            console.log(res)
+        });
         GetBlance()
     }, [keys])
       const SendToken= async()=>{
         setIsModalVisible(false);
         setIsModalVisibleLoading(true);
+        setIsLoding(0);
+        console.log(tokenAccount*decimal)
         const ps2={
             from:account,
             passwd:passwords,
             to:tokenAddress,
-            balance:tokenAccount*decimal
+            balance:tokenAccount*decimal,
+            chain:rpc
         }
         try{
-            await postWallet(1,'pol.transfer',ps2).then(res=>{
-                setIsLoding(true);
+            await postWallet(1,'pol.transfer',ps2).then(async(res)=>{
+                console.log(res)
+                await initJsStore();
+                GetBlance()
+                setIsLoding(1);
                 GetBlance();
+                var obj = {
+                  hash:'123456',
+                  from:account,
+                  to:tokenAddress,
+                  formatFrom:'gkKej1RjUhsfLCzVc4wHzd3mLCNet7EcvrC4n2FjU7fasSmzC',
+                  balance:tokenAccount,
+                  symbols:'roc',
+                  status:'1',
+                  desc:'',
+                  createTime:new Date()
+                }
+                addData(obj)
               });;
         }catch(e){
-            setIsLoding(false)
+            setIsLoding(2)
         }
       
       }
@@ -164,14 +199,14 @@ const AssetsTab = (props) => {
             </Modal>
 
             <Modal wrapClassName='ModalSend' title="Transaction Confirmation" width='600px' visible={isModalVisibleLoading} onCancel={handleCancelLoading}>
-                    <div className='loding'>
+                    <div className={isLoding==0?'loding madelHide':'loding '}>
                     <img src={Loding}></img>
                     </div>
-                    <div className={setIsLoding?'success':'success madelHide'}>
+                    <div className={isLoding==1?'success madelHide':'success '}>
                     <img src={Success}></img>
                     <p>Go to my channel</p>
                     </div>
-                    <div className={!setIsLoding?'success':'success madelHide'}>
+                    <div className={isLoding==2?'success madelHide':'success '}>
                     <img src={Error}></img>
                     <p> Please try again.</p>
                     </div>
