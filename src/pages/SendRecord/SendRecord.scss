@@ -59,7 +59,9 @@
                     
                 }
                 .token{
-                    width: 10%; 
+                    width: 10%;     
+                    white-space: nowrap;
+
                 }
                 .Amount{
                     width: 20%;
@@ -67,6 +69,7 @@
                 .Hash{
                     width: 25%;
                     overflow-y: scroll;
+                    cursor: pointer;
                 }
                 .Date{
                     width: 30%;

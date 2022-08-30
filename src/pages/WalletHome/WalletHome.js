@@ -27,9 +27,9 @@ const WalletHome = (props) => {
 
     const [nftRecord, setNftRecord] = useState([]);
     const Navigate = useNavigate();
-    const Recieve_click = (props) => {
-        console.log(props)
-        Navigate('/AssetsTabs', { state: { datas: previousFrees, number: tokenNumber }, replace: true })
+    const Recieve_click = (send) => {
+        console.log(send)
+        Navigate('/AssetsTabs', { state: { datas: send }, replace: true })
     };
     const RecordBtn = () => {
         Navigate('/sendRecord')
@@ -109,8 +109,8 @@ const WalletHome = (props) => {
                             <p>{tokenName}</p>
                             <p>{previousFrees && previousFrees.toFixed(4)}</p>
                             <p>
-                                <Button onClick={Recieve_click} className='button'>Recieve</Button>
-                                <Button onClick={Recieve_click} className='button'>Send</Button>
+                                <Button onClick={()=>Recieve_click('1')} className='button'>Recieve</Button>
+                                <Button onClick={()=>Recieve_click('2')} className='button'>Send</Button>
                             </p>
                         </li>
                     </ul>

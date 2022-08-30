@@ -3,7 +3,7 @@ import './UserInfo.scss';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { setAccount, setSeed,setAddress } from '../../store/action';
 import { useNavigate } from 'react-router-dom';
-import Top from '../../images/router.png';
+import Top from '../../images/QR.png';
 import File from '../../images/file.png';
 import not from '../../images/not.png';
 import logout from '../../images/logout.png';
@@ -59,7 +59,7 @@ const UserInfo = (props) => {
             'newPass':passFILE
           }
          await postWallet(1,'pol.accountsExport',ps2).then(res=>{
-          funDownload(JSON.stringify(res), `keyFile.json`);
+          funDownload(JSON.stringify(res), `${account}.json`);
             setPassType(false);
         });;
     }
@@ -101,10 +101,10 @@ const UserInfo = (props) => {
             <div className='user_wallet'>
                 <img className='avatar' src={Top}></img>
                 <div className='address_ehem'>
-                    <Select className='select_main' defaultValue={seed} style={{ width: 120 }} onChange={handleChange}>
+                    <Select className='select_main' defaultValue={seed} style={{ width: 200 }} onChange={handleChange}>
                        {
                            knownSubstrate.map(item=>{
-                           return <Option value={item.prefix} key={item.prefix}>{item.network}</Option>
+                           return <Option value={item.prefix} key={item.prefix}>{item.displayName}</Option>
                            })
                        }
                     </Select>
@@ -140,7 +140,7 @@ const UserInfo = (props) => {
                             <p>Are you sure <br></br>
                                 to log out wallet?</p>
                             <div className='Confirm_c'>
-                                <Button className='Cancel'>Cancel</Button>
+                                {/* <Button onClick={logoutModal} className='Cancel'>Cancel</Button> */}
                                 <Button onClick={logoutConfirm} className='Confirm'>Confirm</Button>
                             </div>
                         </div>

@@ -9,7 +9,7 @@ import Dot_IMF from '../../images/dot.png';
 import status_s from '../../images/status_s.png';
 import status_fail from '../../images/status_fail.png';
 import Top from '../../images/router.png';
-import { Button } from 'antd';
+import { Button ,message} from 'antd';
 const { TransferService }  = require("../../store/transfer_service");
 const handleChange = (value) => {
     console.log(`selected ${value}`);
@@ -30,6 +30,16 @@ const SendRecord = (props) => {
             setRecord(res)
     });
     }, []);
+    const copyHash=(hash)=>{
+        let copyContent = hash;
+        var input = document.createElement("input");
+        input.value = copyContent;
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand("Copy");
+        document.body.removeChild(input);
+        message.success('Copy success message');
+    }
     return (
         <div className="SendRecord" >
             <UserInfo></UserInfo>
@@ -55,7 +65,7 @@ const SendRecord = (props) => {
                         return  <li key={index}>
                         <p className='token'>{item.symbols}</p> 
                         <p className='Amount'>{item.balance}</p> 
-                        <p className='Hash'>{item.hash}</p> 
+                        <p className='Hash' onClick={()=>copyHash(item.hash)}>{item.hash}</p> 
                         <p className='Date'>{new Date(parseInt((item.createTime).getTime())).toLocaleString()}</p> 
                         <p className='Status'><img src={item.status==1?status_s:status_fail}></img></p> 
                      </li>

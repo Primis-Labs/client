@@ -18,6 +18,7 @@ import QRCode from 'qrcode.react';
 const { TransferService }  = require("../../store/transfer_service");
 const AssetsTab = (props) => {
     const useLocations=useLocation()
+    console.log(useLocations)
     const {account,keys} = props
     const [tabType, setTabType] = useState(true)
     const Navigate = useNavigate();
@@ -75,6 +76,11 @@ const AssetsTab = (props) => {
 
     
     useEffect( () => {
+        if(useLocations.state.datas=='1'){
+            setTabType(true)
+        }else{
+            setTabType(false)
+        }
         GetBlance()
     }, [keys])
       const SendToken= async()=>{
@@ -207,7 +213,7 @@ const AssetsTab = (props) => {
                     </div>
                     <div className={isLoding==1?'success madelHide':'success '}>
                     <img src={Success}></img>
-                    <p>Go to my channel</p>
+                    <p>Success !</p>
                     </div>
                     <div className={isLoding==2?'success madelHide':'success '}>
                     <img src={Error}></img>
