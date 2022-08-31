@@ -62,9 +62,32 @@ const getDatabase = () => {
             }
         }
     };
+
+    const tblUsers  = {
+        name: 'Users',
+        columns: {
+            id: {
+                primaryKey: true,
+                autoIncrement: true
+            },
+            address:{
+                notNull: true,
+                dataType: DATA_TYPE.String
+            },
+            img: {
+                dataType: DATA_TYPE.String,
+                notNull: false,
+            },
+            createTime :{
+                dataType: DATA_TYPE.DateTime,
+                notNull: false
+            }
+        }
+    };
+
     const dataBase = {
         name: dbname,
-        tables: [tblTransfer]
+        tables: [tblTransfer,tblUsers]
     };
     return dataBase;
 };
