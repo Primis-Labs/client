@@ -4,6 +4,9 @@ export const SET_ACCOUNT = 'set_Account'
 export const SET_SEED='set_Seed'
 
 export const SET_ADDRESS='set_Address'
+
+export const SET_USERIMG='set_Userimg'
+
 //age  n  get  age
 export function setAccount(account) {
     return {
@@ -22,6 +25,12 @@ export function setAddress(address) {
     return {
         type: SET_ADDRESS,
         address: address
+    }
+}
+export function setUserimg(url) {
+    return {
+        type: SET_USERIMG,
+        url: url
     }
 }
 

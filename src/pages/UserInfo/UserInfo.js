@@ -13,16 +13,18 @@ import closeUrl from '../../images/close.png';
 import keyDowload from '../../images/keyDowload.png';
 import { postWallet } from '../../api/walletManager';
 import {knownSubstrate} from '../../api/network'
+import { generateFromString } from 'generate-avatar'
 const { UserService }  = require("../../store/user_service");
 const { Option } = Select;
 
 const UserInfo = (props) => {
     // console.log(knownSubstrate)
-    const { account, setAccount,setSeed,seed ,setAddress,address,keys} = props;
+    const { account, setAccount,setSeed,seed ,setAddress,address,keys,url} = props;
     const Navigate = useNavigate();
     const [tabType, setTabType] = useState(false);
     const [passFILE, setPassFILE] = useState(false);
     const [passType, setPassType] = useState(false);
+    const [userImg, setUserImg] = useState('');
 
     
     const copyAddress = () => {
@@ -97,15 +99,16 @@ const UserInfo = (props) => {
           });    
     }
     useEffect(()=>{
-        
         var indexdb = new UserService();
             indexdb.getUser(account).then(res=>{
+                console.log(res)
                 if(res.length != 0){
+                    setUserImg(res[0].img)
                     return;
                 }
                 var obj = {
                     address:account,
-                    img:File,
+                    img:`data:image/svg+xml;utf8,${generateFromString("example@test.com")}`,
                     createTime:new Date(),
                 }
                 var indexdb = new UserService();
@@ -113,11 +116,11 @@ const UserInfo = (props) => {
             });
        
  
-      },[])
+      },[url])
     return (
         <div className="UserInfo" >
             <div className='user_wallet'>
-                <img className='avatar' src={Top}></img>
+                <img className='avatar' src={userImg?userImg:`data:image/svg+xml;utf8,${generateFromString("example@test.com")}`}></img>
                 <div className='address_ehem'>
                     <Select className='select_main' defaultValue={seed?seed:knownSubstrate[0].prefix} style={{ width: 200 }} onChange={handleChange}>
                        {
@@ -180,7 +183,9 @@ const mapStateToProps = (state) => {
         account: state.account ,
         seed:state.seed,
         address:state.address,
-        keys:state.keys
+        keys:state.keys,
+        userimags:state.userimags,
+        url:state.url
     }
 }  
 export default  connect(mapStateToProps,mapDispatchToProps)(UserInfo)

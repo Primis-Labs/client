@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import './WalletHome.scss';
 //react-redux
 import { connect, useDispatch, useSelector } from 'react-redux';
-import { setAccount, setSeed } from '../../store/action';
+import { setAccount, setSeed ,setUserimg} from '../../store/action';
 import { useNavigate } from 'react-router-dom';
 import UserInfo from '../UserInfo/UserInfo'
 import tabActive from '../../images/tba_active.png';
@@ -10,7 +10,7 @@ import Dot_IMF from '../../images/dot.png';
 import Nft_IMG from '../../images/nft.png';
 import Set_IMG from '../../images/set.png';
 import { NftAsset } from '../NftAssets/NftAssets'
-import { Button, Spin } from 'antd';
+import { Button, Spin ,message} from 'antd';
 import { postWallet } from '../../api/walletManager';
 import { knownSubstrate } from '../../api/network'
 const { UserService }  = require("../../store/user_service");
@@ -19,7 +19,7 @@ const handleChange = (value) => {
     console.log(`selected ${value}`);
 };
 const WalletHome = (props) => {
-    const { account, setAccount, keys } = props;
+    const { account, keys, setUserimg } = props;
     const [tabType, setTabType] = useState(true);
     const [previousFrees, setPreviousFrees] = useState();
     const [tokenName, setTokenName] = useState();
@@ -46,6 +46,8 @@ const WalletHome = (props) => {
           }
           var indexdb = new UserService();
           var r = indexdb.updateByAddress(account,obj);
+          message.success('Avatar changed successfully！');
+          setUserimg(url)
     }
     const GetBlance = () => {
         knownSubstrate.map(async (item) => {
@@ -162,9 +164,9 @@ const WalletHome = (props) => {
         </div>
     )
 }
-const mapDispatchToProps = () => {
+const mapDispatchToProps = (dispatch) => {
     return {
-        setAccount, setSeed
+        setUserimg:(url) => dispatch(setUserimg(url)),
     }
 }
 const mapStateToProps = (state) => {

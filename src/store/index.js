@@ -1,5 +1,5 @@
 import { createStore } from "redux";
-import { SET_SEED, SET_ACCOUNT, SET_ADDRESS } from './action'
+import { SET_SEED, SET_ACCOUNT, SET_ADDRESS ,SET_USERIMG} from './action'
 import { persistStore, persistReducer } from 'redux-persist';
 //  sessionStorage
 import storageSession from 'redux-persist/lib/storage';
@@ -31,6 +31,11 @@ function user(state=defaultState, action) {
             return {
                 ...state,
                 address: action.address
+            }
+        case SET_USERIMG:
+            return {
+                ...state,
+                url:action.url
             }
         default:
             return state;
