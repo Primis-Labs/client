@@ -53,4 +53,14 @@ export class UserService {
             }
         })
     }
+
+    async updateByAddress(address, updateData) {
+        return await idbCon.update({
+            in: this.tableName,
+            set: updateData,
+            where: {
+                address: address
+            }
+        })
+    }
 }
