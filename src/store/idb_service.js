@@ -13,7 +13,7 @@ const getWorkerPath = () => {
 // This will ensure that we are using only one instance. 
 // Otherwise due to multiple instance multiple worker will be created.
 const workerPath = getWorkerPath().default;
-const idbCon = new Connection(new Worker(workerPath));
+export const idbCon = new Connection(new Worker(workerPath));
 const dbname = 'primisDB';
 
 const getDatabase = () => {
@@ -92,7 +92,7 @@ const getDatabase = () => {
     return dataBase;
 };
 
-async function  initJsStore(){
+export async function  initJsStore(){
     try {
         const dataBase = getDatabase();
         await idbCon.initDb(dataBase);
@@ -102,7 +102,7 @@ async function  initJsStore(){
     }
 }
 
-module.exports = {
-    initJsStore,
-    idbCon
- }
+// module.exports = {
+//     initJsStore,
+//     idbCon
+//  }

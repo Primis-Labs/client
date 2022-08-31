@@ -3,7 +3,7 @@ const { handle,cryptoWaitReady } = require('./polkadot');
 const { async } = require('rxjs');
 const { assert, isHex } = require('@polkadot/util');
 
-async function initWallet(network) {
+export async function initWallet(network) {
     switch(network){
      case 1:
         await cryptoWaitReady();
@@ -13,7 +13,7 @@ async function initWallet(network) {
     }
  }
 
-async function postWallet(network,type,data) {
+export async function postWallet(network,type,data) {
    switch(network){
     case 1:
         return await handle(type,data);
@@ -21,6 +21,6 @@ async function postWallet(network,type,data) {
         throw new Error(`Unable to handle message of type ${type}`);
    }
 }
-module.exports = {
-    postWallet,initWallet
-}
+// module.exports = {
+//     postWallet,initWallet
+// }
