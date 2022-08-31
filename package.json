@@ -143,9 +143,7 @@
     "dist-win32": "electron-builder --win --ia32",
     "dist-win64": "electron-builder --win --x64",
     "dist-mac": "electron-builder --mac",
-    "package": "electron-builder build --mac --win -c.extraMetadata.main=build/electron/main.js --publish never",
-    "electron:generate-icons": "electron-icon-builder --input=./public/favicon.png --output=build --flatten"
-
+    "package": "electron-builder build --mac --win -c.extraMetadata.main=build/electron/main.js --publish never"
   },
   "build": {
     "productName": "primis",
