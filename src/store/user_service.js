@@ -13,7 +13,7 @@ export class UserService {
         return await idbCon.select({
             from: this.tableName,
             where:{
-                from:address
+                address:address
             }
         })
     }

@@ -100,16 +100,18 @@ const UserInfo = (props) => {
         
         var indexdb = new UserService();
             indexdb.getUser(account).then(res=>{
-                console.log(res)
+                if(res.length != 0){
+                    return;
+                }
+                var obj = {
+                    address:account,
+                    img:File,
+                    createTime:new Date(),
+                }
+                var indexdb = new UserService();
+                indexdb.add(obj);
             });
-        // var obj = {
-        //     address:account,
-        //     img:File,
-        //     createTime:new Date(),
-        //   }
-        // var indexdb = new UserService();
-
-        //   var r = indexdb.add(obj);
+       
  
       },[])
     return (
