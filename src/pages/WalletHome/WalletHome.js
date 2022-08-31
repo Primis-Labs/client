@@ -13,6 +13,7 @@ import { NftAsset } from '../NftAssets/NftAssets'
 import { Button, Spin } from 'antd';
 import { postWallet } from '../../api/walletManager';
 import { knownSubstrate } from '../../api/network'
+const { UserService }  = require("../../store/user_service");
 
 const handleChange = (value) => {
     console.log(`selected ${value}`);
@@ -28,16 +29,24 @@ const WalletHome = (props) => {
     const [nftRecord, setNftRecord] = useState([]);
     const Navigate = useNavigate();
     const Recieve_click = (send) => {
-        console.log(send)
         Navigate('/AssetsTabs', { state: { datas: send }, replace: true })
     };
     const RecordBtn = () => {
         Navigate('/sendRecord')
     }
     const Nft_click = (props) => {
-        console.log(props)
         // Navigate('/NftTabs',{state:{datas:props},replace:true})
     };
+    const setAvatar=(url)=>{
+        console.log(url)
+        var obj = {
+            address:account,
+            img:url,
+            createTime:new Date(),
+          }
+          var indexdb = new UserService();
+          var r = indexdb.updateByAddress(account,obj);
+    }
     const GetBlance = () => {
         knownSubstrate.map(async (item) => {
             if (keys == item.prefix) {
@@ -62,10 +71,10 @@ const WalletHome = (props) => {
         postWallet(1, 'pol.nftByAddress', ps4).then(res => {
             const nftData = res.data
             nftData.map(item => {
-                console.log(item)
+                // console.log(item)
                 item.metadata_image = 'https://' + item.metadata_image.slice(11, item.metadata_image.length) + '.ipfs.cf-ipfs.com'
             })
-            console.log(nftData)
+            // console.log(nftData)
             setNftRecord(nftData)
         }).catch(err => {
         })
@@ -126,7 +135,7 @@ const WalletHome = (props) => {
                                         <div className='setings'>
                                             <img src={Set_IMG}></img>
                                             <div className='setting_l'>
-                                                <p>Set to avatar</p>
+                                                <p onClick={()=>setAvatar(item.metadata_image)}>Set to avatar</p>
                                                 <p>NFT Market</p>
                                             </div>
                                         </div>

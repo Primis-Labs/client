@@ -1,0 +1,164 @@
+.HomeWrap{
+    height: 84vh;
+    overflow-x: scroll;
+}
+.banner{
+    width: 900px;
+    margin: 0 auto;
+    background: #aaaaaa;
+    height: 302px;
+    margin-top: 30px;
+    background: url('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Finews.gtimg.com%2Fnewsapp_bt%2F0%2F13936653958%2F1000.jpg&refer=http%3A%2F%2Finews.gtimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1664439649&t=44a109c0d9f03a969112432b3f7e5649');
+    background-size: 100% 100%;
+    border-radius: 16px;
+    .coinBtn{
+        padding-top: 200px;
+    }
+    p{
+        width: 460px;
+        background: rgba(0,0,0,.4);
+        opacity: 1;
+        border-radius: 16px;
+        margin: 0 auto;
+        padding: 5px;
+        text-align: center;
+        button{
+            width: 180px;
+            height: 40px;
+            background: #5F58CC;
+            box-shadow: 0px 3px 6px rgba(23,1,48,0.4);
+            opacity: 1;
+            color: #fff;
+            border-radius: 16px;
+            border: 2px solid #5F58CC;
+            margin-left: 10px;
+            margin-right: 10px;
+            &:hover{
+            background: #5F58CC;
+            color: #fff;
+            border: 2px solid #5F58CC;
+            }
+        }
+        .coing{
+            border: 2px solid #FFFFFF;
+            background: rgba(0,0,0,0);
+        box-shadow: 0px 3px 6px rgba(23,1,48,0.4);
+        &:hover{
+            background: rgba(0,0,0,0);
+            color: #fff;
+            border: 2px solid #FFFFFF;
+            }
+        }
+    }
+}
+.homeTabs{
+    width: 900px;
+    margin:  0 auto;
+    padding-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    .tbas{
+        width: 67%;
+        ul{
+            width: 460px;
+            height: 54px;
+            background: #1A1C1E;
+            opacity: 1;
+            border-radius: 16px;
+            display: flex;
+            justify-content: space-between;
+            li{
+                color: #64686E;
+                line-height: 54px;
+                cursor: pointer;
+                width: 20%;
+                text-align: center;
+                position: relative;
+                font-size: 14px;
+             
+                img{
+                    width: 50%;
+                    position: absolute;
+                    bottom: 0;
+                    left: 25%;
+                    display: block;
+                }
+            }
+            .actives{
+                color: #fff;
+            }
+        }
+
+        .application{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding-top: 20px;
+       
+            p{
+                width: 31%;
+                height: 109px;
+                background: #1A1C1E;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: 1px solid #1A1C1E;
+                opacity: 1;
+                border-radius: 16px;
+                cursor: pointer;
+                &:hover{
+                    border:1px solid #3CDFDD;
+                }
+                img{
+                    width: 120px;
+                }
+            }
+        }
+    }
+    .liveWire{
+        width: 30%;
+        height: 325px;
+        background: #1A1C1E;
+        opacity: 1;
+        border-radius: 30px;
+        .titles{
+            display: flex;
+            justify-content: space-between;
+            padding-top: 10px;
+            img{
+               width: 20px;
+               height: 20px; 
+               margin-top: 5px;
+               margin-left: 10px;
+            }
+            p{
+            font-size: 16px;
+            font-weight: bold;
+            color: #FFFFFF;
+            padding-top: 3px;
+            }
+            button{
+                width: 70px;
+                height: 30px;
+                border: 1px solid #3CDFDD;
+                opacity: 1;
+                border-radius: 16px;
+                color: #fff;
+                background:rgba(0,0,0,0);
+                font-size: 12px;
+                margin-right: 10px;
+
+            }
+            .ant-btn > .anticon + span, .ant-btn > span + .anticon{
+                margin-left: 0;
+            }
+        }
+        .comming{
+            color: #fff;
+            text-align: center;
+            font-size: 18px;
+            padding-top: 50px;
+        }
+    }
+ 
+}

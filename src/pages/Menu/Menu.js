@@ -31,7 +31,7 @@ const SiderMenu = (props) => {
   useEffect(() => {
   console.log(Location.pathname)
 
-    if(Location.pathname=='/WalletHome'||Location.pathname=='/AssetsTabs'||Location.pathname=='/NftTabs'){
+    if(Location.pathname=='/Wallet'||Location.pathname=='/WalletHome'||Location.pathname=='/AssetsTabs'||Location.pathname=='/NftTabs'){
       setActiveMenu('/Wallet')
       console.log(activeMenu)
     }

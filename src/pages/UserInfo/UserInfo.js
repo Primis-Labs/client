@@ -13,6 +13,7 @@ import closeUrl from '../../images/close.png';
 import keyDowload from '../../images/keyDowload.png';
 import { postWallet } from '../../api/walletManager';
 import {knownSubstrate} from '../../api/network'
+const { UserService }  = require("../../store/user_service");
 const { Option } = Select;
 
 const UserInfo = (props) => {
@@ -93,15 +94,30 @@ const UserInfo = (props) => {
             //     }
             // })
          
-          });
-    
+          });    
     }
+    useEffect(()=>{
+        
+        var indexdb = new UserService();
+            indexdb.getUser(account).then(res=>{
+                console.log(res)
+            });
+        // var obj = {
+        //     address:account,
+        //     img:File,
+        //     createTime:new Date(),
+        //   }
+        // var indexdb = new UserService();
+
+        //   var r = indexdb.add(obj);
+ 
+      },[])
     return (
         <div className="UserInfo" >
             <div className='user_wallet'>
                 <img className='avatar' src={Top}></img>
                 <div className='address_ehem'>
-                    <Select className='select_main' defaultValue={seed} style={{ width: 200 }} onChange={handleChange}>
+                    <Select className='select_main' defaultValue={seed?seed:knownSubstrate[0].prefix} style={{ width: 200 }} onChange={handleChange}>
                        {
                            knownSubstrate.map(item=>{
                            return <Option value={item.prefix} key={item.prefix}>{item.displayName}</Option>

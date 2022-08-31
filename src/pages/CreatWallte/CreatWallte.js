@@ -58,19 +58,19 @@ function CreatWallte(props) {
             oldpasswd,
         };
         await postWallet(1, 'pol.saveAccountsCreate', data).then(res => {
-            console.log(res)
+            // console.log(res)
             if (res) {
                 setStyleHiden(res)
             }
         });
     }
     const password = (value) => {
-        console.log(value.target.value)
+        // console.log(value.target.value)
         setPasswords(value.target.value)
     }
     const password_void = (value) => {
         setPasswordv(value.target.value)
-        console.log(value.target.value)
+        // console.log(value.target.value)
 
     }
     return (

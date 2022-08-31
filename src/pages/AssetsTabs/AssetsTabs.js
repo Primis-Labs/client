@@ -16,9 +16,9 @@ import { postWallet } from '../../api/walletManager';
 import {knownSubstrate} from '../../api/network';
 import QRCode from 'qrcode.react';
 const { TransferService }  = require("../../store/transfer_service");
+
 const AssetsTab = (props) => {
     const useLocations=useLocation()
-    console.log(useLocations)
     const {account,keys} = props
     const [tabType, setTabType] = useState(true)
     const Navigate = useNavigate();
@@ -46,7 +46,7 @@ const AssetsTab = (props) => {
         setIsModalVisibleLoading(false);
       };
       const Max=()=>{
-        setTokenAccount(useLocations.state.datas)
+        setTokenAccount(toeknBalnce*1-0.03)
       }
       const AccountToken=(e)=>{
         const { value: inputValue } = e.target;
