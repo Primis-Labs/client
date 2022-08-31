@@ -1,5 +1,3 @@
-import { legacy_createStore } from "redux";
-
 const { idbCon } = require("./idb_service");
 
 export class TransferService {
