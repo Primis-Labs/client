@@ -12,9 +12,10 @@ function createWindow () {
     height: 800,
     minWidth:1200,
     minHeight:800,
+    icon:path.join(__dirname, './build/icons/256x256.png'),
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
-    }
+      preload: path.join(__dirname, 'preload.js'),
+    },
   })
   // if(mode){
   //   mainWindow.loadURL("http://localhost:3000/")
