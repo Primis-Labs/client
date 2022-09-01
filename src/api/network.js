@@ -24,7 +24,7 @@ export const knownSubstrate = [
       symbols: ['DOT'],
       website: 'https://polkadot.network',
       genesis: ['0x91b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3'],
-      rpc:'wss://polkadot.api.onfinality.io'
+      rpc:'wss://rpc.polkadot.io'
     },
     {
       decimals: 1000000000000,
@@ -38,7 +38,7 @@ export const knownSubstrate = [
       '0xe3777fa922cafbff200cadeaea1a76bd7898ad5b89f7848999058b50e715f636', // Kusama CC2
       '0x3fd7b9eb6a00376e5be61f01abb429ffb0b104be05eaff4d458da48fcd425baf' // Kusama CC1
       ],
-      rpc:'wss://kusama.public.curie.radiumblock.xyz/ws'
+      rpc:'wss://kusama-rpc.dwellir.com'
     },
     {
       decimals: 1000000000000,
@@ -52,187 +52,16 @@ export const knownSubstrate = [
       rpc:'wss://acala.polkawallet.io'
     },
     {
-      decimals: 1000000000000,
-      displayName: 'Basilisk',
-      network: 'basilisk',
-      prefix: 10041,
-      standardAccount: '*25519',
-      symbols: ['BSX'],
+      decimals: [12],
+      displayName: 'Moonbeam',
+      network: 'moonbeam',
+      prefix: 1284,
+      standardAccount: '*1284',
+      symbols: ['GLMR'],
       website: 'https://bsx.fi',
-      genesis: ['0xa85cfb9b9fd4d622a5b28289a02347af987d8f73fa3108450e2b4a11c1ce5755'],
-      rpc:'wss://basilisk-rpc.dwellir.com'
+      genesis: ['0xfe58ea77779b7abda7da4ec526d14db9b1e9cd40a217c34892af80a9b332b76d'],
+      rpc:'wss://moonbeam.public.blastapi.io'
     },
-    {
-      decimals: 1000000000000,
-      displayName: 'Bifrost',
-      network: 'bifrost',
-      prefix: 6,
-      standardAccount: '*25519',
-      symbols: ['BNC'],
-      website: 'https://bifrost.finance/',
-      genesis: ['0x262e1b2ad728475fd6fe88e62d34c200abe6fd693931ddad144059b1eb884e5b'],
-      rpc:'wss://hk.p.bifrost-rpc.liebi.com/ws'
-    },
-    // {
-    //   decimals: [18],
-    //   displayName: 'Edgeware',
-    //   network: 'edgeware',
-    //   prefix: 7,
-    //   standardAccount: '*25519',
-    //   symbols: ['EDG'],
-    //   website: 'https://edgewa.re',
-    //   genesis: ['0x742a2ca70c2fda6cee4f8df98d64c4c670a052d9568058982dad9d5a7a135c5b'],
-    // },
-    {
-      decimals: 1000000000000,
-      displayName: 'Karura',
-      network: 'karura',
-      prefix: 8,
-      standardAccount: '*25519',
-      symbols: ['KAR'],
-      website: 'https://karura.network/',
-      genesis: ['0xbaf5aabe40646d11f0ee8abbdc64f4a4b7674925cba08e4a05ff9ebed6e2126b'],
-      rpc:'wss://karura.polkawallet.io'
-    },
-    // {
-    //   decimals: [6],
-    //   displayName: 'Polymesh',
-    //   network: 'polymesh',
-    //   prefix: 12,
-    //   standardAccount: '*25519',
-    //   symbols: ['POLYX'],
-    //   website: 'https://polymath.network/',
-    //   genesis: ['0x6fbd74e5e1d0a61d52ccfe9d4adaed16dd3a7caa37c6bc4d0c2fa12e8b2f4063'],
-    // },
-    // {
-    //   decimals: [12],
-    //   displayName: 'Kulupu',
-    //   network: 'kulupu',
-    //   prefix: 16,
-    //   standardAccount: '*25519',
-    //   symbols: ['KLP'],
-    //   website: 'https://kulupu.network/',
-    //   genesis: ['0xf7a99d3cb92853d00d5275c971c132c074636256583fee53b3bbe60d7b8769ba'],
-    // },
-    // {
-    //   decimals: [12],
-    //   displayName: 'Stafi',
-    //   network: 'stafi',
-    //   prefix: 20,
-    //   standardAccount: '*25519',
-    //   symbols: ['FIS'],
-    //   website: 'https://stafi.io',
-    //   genesis: ['0x290a4149f09ea0e402c74c1c7e96ae4239588577fe78932f94f5404c68243d80'],
-    // },
-    // {
-    //   decimals: [6],
-    //   displayName: 'Dock Mainnet',
-    //   network: 'dock-mainnet',
-    //   prefix: 22,
-    //   standardAccount: '*25519',
-    //   symbols: ['DCK'],
-    //   website: 'https://dock.io',
-    //   genesis: ['0x6bfe24dca2a3be10f22212678ac13a6446ec764103c0f3471c71609eac384aae', '0xf73467c6544aa68df2ee546b135f955c46b90fa627e9b5d7935f41061bb8a5a9'],
-    // },
-    {
-      decimals: 1,
-      displayName: 'Subsocial',
-      network: 'subsocial',
-      prefix: 28,
-      standardAccount: '*25519',
-      symbols: null,
-      website: null,
-      genesis: ['0x0bd72c1c305172e1275278aaeb3f161e02eccb7a819e63f62d47bd53a28189f8'],
-      rpc:'wss://para.subsocial.network'
-    },
-    // {
-    //   decimals: [18],
-    //   displayName: 'Centrifuge Chain',
-    //   network: 'centrifuge',
-    //   prefix: 36,
-    //   standardAccount: '*25519',
-    //   symbols: ['CFG'],
-    //   website: 'https://centrifuge.io/',
-    //   genesis: ['0xb3db41421702df9a7fcac62b53ffeac85f7853cc4e689e0b93aeb3db18c09d82', '0x67dddf2673b69e5f875f6f25277495834398eafd67f492e09f3f3345e003d1b5'],
-    // },
-    {
-      decimals: 1000000000000000000,
-      displayName: 'Nodle Chain',
-      network: 'nodle',
-      prefix: 37,
-      standardAccount: '*25519',
-      symbols: ['NODL'],
-      website: 'https://nodle.io/',
-      genesis: ['0x97da7ede98d7bad4e36b4d734b6055425a3be036da2a332ea5a7037656427a21'],
-      rpc:'wss://public-rpc.pinknode.io'
-    },
-    // {
-    //   decimals: [12],
-    //   displayName: 'Picasso',
-    //   network: 'picasso',
-    //   prefix: 49,
-    //   standardAccount: '*25519',
-    //   symbols: ['PICA'],
-    //   website: 'https://picasso.composable.finance',
-    //   genesis: ['0xe8e7f0f4c4f5a00720b4821dbfddefea7490bcf0b19009961cc46957984e2c1c'],
-    // },
-    // {
-    //   decimals: [12],
-    //   displayName: 'Composable',
-    //   network: 'composable',
-    //   prefix: 50,
-    //   standardAccount: '*25519',
-    //   symbols: ['LAYR'],
-    //   website: 'https://composable.finance',
-    //   genesis: ['0xdaab8df776eb52ec604a5df5d388bb62a050a0aaec4556a64265b9d42755552d'],
-    // },
-    // {
-    //   decimals: [12],
-    //   displayName: 'HydraDX',
-    //   network: 'hydradx',
-    //   prefix: 63,
-    //   standardAccount: '*25519',
-    //   symbols: ['HDX'],
-    //   website: 'https://hydradx.io',
-    //   genesis: ['0xafdc188f45c71dacbaa0b62e16a91f726c7b8699a9748cdf715459de6b7f366d', // HydraDX Parachain
-    //   '0xd2a620c27ec5cbc5621ff9a522689895074f7cca0d08e7134a7804e1a3ba86fc', // Snakenet Gen3-1
-    //   '0x10af6e84234477d84dc572bac0789813b254aa490767ed06fb9591191d1073f9', // Snakenet Gen3
-    //   '0x3d75507dd46301767e601265791da1d9cb47b6ebc94e87347b635e5bf58bd047', // Snakenet Gen2
-    //   '0x0ed32bfcab4a83517fac88f2aa7cbc2f88d3ab93be9a12b6188a036bf8a943c2' // Snakenet Gen1
-    //   ],
-    // },
-    // {
-    //   decimals: [0, 9, 9, 9, 9, 9, 9, 9],
-    //   displayName: 'Equilibrium Network',
-    //   network: 'equilibrium',
-    //   prefix: 67,
-    //   standardAccount: '*25519',
-    //   symbols: ['Unknown', 'USD', 'EQ', 'ETH', 'BTC', 'EOS', 'DOT', 'CRV'],
-    //   website: 'https://equilibrium.io',
-    //   genesis: ['0x6f1a800de3daff7f5e037ddf66ab22ce03ab91874debeddb1086f5f7dbd48925'],
-    // },
-    {
-      decimals: 1000000000000000000,
-      displayName: 'SORA Network',
-      network: 'sora',
-      prefix: 69,
-      standardAccount: '*25519',
-      symbols: ['XOR'],
-      website: 'https://sora.org',
-      genesis: ['0x7e4e32d0feafd4f9c9414b0be86373f9a1efa904809b683453a9af6856d38ad5'],
-      rpc:'wss://ws.parachain-collator-1.c1.sora2.soramitsu.co.jp'
-    },
-    // {
-    //   decimals: [12],
-    //   displayName: 'Parallel',
-    //   network: 'parallel',
-    //   prefix: 172,
-    //   standardAccount: '*25519',
-    //   symbols: ['PARA'],
-    //   website: 'https://parallel.fi/',
-    //   genesis: ['0xe61a41c53f5dcd0beb09df93b34402aada44cb05117b71059cce40a2723a4e97'],
-    //   rpc:'wss://parallel-heiko.api.onfinality.io/public-ws'
-    // },
     {
       decimals: 1000000000000,
       displayName: 'Rococo Test',
