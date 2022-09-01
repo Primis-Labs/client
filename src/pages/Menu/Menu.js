@@ -19,7 +19,7 @@ const SiderMenu = (props) => {
   const items = [
     { label: 'Home', key: '/', icon: <HomeIcon /> }, // 菜单项务必填写 key
     { label: 'Wallet', key: '/Wallet', icon: <WalletIcon /> },
-    { label: 'Chart', key: '/Chart', icon: <ChatIcon /> },
+    { label: 'Chat', key: '/Chart', icon: <ChatIcon /> },
     { label: 'Subsoribe', key: '/Subsoribe', icon: <SubIcon /> },
     { label: 'Brower', key: '/Brower', icon: <BrowserIcon /> },
   ];

@@ -81,11 +81,12 @@
                     position: absolute;
                     bottom: 0;
                     left: 25%;
-                    display: block;
+                    display: none;
                 }
             }
             .actives{
                 color: #fff;
+                display: block;
             }
         }
 

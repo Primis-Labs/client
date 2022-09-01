@@ -12,10 +12,7 @@ import listicon from '../../images/listicon.png';
 
 import './Home.scss';
 const Home = () => {
-  const [count,setCount]=useState(0)
-  const onFinish = () => {
-    setCount(count+1)
-  };
+  const [active,setActive]=useState(1)
   const logoSrc=[
     {src:chainx},
     {src:poek},
@@ -27,8 +24,10 @@ const Home = () => {
   useEffect(()=>{
     //post
     // document.title=` ${count} `;
-  },[count])
-
+  },[])
+  const tabs=(data)=>{
+    setActive(data)
+  }
   return (
     <div className='HomeWrap'>
       <div className='banner'>
@@ -43,25 +42,21 @@ const Home = () => {
 
         <div className='tbas'>
           <ul>
-            <li className='actives'>
+            <li className={active==1?'actives':''} onClick={()=>tabs(1)}>
             Polkadot
-            <img src={tabactive}/>
+            <img className={active==1?'actives':''}  src={tabactive}/>
             </li>
-            <li>
+            <li className={active==2?'actives':''}  onClick={()=>tabs(2)}>
             Kusama
-            {/* <img src={tabactive}/> */}
+            <img className={active==2?'actives':''}  src={tabactive}/>
             </li>
-            <li>
+            <li className={active==3?'actives':''}  onClick={()=>tabs(3)}>
             Acala
-            {/* <img src={tabactive}/> */}
+            <img className={active==3?'actives':''}  src={tabactive}/>
             </li>
-            <li>
-            Astar
-            {/* <img src={tabactive}/> */}
-            </li>
-            <li>
+            <li className={active==4?'actives':''}  onClick={()=>tabs(4)}>
             Moonbeam
-            {/* <img src={tabactive}/> */}
+            <img className={active==4?'actives':''}  src={tabactive}/>
             </li>
            </ul>
 

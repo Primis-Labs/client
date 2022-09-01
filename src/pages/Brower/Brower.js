@@ -1,9 +1,9 @@
 import React from "react";
-import './chart.scss'
-function Chat() {
+import './Brower.scss'
+function Brower() {
     return (
         <div className="homes">Comming soon ~</div>
     )
 }
  
-export default Chat;
+export default Brower;

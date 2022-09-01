@@ -7,6 +7,10 @@ import WalletHome from '../pages/WalletHome/WalletHome';
 import AssetsTabs from '../pages/AssetsTabs/AssetsTabs';
 import SendRecord from '../pages/SendRecord/SendRecord';
 import NftTabs from '../pages/NftTabs/NftTabs';
+import Subsoribe from '../pages/Subsoribe/Subsoribe';
+import Brower from '../pages/Brower/Brower';
+
+
 //The routing configuration
 const routes =  [
 
@@ -68,7 +72,18 @@ const routes =  [
         exact: true,
         key:'NftTabs',
     },
-    
+    {
+        path: "/Subsoribe",
+        component: Subsoribe,
+        exact: true,
+        key:'Subsoribe',
+    },
+    {
+        path: "/Brower",
+        component: Brower,
+        exact: true,
+        key:'Brower',
+    },
     
 ]
 export default routes;

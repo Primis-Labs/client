@@ -1,9 +1,9 @@
 import React from "react";
-import './chart.scss'
-function Chat() {
+import './Subsoribe.scss'
+function Subsoribe() {
     return (
         <div className="homes">Comming soon ~</div>
     )
 }
  
-export default Chat;
+export default Subsoribe;

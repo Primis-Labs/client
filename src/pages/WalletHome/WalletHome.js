@@ -68,7 +68,7 @@ const WalletHome = (props) => {
             }
         })
         let ps4 = {
-            address: 'EJJuXJGycFmy6e7ePJVEU57hmLAgiB1y5RFfguo61fgTU9A',
+            address: account,
         }
         postWallet(1, 'pol.nftByAddress', ps4).then(res => {
             const nftData = res.data

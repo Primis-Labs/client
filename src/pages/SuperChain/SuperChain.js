@@ -23,9 +23,9 @@ function SuperChain() {
                     <li>
                        <img src={aca_img}></img> 
                     </li>
-                    <li>
+                    {/* <li>
                        <img src={astar_img}></img> 
-                    </li>
+                    </li> */}
                     <li>
                        <img src={beam_img}></img> 
                     </li>
