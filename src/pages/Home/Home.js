@@ -68,7 +68,7 @@ const Home = () => {
           <div className='application'>
             {
               logoSrc.map((item,index)=>{
-                return <p>
+                return <p key={index}>
                 <img src={item.src}/>
                 </p>
               })
