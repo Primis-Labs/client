@@ -10,7 +10,7 @@ import Dot_IMF from '../../images/dot.png';
 import Nft_IMG from '../../images/nft.png';
 import Set_IMG from '../../images/set.png';
 import { NftAsset } from '../NftAssets/NftAssets'
-import { Button, Spin ,message} from 'antd';
+import { Button, Spin ,message,Pagination} from 'antd';
 import { postWallet } from '../../api/walletManager';
 import { knownSubstrate } from '../../api/network'
 const { UserService }  = require("../../store/user_service");
@@ -25,8 +25,10 @@ const WalletHome = (props) => {
     const [tokenName, setTokenName] = useState();
     const [tokenNumber, setTokenNumber] = useState();
     const [lodingL, setLodingL] = useState(true);
+    const [totals, setTotals] = useState(1);
 
     const [nftRecord, setNftRecord] = useState([]);
+    const [rmrks, setRmrks] = useState(2);
     const Navigate = useNavigate();
     const Recieve_click = (send) => {
         Navigate('/AssetsTabs', { state: { datas: send }, replace: true })
@@ -37,6 +39,9 @@ const WalletHome = (props) => {
     const Nft_click = (props) => {
         // Navigate('/NftTabs',{state:{datas:props},replace:true})
     };
+    const pageChange=(value)=>{
+        GetNfts(rmrks,value)
+    }
     const setAvatar=(url)=>{
         console.log(url)
         var obj = {
@@ -48,6 +53,29 @@ const WalletHome = (props) => {
           var r = indexdb.updateByAddress(account,obj);
           message.success('Avatar changed successfully！');
           setUserimg(url)
+    }
+    const GetNfts=(type,page)=>{
+        let ps4 = {
+            address: account,
+            rmrk:type,
+            page:page
+        }
+        postWallet(1, 'pol.nftByAddress', ps4).then(res => {
+            if(res.data.data){
+                const nftData = res.data.data.nfts
+                nftData.map(item => {
+                    // console.log(item)
+                    item.metadata_image = 'https://' + item.metadata_image.slice(11, item.metadata_image.length) + '.ipfs.cf-ipfs.com'
+                })
+                // console.log(nftData)
+                setNftRecord(nftData)
+                setTotals(res.data.data.nfts_aggregate.aggregate.count)
+            }else {
+                setNftRecord([])
+            }
+         
+        }).catch(err => {
+        })
     }
     const GetBlance = () => {
         knownSubstrate.map(async (item) => {
@@ -67,22 +95,16 @@ const WalletHome = (props) => {
                 //    })
             }
         })
-        let ps4 = {
-            address: account,
-        }
-        postWallet(1, 'pol.nftByAddress', ps4).then(res => {
-            const nftData = res.data
-            nftData.map(item => {
-                // console.log(item)
-                item.metadata_image = 'https://' + item.metadata_image.slice(11, item.metadata_image.length) + '.ipfs.cf-ipfs.com'
-            })
-            // console.log(nftData)
-            setNftRecord(nftData)
-        }).catch(err => {
-        })
+    
+    }
+    const rmrk=(type)=>{
+        setRmrks(type)
+        GetNfts(type,1);
+
     }
     useEffect(() => {
-        GetBlance()
+        GetBlance();
+        GetNfts(2,1);
 
     }, [keys])
     return (
@@ -128,10 +150,12 @@ const WalletHome = (props) => {
                 </div>
                 <div className={!tabType ? 'active' : 'key'}>
                     <div className='Nft'>
+                        <Button className={rmrks==1?'nftTab':'olds'} onClick={()=>rmrk(1)}>RMRK 1</Button>
+                        <Button className={rmrks==2?'nftTab':'olds'}  onClick={()=>rmrk(2)}>RMRK 2</Button>
                         <ul className='Nft_ul'>
 
                             {
-                                nftRecord.map((item, index) => {
+                              nftRecord.map((item, index) => {
 
                                     return <li key={index}>
                                         <div className='setings'>
@@ -148,14 +172,10 @@ const WalletHome = (props) => {
                                         </p>
                                     </li>
                                 })
-
                             }
-
-
-                            {/* <NftAsset></NftAsset> */}
-
+                             {nftRecord.length==0 ? <NftAsset /> : null}
                         </ul>
-
+                        <Pagination className='pages' onChange={pageChange} defaultCurrent={1} total={totals} />
                     </div>
                 </div>
 

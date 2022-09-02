@@ -12,6 +12,9 @@ function createWindow () {
     height: 800,
     minWidth:1200,
     minHeight:800,
+    // frame:false,
+    backgroundColor:'#111315',
+    icon:'./public/primis.ico',
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },
