@@ -9,7 +9,7 @@ import SendRecord from '../pages/SendRecord/SendRecord';
 import NftTabs from '../pages/NftTabs/NftTabs';
 import Subsoribe from '../pages/Subsoribe/Subsoribe';
 import Brower from '../pages/Brower/Brower';
-
+import Setting from '../pages/Setting/Setting';
 
 //The routing configuration
 const routes =  [
@@ -83,6 +83,12 @@ const routes =  [
         component: Brower,
         exact: true,
         key:'Brower',
+    },   
+    {
+        path: "/Setting",
+        component: Setting,
+        exact: true,
+        key:'Setting',
     },
     
 ]

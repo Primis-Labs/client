@@ -63,7 +63,9 @@ const SiderMenu = (props) => {
 
  
   };
-
+  const Setting=()=>{
+    Navigate('/Setting')
+  }
   return (
     <div
       style={{
@@ -76,7 +78,7 @@ const SiderMenu = (props) => {
       <Menu className='menu' selectedKeys={[activeMenu]} onClick={MenuRouter} mode="inline" items={items} />
 
       <div className='setting'>
-          <button > <img src={setting}></img> Setting</button>
+          <button onClick={Setting}> <img src={setting}></img> Setting</button>
       </div>
     </div>
   );
