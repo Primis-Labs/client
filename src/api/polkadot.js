@@ -8,7 +8,7 @@ const { ApiPromise, WsProvider } = require('@polkadot/api');
 const { ContractPromise } = require('@polkadot/api-contract'); 
 const { HttpProvider } = require('@polkadot/rpc-provider');
 const { latestNews } = require('./home');
-const { nftByAddress } = require('./nft');
+const { nftByAddress,sendNft } = require('./nft');
 const axios = require('axios').default;
 const {
   ScProvider,
@@ -237,6 +237,8 @@ async function handle(type,data) {
        return await nftByAddress(data);
       case 'latestNews':
        return await latestNews();
+      case 'sendNft':
+        return await sendNft(data);
      default:
        throw new Error(`Unable to handle message of type ${type}`);
    }

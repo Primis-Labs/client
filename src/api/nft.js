@@ -1,11 +1,11 @@
 /* eslint-disable no-unused-vars */
 const axios = require('axios').default;
+const { Consolidator } = require('rmrk-tools');
 const rmrk1 = "https://singular.rmrk.app/api/rmrk1/account/";
 const rmrk2 = "https://gql-rmrk2-prod.graphcdn.app/"
 
 
-
-export async function nftByAddress(data){
+  export async function nftByAddress(data){
     let { address,rmrk,page } = data;
     if(typeof page === "undefined"){
         page = 1;
@@ -33,6 +33,67 @@ export async function nftByAddress(data){
 
     }
 }
+
+  /**
+   * Send an NFT to an arbitrary recipient.
+   * _version :1.0.0  /  2.0.0
+   * You can only SEND an existing NFT (one that has not been CONSUMEd yet).
+   * https://github.com/rmrk-team/rmrk-spec/blob/master/standards/rmrk1.0.0/interactions/send.md
+   * const [_prefix, _op_type, _version, id, recipient] = remark.split("::");
+   */
+  export async function sendNft(data){
+    let { id,recipient,version } = data;
+    if(typeof version === 'undefined'){
+      version  = '1.0.0';
+    }
+    const consolidator = new Consolidator();
+    const remark = 'rmrk::SEND::'+version+'::'+id+'::' + recipient;
+    return consolidator.send(remark);
+  }
+
+
+  export function sendInteraction(
+    remark,
+    sendEntity,
+    nft
+  ){
+    if (!nft) {
+      throw new Error(
+        `[SEND] Attempting to send non-existant NFT ${sendEntity.id}`
+      );
+    }
+  
+    if (Boolean(nft.burned)) {
+      throw new Error(
+        `[SEND] Attempting to send burned NFT ${sendEntity.id}`
+      );
+    }
+  
+    // Check if allowed to issue send - if owner == caller
+    if (nft.owner != remark.caller) {
+      throw new Error(
+        `[SEND}] Attempting to send non-owned NFT ${sendEntity.id}, real owner: ${nft.owner}`
+      );
+    }
+  
+    if (nft.transferable === 0 || nft.transferable >= remark.block) {
+      throw new Error(
+        `[SEND] Attempting to send non-transferable NFT ${sendEntity.id}.`
+      );
+    }
+  
+    nft.updatedAtBlock = remark.block;
+    nft.addChange({
+      field: "owner",
+      old: nft.owner,
+      new: sendEntity.recipient,
+      caller: remark.caller,
+      block: remark.block,
+      opType: "SEND",
+    });
+  
+    nft.owner = sendEntity.recipient;
+  };
 
 // module.exports = {
 //     nftByAddress

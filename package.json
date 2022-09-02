@@ -196,6 +196,7 @@
     "file-loader": "^6.2.0",
     "jest": "^28.1.3",
     "jest-environment-jsdom": "^28.1.3",
+    "rmrk-tools": "^2.0.90",
     "wait-on": "^6.0.1"
   },
   "babel": {
