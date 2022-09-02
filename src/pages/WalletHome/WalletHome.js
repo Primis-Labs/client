@@ -36,8 +36,8 @@ const WalletHome = (props) => {
     const RecordBtn = () => {
         Navigate('/sendRecord')
     }
-    const Nft_click = (props) => {
-        // Navigate('/NftTabs',{state:{datas:props},replace:true})
+    const Nft_click = (images,send,id) => {
+        Navigate('/NftTabs',{state:{images:images,datas:send,rmrks:rmrks,id:id},replace:true})
     };
     const pageChange=(value)=>{
         GetNfts(rmrks,value)
@@ -56,7 +56,7 @@ const WalletHome = (props) => {
     }
     const GetNfts=(type,page)=>{
         let ps4 = {
-            address: account,
+            address: 'EXZLG911C35TBhi2b2m3G1pEFhn5NvEhyZxXHye6ffX2b77',
             rmrk:type,
             page:page
         }
@@ -167,8 +167,8 @@ const WalletHome = (props) => {
                                         </div>
                                         <img className='bg' src={item.metadata_image ? item.metadata_image : Nft_IMG}></img>
                                         <p className='seting_btn'>
-                                            <Button onClick={() => Nft_click(item.metadata_image)} className='btn Recieve'>Recieve</Button>
-                                            <Button onClick={() => Nft_click(item.metadata_image)} className='btn'>Send</Button>
+                                            <Button onClick={() => Nft_click(item.metadata_image,1,item.id)} className='btn Recieve'>Recieve</Button>
+                                            <Button onClick={() => Nft_click(item.metadata_image,2,item.id)} className='btn'>Send</Button>
                                         </p>
                                     </li>
                                 })
