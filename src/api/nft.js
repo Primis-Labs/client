@@ -6,7 +6,10 @@ const rmrk2 = "https://gql-rmrk2-prod.graphcdn.app/"
 
 
 export async function nftByAddress(data){
-    let { address,rmrk } = data;
+    let { address,rmrk,page } = data;
+    if(typeof page === "undefined"){
+        page = 1;
+    }
     if(rmrk === 1){
         return await axios.get(rmrk1 + address);
     }else if(rmrk === 2){
@@ -16,8 +19,8 @@ export async function nftByAddress(data){
         param.variables.where = {};
         param.variables.where.rootowner = {}
         param.variables.where.rootowner._in = [address];
-        param.variables.limit = 50;
-        param.variables.offset = 50;
+        param.variables.limit = 10;
+        param.variables.offset = 10 * page;
         let r =  await axios.post(rmrk2,
             param, 
             {
