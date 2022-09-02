@@ -5,7 +5,8 @@ const baseURL = 'https://www.coindesk.com/arc/outboundfeeds/rss/?outputType=json
 async function latestNews(){
    return axios.get(baseURL);
 }
-latestNews()
+
+
 module.exports = {
     latestNews
 }

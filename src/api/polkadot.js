@@ -8,13 +8,13 @@ const { ApiPromise, WsProvider } = require('@polkadot/api');
 const { ContractPromise } = require('@polkadot/api-contract'); 
 const { HttpProvider } = require('@polkadot/rpc-provider');
 const { latestNews } = require('./home');
+const { nftByAddress } = require('./nft');
 const axios = require('axios').default;
 const {
   ScProvider,
   WellKnownChain,
 } = require("@polkadot/rpc-provider/substrate-connect");
 const { async } = require('rxjs');
-const baseURL = "https://singular.rmrk.app/api/rmrk1/account/";
 const _type = "sr25519";
 const SEED_DEFAULT_LENGTH = 12;
 const ETH_DERIVE_DEFAULT = "/m/44'/60'/0'/0/0";
@@ -207,11 +207,7 @@ async function transfer(data){
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////       nft        //////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-async function nftByAddress(data){
-  let { address } = data;
-   return axios.get(baseURL + address)
- 
-}
+
 
 async function handle(type,data) {
    switch (type) {
