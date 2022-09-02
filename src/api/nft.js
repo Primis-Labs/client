@@ -19,8 +19,8 @@ const rmrk2 = "https://gql-rmrk2-prod.graphcdn.app/"
         param.variables.where = {};
         param.variables.where.rootowner = {}
         param.variables.where.rootowner._in = [address];
-        param.variables.limit = 10;
-        param.variables.offset = 10 * page;
+        param.variables.limit = 12;
+        param.variables.offset = 12 * page;
         let r =  await axios.post(rmrk2,
             param, 
             {

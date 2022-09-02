@@ -1,4 +1,7 @@
 .WalletHome{
+    .x{
+        display: none;
+    }
     // padding-top: 20px;
     max-height: 82vh;
     overflow-y:scroll;
@@ -161,6 +164,66 @@
             }
             }
         }
+        .Nft{
+            .nftTab{
+                width:80px;
+                height: 30px;
+                border: 1px solid #3CDFDD;
+                color: #3CDFDD;
+                font-size: 14px;
+                background: rgba(0,0,0,0);
+                margin-top: 10px;
+                margin-bottom: 10px;
+                border-radius:16px;
+                margin-right: 10px;
+                margin-left: 10px;
+                
+            }
+            .olds{
+                width:80px;
+                height: 30px;
+                border: 1px solid #aaaaaa;
+                color: #aaaaaa;
+                background: rgba(0,0,0,0);
+                font-size: 14px;
+                margin-top: 10px;
+                margin-bottom: 10px;
+                border-radius:16px;
+                margin-right: 10px;
+                margin-left: 10px;
+            }
+            .pages{
+                text-align: center;
+                .ant-pagination-item-ellipsis{
+                    color: #fff;
+                }
+                .ant-pagination-options{
+                    display: none;
+                }
+                button{
+                border: 1px solid rgba(0,0,0,0);
+                background: rgba(60, 223, 221, 0.3) !important;
+                color: #fff;
+                border-radius: 6px;
+                }
+                .ant-pagination-item-active{
+                    background: rgba(60, 223, 221, 0.3);
+                    border-color: #3CDFDD;
+                    a{
+                        color: #3CDFDD !important;
+                    }
+                }
+                .ant-pagination-item{
+                    a{
+                        color: #fff;
+                    }
+                    border-radius: 6px;
+                    border: 1px solid rgba(0,0,0,0);
+                    background: rgba(60, 223, 221, 0.3) !important;
+                }
+
+            }
+        }
         .Nft_ul{
             padding-top: 20px;
             border-radius: 16px;
@@ -168,7 +231,7 @@
             padding-bottom: 20px;
             overflow: hidden;
             display: flex;
-            justify-content: space-around;
+            // justify-content: space-around;
             padding-left: 20px;
             padding-right: 20px;
             flex-wrap: wrap;
@@ -176,6 +239,10 @@
                 width: 23%;
                 height: 254px;
                 position: relative;
+                margin-bottom: 20px;
+                &:not(:nth-child(4n)){
+                    margin-right:calc(4%/1.5);
+                }
                 &:hover .seting_btn{
                     opacity: 1;
                     transition: .5s;
@@ -230,6 +297,11 @@
                     z-index: 0;
                     left: 0;
                     top: 0;
+                    min-width: 100%;
+                    max-width: 100%;
+                    min-height: 100%;
+                    max-height: 100%;
+                    object-fit: cover;
               
                 }
                 .seting_btn{
@@ -246,14 +318,15 @@
                     opacity:0;
                 
                     .btn{
-                        width: 83px;
-                        height: 26px;
+                        width: 80px;
+                        height: 30px;
                         border: 1px solid #7D75FF;
                         opacity: 1;
                         border-radius: 16px;
                         background: rgba(0,0,0,0);
                         color: #fff;
                         font-size: 12px;
+                        margin: 0;
                     }
                     .Recieve{
                         background: #7D75FF;
