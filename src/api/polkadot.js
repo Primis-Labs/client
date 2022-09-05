@@ -51,7 +51,7 @@ function mnemonicGenerate(){
 // Create address
 function seedCreateAddress(mnemonic){
    var seed = mnemonicGenerate() ;
-   if( typeof mnemonic === 'undefined'){
+   if( typeof mnemonic !== 'undefined'){
       seed = mnemonic;
    }
    const address =  _uiKeyring.createFromUri(getSuri( seed, _type), {}, _type).address;
