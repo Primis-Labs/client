@@ -57,7 +57,6 @@ const NftTabs = (props) => {
                 setIsLoding(1);
 
             }).catch(err => {
-
             })
         } catch (e) {
             setIsLoding(2)

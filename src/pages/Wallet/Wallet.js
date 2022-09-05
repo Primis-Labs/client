@@ -1,10 +1,8 @@
 import React from "react";
 import './Wallet.scss';
-//引入react-redux
 import { connect ,useDispatch, useSelector} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-//引入公共方法
 import { setAccount,setSeed } from '../../store/action';
 import creat_img from '../../images/creat.png';
 import import_img from '../../images/impot.png';
@@ -62,5 +60,4 @@ const mapDispatchToProps= () =>{
         setAccount, setSeed 
     }
 }
-//建立连接  调用方法
 export default connect(mapDispatchToProps)(Wallets)

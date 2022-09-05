@@ -5,7 +5,6 @@ import { Input, Space } from 'antd';
 import { connect} from 'react-redux';
 import './Header.scss';
 import {SearchIcon} from '../../style/iconfont'
-//引入react-redux
 function Header(props) {
   const {age,name} =props;
   // console.log(age)

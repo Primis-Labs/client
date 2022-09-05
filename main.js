@@ -1,20 +1,20 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
+const { app, BrowserWindow } = require('electron')
 const path = require('path')
-const url =require('url')
-const mode =require("electron-is-dev");
+const url = require('url')
+const mode = require("electron-is-dev");
 
 let mainWindow;
-
-function createWindow () {
+let willQuitApp = false;
+function createWindow() {
   const mainWindow = new BrowserWindow({
     width: 1200,
     height: 800,
-    minWidth:1200,
-    minHeight:800,
+    minWidth: 1200,
+    minHeight: 800,
     // frame:false,
-    backgroundColor:'#111315',
-    icon:'./public/primis.ico',
+    backgroundColor: '#111315',
+    icon: './public/primis.ico',
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },
@@ -28,7 +28,7 @@ function createWindow () {
   //     slashes:true
   //   }))
   // }
- //mainWindow.webContents.openDevTools();
+  //mainWindow.webContents.openDevTools();
   // and load the index.html of the app.
   // mainWindow.loadFile('./public/index.html')
 
@@ -38,27 +38,35 @@ function createWindow () {
 }
 
 function loadVite(port) {
-  if(mode){
+  if (mode) {
     mainWindow.loadURL(`http://localhost:${port}`).catch((e) => {
       console.log('Error loading URL, retrying', e);
       setTimeout(() => {
-          loadVite(port);
+        loadVite(port);
       }, 200);
-   });
-  }else{
-      mainWindow.loadURL(url.format({
-      pathname:path.join(__dirname,'./build/index.html'),
-      protocol:'file:',
-      slashes:true
+    });
+  } else {
+    mainWindow.loadURL(url.format({
+      pathname: path.join(__dirname, './build/index.html'),
+      protocol: 'file:',
+      slashes: true
     }))
   }
- 
+
 }
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   mainWindow = createWindow();
+  mainWindow.on('close', (e) => {
+    if (willQuitApp) {
+      mainWindow = null;
+    } else {
+      e.preventDefault();
+      mainWindow.hide()
+    }
+  })
   loadVite(3000);
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
@@ -67,8 +75,10 @@ app.whenReady().then(() => {
   })
 })
 
+
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
+app.on('before-quit', () => { willQuitApp = true });
 // explicitly with Cmd + Q.
 app.on('window-all-closed', function () {
   if (process.platform !== 'darwin') app.quit()

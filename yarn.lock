@@ -10706,7 +10706,7 @@
 
 "rmrk-tools@^2.0.90":
   "integrity" "sha512-ooF7lNGuPgU3QU5HxTf2964buK7Jh4NuotqI/QN2oVxABwQEF2GwAHfL3AUdUMLtEcGs6Ws7civ0PDRRNYTvIQ=="
-  "resolved" "https://registry.npmmirror.com/rmrk-tools/-/rmrk-tools-2.0.90.tgz"
+  "resolved" "https://registry.npmjs.org/rmrk-tools/-/rmrk-tools-2.0.90.tgz"
   "version" "2.0.90"
   dependencies:
     "@polkadot/api-augment" "^9.0.1"

@@ -19,7 +19,7 @@ const handleChange = (value) => {
     console.log(`selected ${value}`);
 };
 const WalletHome = (props) => {
-    const { account, keys, setUserimg } = props;
+    const { account, keys, setUserimg ,address} = props;
     const [tabType, setTabType] = useState(true);
     const [previousFrees, setPreviousFrees] = useState();
     const [tokenName, setTokenName] = useState();
@@ -56,7 +56,7 @@ const WalletHome = (props) => {
     }
     const GetNfts=(type,page)=>{
         let ps4 = {
-            address: 'EXZLG911C35TBhi2b2m3G1pEFhn5NvEhyZxXHye6ffX2b77',
+            address:address,
             rmrk:type,
             page:page
         }
@@ -193,7 +193,8 @@ const mapStateToProps = (state) => {
     console.log(state.account)
     return {
         account: state.account,
-        keys: state.keys
+        keys: state.keys,
+        address:state.address,
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(WalletHome)
