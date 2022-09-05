@@ -4,7 +4,7 @@ import './NftTabs.scss';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { setAccount, setSeed } from '../../store/action';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Button, Input, Modal } from 'antd';
+import { Button, Input, Modal,message } from 'antd';
 import Top from '../../images/router.png';
 import UserInfo from '../UserInfo/UserInfo'
 import tabActive from '../../images/tba_active.png';
@@ -13,6 +13,7 @@ import Success from '../../images/success.png';
 import Error from '../../images/error.png';
 import QR from '../../images/QR.png';
 import QRCode from 'qrcode.react';
+import {knownSubstrate} from '../../api/network';
 import { postWallet } from '../../api/walletManager';
 
 const NftTabs = (props) => {
@@ -20,6 +21,7 @@ const NftTabs = (props) => {
     const [tabType, setTabType] = useState(true)
     const [addressT, setAddressT] = useState(true)
     const [isLoding, setIsLoding] = useState('3');
+    const [Blances,setBlances] =useState(0)
     const Navigate = useNavigate();
     const useLocations = useLocation()
     console.log(useLocations)
@@ -45,6 +47,9 @@ const NftTabs = (props) => {
         setIsModalVisible(false);
         setIsModalVisibleLoading(true);
         setIsLoding(0);
+        if(Blances==0){
+          message.error('Lack of balance！');
+        }
         let ps2 = {
             id: useLocations.state.id,
             recipient: addressT,
@@ -52,18 +57,37 @@ const NftTabs = (props) => {
         }
         try {
 
-            await postWallet(1, 'pol.sendNft', ps2).then((res) => {
+            await postWallet(1, 'sendNft', ps2).then((res) => {
                 console.log(res)
                 setIsLoding(1);
 
             }).catch(err => {
+            setIsLoding(2)
+
             })
         } catch (e) {
+
             setIsLoding(2)
 
         }
     }
+
+    const GetBlance =  () =>{
+        knownSubstrate.map( async(item)=>{
+            if(keys==item.prefix){
+                // postWallet(1,'pol.openConnnect',item.rpc).then(async (res)=>{
+                const ps2 = {
+                    address:account,
+                    chain:item.rpc
+                  }
+                 let { data: { free: previousFree }, nonce: previousNonce } = await postWallet(1,'pol.balance',ps2);
+                 setBlances(`${previousFree}`/item.decimals);
+            //    })
+            }})
+    }
+
     useEffect(() => {
+        GetBlance();
         if (useLocations.state.datas == '1') {
             setTabType(true)
         } else {
@@ -97,7 +121,7 @@ const NftTabs = (props) => {
 
                     <div className={tabType ? 'active' : 'key'}>
                         <div className='Recieve'>
-                            <img src={QR}></img>
+                            {/* <img src={QR}></img> */}
                             <div className="QR_CODE">
                                 <QRCode value={account} size={170}></QRCode>
                             </div>
@@ -107,7 +131,7 @@ const NftTabs = (props) => {
                     </div>
                     <div className={!tabType ? 'active' : 'key'}>
                         <div className='Recieve'>
-                            <img src={QR}></img>
+                            <img src={useLocations.state.images}></img>
 
                             <div className='_address'>
                                 <Input onChange={addressChange} placeholder="Enter Address"></Input>
@@ -131,7 +155,7 @@ const NftTabs = (props) => {
                     </li>
 
                 </ul>
-                <h6><span>Transaction  Fee：</span><a>0.01 DOT</a></h6>
+                {/* <h6><span>Transaction  Fee：</span><a>0.01 DOT</a></h6> */}
                 <div className='modal_footer'>
                     <Button onClick={handleCancel} className='Cancel'>Cancel</Button>
                     <Button onClick={sends} className='Confirm'>Confirm</Button>

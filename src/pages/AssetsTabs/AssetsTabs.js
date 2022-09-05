@@ -168,7 +168,7 @@ const AssetsTab = (props) => {
 
                     <div className={tabType ? 'active' : 'key'}>
                         <div className='Recieve'>
-                            <img src={QR}></img>
+                            {/* <img src={QR}></img> */}
                             <div className="QR_CODE">
                             <QRCode value={account} size={170}></QRCode>
                             </div>
@@ -178,7 +178,7 @@ const AssetsTab = (props) => {
                     </div>
                     <div className={!tabType ? 'active' : 'key'}>
                     <div className='Recieve'>
-                            <img src={QR}></img>
+                            {/* <img src={QR}></img> */}
                             <div className='_address'>
                             <Input  onChange={addressChange} placeholder="Enter Address" className='_address_input'></Input>
                             </div>
@@ -200,7 +200,7 @@ const AssetsTab = (props) => {
             <p><span>Recieve：</span> <a>{account.slice(0, 4)}****{account.slice(account.length - 4, account.length)}</a></p>
             <p><span>Total amount：</span> <a>{tokenAccount}</a></p>
             {/* <p><span>Transaction  amount：</span> <a>12DOT</a></p> */}
-            <p><span>Transaction  Fee：</span> <a>0.03</a></p>
+            {/* <p><span>Transaction  Fee：</span> <a>0.03</a></p> */}
             <div className='modal_footer'>
                 <Button onClick={handleCancel} className='Cancel'>Cancel</Button>
                 <Button onClick={SendToken} className='Confirm'>Confirm</Button>
