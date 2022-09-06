@@ -148,6 +148,16 @@
   "build": {
     "productName": "primis",
     "appId": "primis",
+    "nsis": {
+      "oneClick": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "build/primis.icon",
+      "uninstallerIcon": "build/primis.icon",
+      "installerHeaderIcon": "build/primis.icon",
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
     "directories": {
       "output": "builder"
     },
@@ -161,7 +171,8 @@
       "artifactName": "${productName}_Setup_${version}_alpha.${ext}"
     },
     "win": {
-      "icon": "build/primis.png",
+      "target": "nsis",
+      "icon": "build/primis.icon",
       "artifactName": "${productName}_Setup_${version}_alpha.${ext}"
     },
     "linux": {
