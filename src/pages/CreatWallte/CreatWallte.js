@@ -33,9 +33,10 @@ function CreatWallte(props) {
     const [seed, setSeed] = useState(false);
 
     const creatAccount = () => {
+        
         if (passwords == passwordv && passwords !== '') {
             postWallet(1, 'pol.mnemonicGenerate', {}).then(res => {
-                postWallet(1, 'pol.seedCreateAddress', { res }).then(res => {
+                postWallet(1, 'pol.seedCreateAddress', res ).then(res => {
                     dispatch(setAccount(res.address))
                     setSeed(res.seed)
                     let genesisHash = '';
