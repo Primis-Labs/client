@@ -17,6 +17,8 @@ function createWindow() {
     icon: './public/primis.ico',
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
+      webviewTag:true,
+      nodeIntegration:true
     },
   })
   // if(mode){
@@ -63,15 +65,20 @@ app.whenReady().then(() => {
     if (willQuitApp) {
       mainWindow = null;
     } else {
+      mainWindow.hide();
+      mainWindow.setSkipTaskbar(true);
       e.preventDefault();
-      mainWindow.hide()
     }
   })
   loadVite(3000);
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
-    if (BrowserWindow.getAllWindows().length === 0) createWindow()
+    if (mainWindow === null) {
+      createWindow();
+    } else {
+      mainWindow.show();
+    }
   })
 })
 

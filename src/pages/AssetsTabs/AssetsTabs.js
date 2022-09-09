@@ -15,11 +15,16 @@ import Error from '../../images/error.png';
 import { postWallet } from '../../api/walletManager';
 import {knownSubstrate} from '../../api/network';
 import QRCode from 'qrcode.react';
+import Dot_IMF from '../../images/dot.png';
+import Ksm_Img from '../../images/ksm.png';
+import aca_Img from '../../images/aca.png';
+import astr_Img from '../../images/astr.png';
+import gkmr_Img from '../../images/gkmr.png';
 const { TransferService }  = require("../../store/transfer_service");
 
 const AssetsTab = (props) => {
     const useLocations=useLocation()
-    const {account,keys} = props
+    const {account,keys,address} = props
     const [tabType, setTabType] = useState(true)
     const Navigate = useNavigate();
     const outWalletRouter = (props) => {
@@ -34,7 +39,7 @@ const AssetsTab = (props) => {
     const [toeknBalnce, setTokenBalance] = useState(true);
     const [decimal, setDecimal] = useState(true);
     const [rpc, setRpc] = useState('');
-    const [tokenName,setTokenName]=useState('')
+    const [tokenName,setTokenName]=useState([])
     
     const showModal = () => {
         setIsModalVisible(true);
@@ -69,7 +74,7 @@ const AssetsTab = (props) => {
                  setTokenBalance(`${previousFree}`/item.decimals);
                  setDecimal(item.decimals);
                  setRpc(item.rpc);
-                 setTokenName(item.displayName);
+                 setTokenName(item.symbols[0]);
             //    })
             }})
     }
@@ -169,11 +174,17 @@ const AssetsTab = (props) => {
                     <div className={tabType ? 'active' : 'key'}>
                         <div className='Recieve'>
                             {/* <img src={QR}></img> */}
+
+                            <img  className={keys=='0'?'':'tokenHidden'} src={Dot_IMF}></img>
+                            <img className={keys=='2'?'':'tokenHidden'}  src={Ksm_Img}></img>
+                            <img className={keys=='10'?'':'tokenHidden'} src={aca_Img}></img>
+                            <img className={keys=='18'?'':'tokenHidden'}  src={astr_Img}></img>
+                            <img className={keys=='1284'?'':'tokenHidden'} src={gkmr_Img}></img>
                             <div className="QR_CODE">
-                            <QRCode value={account} size={170}></QRCode>
+                            <QRCode value={address} size={170}></QRCode>
                             </div>
                             <p> Your Address </p>
-                            <span>{account}</span>
+                            <span>{address}</span>
                         </div>
                     </div>
                     <div className={!tabType ? 'active' : 'key'}>
@@ -233,7 +244,8 @@ const mapDispatchToProps = () => {
 const mapStateToProps = (state) => {
     return { 
         account: state.account ,
-        keys:state.keys
+        keys:state.keys,
+        address:state.address
     }
 }  
 export default connect(mapStateToProps,mapDispatchToProps)(AssetsTab)

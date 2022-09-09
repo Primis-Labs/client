@@ -48,9 +48,12 @@
             
             .Recieve{
                 padding-top: 50px;
+                .tokenHidden{
+                    display: none;
+                }
                 img{
-                    width: 100px;
-                    height: 100px;
+                    width: 120px;
+                    // height: 100px;
                     display: block;
                     margin: 0 auto;
                     margin-top: 30px;
@@ -208,13 +211,15 @@
         display: none;
     }
     p{
-        font-size: 24px;
+        font-size: 20px;
         font-weight: 400;
         color: #AAAAAA;
         display: flex;
         justify-content: space-between;
         a{
         color: #FFFFFF;
+        font-size: 16px;
+
         }
     }
     .modal_footer{

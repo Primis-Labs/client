@@ -28,7 +28,7 @@ const UserInfo = (props) => {
 
     
     const copyAddress = () => {
-        let copyContent = account;
+        let copyContent = address;
         var input = document.createElement("input");
         input.value = copyContent;
         document.body.appendChild(input);
@@ -64,7 +64,9 @@ const UserInfo = (props) => {
          await postWallet(1,'pol.accountsExport',ps2).then(res=>{
           funDownload(JSON.stringify(res), `${account}.json`);
             setPassType(false);
-        });;
+        }).catch(res=>{
+        message.error('Password mistake !');
+        });
     }
     const funDownload = (content, filename) => {
         var eleLink = document.createElement("a");

@@ -6,13 +6,18 @@ import { setAccount, setSeed ,setUserimg} from '../../store/action';
 import { useNavigate } from 'react-router-dom';
 import UserInfo from '../UserInfo/UserInfo'
 import tabActive from '../../images/tba_active.png';
-import Dot_IMF from '../../images/dot.png';
 import Nft_IMG from '../../images/nft.png';
 import Set_IMG from '../../images/set.png';
 import { NftAsset } from '../NftAssets/NftAssets'
 import { Button, Spin ,message,Pagination} from 'antd';
 import { postWallet } from '../../api/walletManager';
-import { knownSubstrate } from '../../api/network'
+import { knownSubstrate } from '../../api/network';
+import Dot_IMF from '../../images/dot.png';
+import Ksm_Img from '../../images/ksm.png';
+import aca_Img from '../../images/aca.png';
+import astr_Img from '../../images/astr.png';
+import gkmr_Img from '../../images/gkmr.png';
+
 const { UserService }  = require("../../store/user_service");
 
 const handleChange = (value) => {
@@ -103,6 +108,7 @@ const WalletHome = (props) => {
 
     }
     useEffect(() => {
+        setNftRecord([]);
         GetBlance();
         GetNfts(2,1);
 
@@ -139,7 +145,12 @@ const WalletHome = (props) => {
                             <p></p>
                         </li>
                         <li>
-                            <p>{tokenName}</p>
+                            <p className={keys=='0'?'':'tokenHidden'}><img src={Dot_IMF}></img></p>
+                            <p className={keys=='2'?'':'tokenHidden'} ><img src={Ksm_Img}></img></p>
+                            <p className={keys=='10'?'':'tokenHidden'} ><img src={aca_Img}></img></p>
+                            <p className={keys=='18'?'':'tokenHidden'} ><img src={astr_Img}></img></p>
+                            <p className={keys=='1284'?'':'tokenHidden'} ><img src={gkmr_Img}></img></p>
+
                             <p>{previousFrees && previousFrees.toFixed(4)}</p>
                             <p>
                                 <Button onClick={()=>Recieve_click('1')} className='button'>Recieve</Button>

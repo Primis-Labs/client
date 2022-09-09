@@ -1,6 +1,6 @@
 import './App.css';
 import Menu from '../src/pages/Menu/Menu';
-import React, { useEffect} from "react";
+import React, { useEffect,useState,useRef} from "react";
 import 'antd/dist/antd.css';
 import { HashRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import routers from "./router/routers";
@@ -13,7 +13,6 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { persistor } from './store/index';
 import { initWallet } from '../src/api/walletManager';
 import { initJsStore } from "../src/store/idb_service";
-
 const _WindowWrapper = styled.div`
   overflow: hidden;
   display: flex;
@@ -23,6 +22,7 @@ const _WindowWrapper = styled.div`
   background:#111315;
   font-size: ${dfstyles.game.fontSize};
 `;
+
 function App() {
   useEffect(()=>{
     initWallet(1);

@@ -1,6 +1,6 @@
 import React from "react";
 import dfstyles from '../../style/style';
-import { SearchOutlined } from '@ant-design/icons';
+import { SearchOutlined,ArrowLeftOutlined,ArrowRightOutlined } from '@ant-design/icons';
 import { Input, Space } from 'antd';
 import { connect} from 'react-redux';
 import './Header.scss';
@@ -11,8 +11,9 @@ function Header(props) {
   const onSearch = (value) => console.log(value);
     return (
       <div className='header'>
-          <span>{name}</span>
-          <Input className="Search_Input"  placeholder="Search" value={age} prefix={<SearchIcon />} />
+          {/* <ArrowLeftOutlined className='outIcon' />
+          <ArrowRightOutlined className='outIcon'  /> */}
+          <Input className="Search_Input"  placeholder="Http://" value={age} prefix={<SearchIcon />} />
         </div>
     )
 }  

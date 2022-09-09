@@ -16,9 +16,10 @@ function LoginWallet(props){
     const [filesContent, setFilesContent] = useState('')
     const [fileName, setFileName] = useState('')
     const [passwords, setPasswords] = useState('')
+    const [newpasswords, setNewpasswords] = useState('')
     const [seedValue, setSeedValue] = useState('')
     const [loadings, setLoadings] = useState(false);
-
+    
     const Navigate = useNavigate();
     const outWalletRouter = () => {
       Navigate('/Wallet')
@@ -54,6 +55,10 @@ function LoginWallet(props){
       const PassClick=(e)=>{
         setPasswords(e.target.value);
       }
+      const newPassClick=(e)=>{
+        setNewpasswords(e.target.value);
+
+      }
       const ConfirmLogin= async()=>{
         setLoadings(true)
         if(!filesContent){
@@ -82,14 +87,34 @@ function LoginWallet(props){
           });
       
       }
+      const CreatWallet = async (genesisHash, name, seed, address, oldpasswd) => {
+        const data = {
+            genesisHash,
+            name,
+            seed,
+            address,
+            oldpasswd,
+        };
+        await postWallet(1, 'pol.saveAccountsCreate', data).then(res => {
+            // console.log(res)
+            if (res) {
+            Navigate('/WalletHome')            
+            }
+        });
+    }
       const seed=(e)=>{
           console.log(e.target.value)
         setSeedValue(e.target.value)
       }
     const Secret=async()=>{
+        if(!newpasswords){
+            message.error(`Password mistake！`);
+            return;
+        }
         postWallet(1,'pol.seedCreateAddress',seedValue).then(res=>{
+            let genesisHash = '';
+            CreatWallet(genesisHash, 'xxx', res.seed, res.address, newpasswords)
             dispatch(setAccount(res.address))
-            Navigate('/WalletHome')            
         });
     }
     return (
@@ -117,6 +142,10 @@ function LoginWallet(props){
 
                 <div  className={tabType?'active':'key'}>
                         <TextArea onChange={seed} rows={6}  ></TextArea>
+                        <div className='_password'>
+                         <span>New password</span>
+                        <Input type='password'  placeholder='PassWord' onChange={newPassClick}></Input>
+                        </div>
                         <div className='Confirm_c'>
                             {/* <Button className='Cancel'>Cancel</Button> */}
                             <Button onClick={Secret} className='Confirm'>Confirm</Button>

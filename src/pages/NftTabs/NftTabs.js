@@ -17,7 +17,7 @@ import {knownSubstrate} from '../../api/network';
 import { postWallet } from '../../api/walletManager';
 
 const NftTabs = (props) => {
-    const { account, keys } = props
+    const { account, keys ,address } = props
     const [tabType, setTabType] = useState(true)
     const [addressT, setAddressT] = useState(true)
     const [isLoding, setIsLoding] = useState('3');
@@ -123,10 +123,10 @@ const NftTabs = (props) => {
                         <div className='Recieve'>
                             {/* <img src={QR}></img> */}
                             <div className="QR_CODE">
-                                <QRCode value={account} size={170}></QRCode>
+                                <QRCode value={address} size={170}></QRCode>
                             </div>
                             <p> Your Address </p>
-                            <span>{account}</span>
+                            <span>{address}</span>
                         </div>
                     </div>
                     <div className={!tabType ? 'active' : 'key'}>
@@ -188,7 +188,8 @@ const mapDispatchToProps = () => {
 const mapStateToProps = (state) => {
     return {
         account: state.account,
-        keys: state.keys
+        keys: state.keys,
+        address:state.address
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(NftTabs)

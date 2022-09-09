@@ -7,8 +7,8 @@
      .ant-menu-item-selected{
         background: rgba(60,223,221,0.3) !important;
         color: #47C8C3  !important;
-        width: 90%;
-        height: 54px;
+        width: 85%;
+        height: 45px;
         border-radius: 16px;
     }
     .ant-menu-item:active, .ant-menu-submenu-title:active{
@@ -20,8 +20,8 @@
     .ant-menu-item{
         width: 90% !important;
         margin: 0 auto;
-        height: 54px !important;
-        line-height: 54px !important;
+        height: 45px !important;
+        line-height: 45px !important;
         margin-bottom: 30px !important;
         padding-left: 20% !important;
     }
@@ -35,10 +35,10 @@
 
 .Logo{
     text-align: center;
-    padding: 37px 0;
+    padding: 30px 0;
     img{
-        width: 145px;
-        height: 46px;
+        width: 136px;
+        height: auto;
     }
     
 }
@@ -48,17 +48,17 @@
     cursor: pointer;
     button{
         width: 80%;
-        height: 50px;
+        height: 45px;
         border: 1px solid #3CDFDD;
         opacity: 1;
         border-radius: 16px;
         color: #3CDFDD;
-        font-size: 20px;
+        font-size: 18px;
         background: rgba(0,0,0,0);
          cursor: pointer;
         img{
-            width: 32px;
-            height: 32px;
+            width: 30px;
+            height: 30px;
             margin-right: 10px;
         }
     }

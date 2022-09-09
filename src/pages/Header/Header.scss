@@ -1,37 +1,41 @@
 
 .header{
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
     background: #1A1C1E;
-    height: 120px;
+    height: 77px;
     width: 100%;
     color:#fff;
+    display: flex;
+    // justify-content: flex-start;
+    // flex-wrap: nowrap;
+    align-items: center;
+    .outIcon{
+        margin-left: 20px;
+        cursor: pointer;
+        margin-right: 20px;
+        color: #aaaaaa;
+    }
     .Search_Input{
-
         margin: 0 auto;
         width: 90%;
-        height: 60px;
-        margin-top: 30px;
- 
-background: #272C31;
+        height: 40px;
+        // margin-top: 20px;
+        background: #272C31;
         box-shadow: 0px 0px 27px rgba(95,88,204,0.13);
         opacity: 1;
         border-radius: 16px;
         border:none;
         .ant-input{
- 
-background: #272C31;
+        background: #272C31;
         color: #fff;
-        font-size: 18px;
-
+        font-size: 16px;
         }
         .ant-input::placeholder{
             color: #40444A;
-            font-size: 18px;
+            font-size: 16px;
             }
         .anticon{
-            font-size: 18px !important;
+            font-size: 15px !important;
             color: #64686E;
         }
     }

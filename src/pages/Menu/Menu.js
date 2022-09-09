@@ -69,7 +69,7 @@ const SiderMenu = (props) => {
   return (
     <div
       style={{
-        width: '348px',
+        width: '300px',
         background: '#1A1C1E',
         height:'100vh'
       }}
