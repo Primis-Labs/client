@@ -9,6 +9,8 @@ const { ContractPromise } = require('@polkadot/api-contract');
 const { HttpProvider } = require('@polkadot/rpc-provider');
 const { latestNews } = require('./home');
 const { nftByAddress,sendNft } = require('./nft');
+const { formatBalance, nextTick } = require('@polkadot/util');
+
 const axios = require('axios').default;
 const {
   ScProvider,
@@ -204,6 +206,14 @@ async function transfer(data){
  
 }
 
+async function transferFree(data){
+  let { from,to,balance,chain} = data;
+  polkadotApi = await ApiPromise.create({ provider:new WsProvider(chain) });
+  const extrinsic = polkadotApi.tx.balances.transfer(to, balance);
+  const { partialFee } = await extrinsic.paymentInfo(from);
+  return formatBalance(partialFee, { withSiFull: true })
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////       nft        //////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -233,6 +243,8 @@ async function handle(type,data) {
         return balance(data);
      case 'pol.transfer':
        return transfer(data);
+      case 'pol.transferFree':
+        return transferFree(data);
       case 'pol.nftByAddress':
        return await nftByAddress(data);
       case 'latestNews':
