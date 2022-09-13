@@ -1,0 +1,143 @@
+.CreatWalletFile{
+    // width: 80%;
+    padding-top: 48px;
+    max-height: 82vh;
+    overflow-y:scroll;
+    .top_{
+        width: 800px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 22px;
+        img{
+            width:40px;
+            height: 40px;
+            cursor: pointer;
+        }
+        span{
+            font-size: 20px;
+            font-weight: bold;
+            color: #FFFFFF;
+        }
+    }
+    .CreatWallet_c{
+        width: 800px;
+        // height: 222px;
+        margin: 0 auto;
+        background: url('../../images/waleet_bg.png');
+        background-size: 100% 100%;
+        background-size: 120% 100%;
+        border-radius: 30px;
+        overflow: hidden;
+        p{
+            font-size: 18px;
+            font-weight: 400;
+            color: #FFFFFF;
+            width: 90%;
+            margin: 0 auto;
+            padding-top: 30px;
+            padding-bottom: 10px;
+            display: flex;
+            justify-content:space-between;
+            align-items: center;
+        }
+        .SecretPhrase{
+            margin: 0 auto;
+            width: 90%;
+            display: flex;
+            justify-content:space-between;
+            ul{
+                width: 90%;
+                display: flex;
+                justify-content:space-around;
+                flex-wrap: wrap;
+                border: 1px solid #3CDFDD;
+                border-radius: 16px;
+                padding-bottom: 20px;
+                padding-left: 10px;
+                padding-right: 10px;
+
+                li{
+                    width: 22%;
+                    height: 50px;
+                    background:#111315 ;
+                    opacity: 1;
+                    border-radius: 8px;
+                    margin-top: 20px;
+                    // line-height: 50px;
+                    color: #AAAAAA;
+                    font-size: 16px;
+                    padding-left: 10px;
+                    span{
+                        float: left;
+                        margin-top: 14px;
+                    }
+                    a{
+                    font-size: 12px;
+                    float: right;
+                    color: #AAAAAA;
+                    margin-top: 10px;
+                    margin-right: 10px;
+                    }
+                }
+            }
+        }
+        img{
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+        }
+        input{
+            width: 90%;
+            height: 50px;
+            margin: 0;
+            display: block;
+            background: rgba(0,0,0,0);
+            border: 1px solid #3CDFDD;
+            opacity: 1;
+            border-radius: 16px;
+            color: #fff;
+            padding-left: 10px;
+        }
+        h6{
+            width: 90%;
+            margin: 0 auto;
+            font-size: 16px;
+            color: #3CDFDD;
+            padding-top: 16px;
+            padding-bottom: 40px;
+            img{
+                width: 20px;
+                height: 20px;
+                margin-right: 10px;
+            }
+        }
+        .Confirm_c{
+            display: flex;
+            justify-content: center;
+            padding-bottom: 30px;
+            .Cancel{
+                width: 200px;
+                height: 48px;
+                border: 1px solid #7D75FF;
+                opacity: 1;
+                border-radius: 16px;
+                background: rgba(0,0,0,0);
+                color: #7D75FF;
+                margin-right: 10px;
+            }
+            .Confirm{
+                width: 200px;
+                height: 48px;
+                background: #7D75FF;
+                opacity: 1;
+                border-radius: 16px;
+                color: #fff;
+                border:none;
+                margin-left: 10px;
+
+            }
+        }
+    }
+    
+}

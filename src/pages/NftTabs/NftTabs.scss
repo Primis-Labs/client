@@ -1,0 +1,365 @@
+@font-face {  font-family: SpaceMono;  src: url('../../style/font/SpaceMono-Bold.ttf');}
+.NftTabs{
+    // width: 80%;
+    // padding-top: 48px;
+    max-height: 82vh;
+    overflow-y:scroll;
+    .top_{
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 22px;
+        padding-top: 30px;
+        img{
+            width:40px;
+            height: 40px;
+            cursor: pointer;
+        }
+        span{
+            font-size: 20px;
+            font-weight: bold;
+            color: #FFFFFF;
+        }
+    }
+    .LoginWallet_c{
+        width: 800px;
+        // height: 222px;
+        margin: 0 auto;
+        p{
+            font-size: 24px;
+            font-weight: 400;
+            color: #FFFFFF;
+            width: 90%;
+            margin: 0 auto;
+            padding-top: 28px;
+            padding-bottom: 10px;
+        }
+ 
+        .key{
+            display: none;
+        }
+        .tabsWrap{
+            width: 800px;
+            height: 620px;
+            border: 1px solid #707070;
+            opacity: 1;
+            border-radius: 16px;
+            
+            .Recieve{
+                padding-top: 30px;
+                img{
+                    width: 100px;
+                    height: 100px;
+                    display: block;
+                    margin: 0 auto;
+                    margin-top: 30px;
+                }
+                .QR_CODE{
+                    width: 206px;
+                    height: 206px;
+                    background: linear-gradient(180deg, #47C8C3 0%, #5AA6E9 41%, #5F58CC 100%);
+                    opacity: 1;
+                    border-radius: 16px;
+                    margin: 30px auto;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                p{
+                    color: #AAAAAA;
+                    font-size: 22px;
+                    text-align: center;
+                    padding: 0;
+                }
+                span{
+                    color: #fff;
+                    font-size: 22px;
+                    display: block;
+                    text-align: center;
+                }
+                ._address{
+                    width: 90%;
+                    margin: 0 auto;
+                    padding-top: 48px;
+                    padding-bottom: 48px;
+                    input{
+                        height: 60px;
+                        background: #1A1C1E;
+                        opacity: 1;
+                        border:none;
+                        color: #fff;    
+                        
+                        border-radius: 16px; 
+                    }
+           
+                }
+                ._Amount{
+                    width: 90%;
+                    margin: 0 auto;
+                    background: #1A1C1E;                    
+                    border-radius: 16px;
+                    display: flex;
+                    align-items: center;
+                    overflow: hidden;
+                    input{
+                        height: 60px;
+                        opacity: 1;
+                        border:none;
+                        color: #fff;  
+                        background: #1A1C1E;
+
+                    }
+                    button{
+                        width: 103px;
+                        height: 40px;
+                        background: #7D75FF;
+                        opacity: 1;
+                        border-radius: 16px;
+                        border:none;
+                        font-size: 24px;
+                        margin-right: 20px;
+                    }
+                }
+                .balance{
+                    text-align: left;
+                    color: #3CDFDD;
+                    padding-bottom: 40px;
+                }
+                .send{
+                    display: block;
+                    width: 320px;
+                    height: 50px;
+                    background: #7D75FF;
+                    opacity: 1;
+                    border-radius: 16px;
+                    font-size: 28px;
+                    border:none;
+                    margin: 0 auto;
+                }
+            }
+        }
+        ul{
+        display: flex;
+        justify-content:space-between;
+        border-bottom: 1px solid #707070;
+        width: 90%;
+        margin: 0 auto;
+        li{
+            font-size: 20px;
+            font-weight: 400;
+            color: #AAAAAA;  
+            padding-top: 28px;
+            padding-bottom: 24px;
+            width: 174px;
+            text-align: center;
+            margin-left: 40px;
+            margin-right: 40px;
+            position: relative;
+            cursor: pointer;
+            img{
+                width: 100%;
+                position: absolute;
+                bottom: 0px;
+                left:0px;
+                display: none;
+
+            }
+            .active{
+                color: #fff;
+                display: block;
+            }
+            
+        }
+        }
+    }
+
+}
+.ModalSend{
+    .ant-modal-content{
+        background: url('../../images/waleet_bg.png');
+        background-size:100% 100%;
+        border-radius: 16px;
+        overflow: hidden;
+    }
+    .ant-modal-header{
+        border:1px solid #282A29;
+        background: rgba(0,0,0,0);
+        font-family: 'SpaceMono';
+        padding-top: 32px;
+        padding-bottom: 32px;
+        .ant-modal-title{
+            color: #fff;
+            font-size: 25px;
+        }
+
+    }
+    .ant-modal-close{
+        padding-top: 23px;
+        .ant-modal-close-icon{
+            color: #fff;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+    }
+    .ant-modal-footer{
+        display: none;
+    }
+    ul{
+        display: flex;
+        justify-content: space-between;
+        li{
+            width: 210px;
+            height: 230px;
+            background: rgba(42,43,44,0.39);
+            opacity: 1;
+            border-radius: 16px;  
+            p{
+                width: 146px;
+                height: 146px;
+                padding: 0;
+                background: rgba(50,54,58,0.39);
+                border-radius: 50%;
+                opacity: 1;
+                margin: 0 auto; 
+                margin-top: 30px;
+                overflow: hidden;
+                img{
+                    width: 100%;
+                    height: 100%;
+                    min-width: 100%;
+                    max-width: 100%;
+                    min-height: 100%;
+                    max-height: 100%;
+                    object-fit: cover;
+                }
+
+            }
+            .addresst{
+                font-size: 14px;
+                word-break: break-all;
+                padding: 20px;
+                text-align: center;
+            }
+            span{
+                display: block;
+                text-align: center;
+                color: #AAAAAA;
+                font-size: 20px;
+            }
+        }
+
+    }
+    h6{
+        font-size: 20px;
+        color: #AAAAAA;
+        display: flex;
+        justify-content: space-between;
+        a{
+            color: #fff;
+        }
+    }
+    .modal_footer{
+        text-align: center;
+        padding-top: 30px;
+        button{
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+        .Cancel{
+            width: 170px;
+            height: 50px;
+            border: 1px solid #7D75FF;
+            opacity: 1;
+            border-radius: 16px;
+            background: rgba(0,0,0,0);
+            color: #7D75FF;
+            font-size: 20px;
+        }
+        .Confirm{
+            width: 170px;
+            height: 50px;
+            border: none;
+            opacity: 1;
+            border-radius: 16px;
+            background: #7D75FF;
+            color: #fff;
+            font-size: 20px;
+        }
+    }
+    @keyframes mymove {
+        50% {
+
+            transform: rotate(360deg);
+
+        }
+    }
+    @-webkit-keyframes mymove{  /* Safari and Chrome */
+
+        50% {
+
+            transform: rotate(360deg);
+        }
+    }
+    .loding{
+        text-align: center;
+        padding-top: 68px;
+        padding-bottom: 100px;
+        animation: mymove 5s infinite;
+        display: none;
+
+    }
+    img{
+        width: 68px;
+        height: 68px;
+    }
+    .success{
+        text-align: center;
+        padding-top: 68px;
+        display: none;
+
+        img{
+
+            margin-top: 24px;
+        }
+        p{
+            width: 292px;
+            height: 60px;
+            background: rgba(60,223,221,0.3);
+            border-radius: 16px;
+            color: #3CDFDD;
+            font-size: 20px;
+            line-height: 60px;
+            margin: 0 auto;
+            display: block;
+            margin-bottom: 35px;
+            margin-top: 20px;
+        }
+    }
+    .error{
+        text-align: center;
+        padding-top: 68px;
+        display: none;
+        img{
+
+            margin-top: 24px;
+        }
+        p{
+            width: 292px;
+            height: 60px;
+            // background: rgba(60,223,221,0.3);
+            border-radius: 16px;
+            color: #fff;
+            font-size: 20px;
+            line-height: 60px;
+            margin: 0 auto;
+            margin-top: 20px;
+            display: block;
+            margin-bottom: 35px;
+        }
+    }
+    .madelHide{
+        display: block;
+    }
+}
