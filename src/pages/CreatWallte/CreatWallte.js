@@ -36,7 +36,11 @@ function CreatWallte(props) {
         
         if (passwords == passwordv && passwords !== '') {
             postWallet(1, 'pol.mnemonicGenerate', {}).then(res => {
-                postWallet(1, 'pol.seedCreateAddress', res ).then(res => {
+                let ps2={
+                    mnemonic:res,
+                    type:''
+                  } 
+                postWallet(1, 'pol.seedCreateAddress', ps2 ).then(res => {
                     dispatch(setAccount(res.address))
                     setSeed(res.seed)
                     let genesisHash = '';
@@ -86,6 +90,8 @@ function CreatWallte(props) {
                     <p><img src={Pc}></img><span>Select Networks</span></p>
                     <Select className='select_main' defaultValue="Polkadot">
                         <Option value="jack">Polkadot</Option>
+                        <Option value="jack">Polkadot</Option>
+
                     </Select>
                 </div>
 
