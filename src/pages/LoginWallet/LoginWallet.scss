@@ -124,12 +124,16 @@
             margin-top: 20px;
             overflow: hidden;
             display: flex;
+            align-items: center;
             input{
             width: 80%;
             background: rgba(17,19,21,0.39);
             height: 60px;
             border:none;
             color: #fff;
+            }
+            .ant-upload-list{
+                display: none !important;
             }
             .Upload_B{
                 width: 146px;

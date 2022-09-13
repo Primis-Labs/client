@@ -91,9 +91,9 @@ function CreatWallte(props) {
 
                 <from>
                     <p>New Password</p>
-                    <input type='password' placeholder='Pass Word' onChange={password}></input>
+                    <input type='password' placeholder='Password' onChange={password}></input>
                     <p>Confirm password</p>
-                    <input type='password' placeholder='Pass Word' onChange={password_void}></input>
+                    <input type='password' placeholder='Password' onChange={password_void}></input>
                     <h6><img src={Warring}></img>Keep your own password and avoid sharing it to anyone.</h6>
                     <div className='Confirm_c'>
                         {/* <Button className='Cancel'>Cancel</Button> */}

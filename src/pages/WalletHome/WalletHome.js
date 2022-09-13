@@ -128,10 +128,10 @@ const WalletHome = (props) => {
                     <li onClick={() => {
                         setTabType(false)
                     }}>
-                        <span className={!tabType ? 'active' : ''} >NFT</span>
+                        <span className={!tabType ? 'active' : ''} >NFTs</span>
                         <img className={!tabType ? 'active' : ''} src={tabActive}></img>
                     </li>
-                    <Button  onClick={RecordBtn} className={tabType ? 'RecordBtn':'key'}>Record</Button>
+                    <Button  onClick={RecordBtn} className={tabType ? 'RecordBtn':'key'}>Records</Button>
                 </ul>
 
                 <div className={tabType ? 'active' : 'key'}>
@@ -140,7 +140,7 @@ const WalletHome = (props) => {
                     <Spin></Spin>
                     </div>
                         <li className='title'>
-                            <p>Token</p>
+                            <p>Tokens</p>
                             <p>Amount</p>
                             <p></p>
                         </li>
@@ -150,7 +150,7 @@ const WalletHome = (props) => {
                             <p className={keys=='10'?'':'tokenHidden'} ><img src={aca_Img}></img></p>
                             <p className={keys=='18'?'':'tokenHidden'} ><img src={astr_Img}></img></p>
                             <p className={keys=='1284'?'':'tokenHidden'} ><img src={gkmr_Img}></img></p>
-
+                            <p className={keys=='172'?'':'tokenHidden'} ><img src={Ksm_Img}></img></p>
                             <p>{previousFrees && previousFrees.toFixed(4)}</p>
                             <p>
                                 <Button onClick={()=>Recieve_click('1')} className='button'>Recieve</Button>

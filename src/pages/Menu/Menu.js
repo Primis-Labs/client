@@ -20,8 +20,8 @@ const SiderMenu = (props) => {
     { label: 'Home', key: '/', icon: <HomeIcon /> }, // 菜单项务必填写 key
     { label: 'Wallet', key: '/Wallet', icon: <WalletIcon /> },
     { label: 'Chat', key: '/Chart', icon: <ChatIcon /> },
-    { label: 'Subsoribe', key: '/Subsoribe', icon: <SubIcon /> },
-    { label: 'Brower', key: '/Brower', icon: <BrowserIcon /> },
+    { label: 'Subscribe', key: '/Subsoribe', icon: <SubIcon /> },
+    { label: 'Browser', key: '/Brower', icon: <BrowserIcon /> },
   ];
   const Navigate = useNavigate();
   const Location = useLocation();

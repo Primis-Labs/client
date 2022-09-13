@@ -67,7 +67,7 @@ function LoginWallet(props){
             return;
         }
         if(!passwords){
-            message.error(`Password mistake！`);
+            message.error(`Wrong Password！`);
              setLoadings(false)
             return;
         }
@@ -121,7 +121,7 @@ function LoginWallet(props){
         <div className="LoginWallet" >
             <div className='top_'>
                 <img onClick={outWalletRouter} src={Top}></img>
-                <span>Import Wallet</span>
+                <span>Log in Wallet</span>
             </div>
             <div className='LoginWallet_c'>
                 <ul>

@@ -28,7 +28,7 @@ const CreatWalletFile = (props) => {
         input.select();
         document.execCommand("Copy");
         document.body.removeChild(input);
-        message.success('Copy success message');
+        message.success('Successfully copied Address.');
     };
     //download keystore
     const Downloads = (address,newPass) => {

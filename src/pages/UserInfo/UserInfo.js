@@ -35,7 +35,7 @@ const UserInfo = (props) => {
         input.select();
         document.execCommand("Copy");
         document.body.removeChild(input);
-        message.success('Copy success message');
+        message.success('Successfully copied Address.');
     };
     const logoutModal = () => {
         setTabType(true)
@@ -65,7 +65,7 @@ const UserInfo = (props) => {
           funDownload(JSON.stringify(res), `${account}.json`);
             setPassType(false);
         }).catch(res=>{
-        message.error('Password mistake !');
+        message.error('Wrong Password!');
         });
     }
     const funDownload = (content, filename) => {
@@ -150,7 +150,7 @@ const UserInfo = (props) => {
                                     <Input  placeholder="Download Keyfile" disabled/>
                                     <img src={keyDowload}></img>
                                 </div>
-                                <a>Note: Never disclose this private key.</a>
+                                <a>Note: Keep your keyfile and password safe.</a>
                                 <div className='Confirm_c'>
                                     <Button onClick={exportConfirm} className='Confirm'>Confirm</Button>
                                 </div>

@@ -12,7 +12,7 @@ function SuperChain() {
     return (
         <div className="chain" >
             <div className='login_wallet'>
-                <h6>Space Mono</h6>
+                <h6>Supported Chains</h6>
                 <ul>
                     <li>
                        <img src={pol_img}></img> 

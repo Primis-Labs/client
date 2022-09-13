@@ -4,7 +4,7 @@ import './AssetsTabs.scss';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { setAccount, setSeed } from '../../store/action';
 import { useNavigate,useLocation } from 'react-router-dom';
-import { Button ,Input,Modal} from 'antd';
+import { Button ,Input,Modal,message} from 'antd';
 import Top from '../../images/router.png';
 import UserInfo from '../UserInfo/UserInfo'
 import tabActive from '../../images/tba_active.png';
@@ -39,10 +39,50 @@ const AssetsTab = (props) => {
     const [toeknBalnce, setTokenBalance] = useState(true);
     const [decimal, setDecimal] = useState(true);
     const [rpc, setRpc] = useState('');
+    const [gasfees, setGasfees] = useState('');
+    const [loadings, setLoadings] = useState(false);
     const [tokenName,setTokenName]=useState([])
     
-    const showModal = () => {
-        setIsModalVisible(true);
+    const showModal = async() => {
+        setLoadings(true)
+        if(toeknBalnce==0){
+        setLoadings(false)
+            message.error('Lack of balance.');
+            return;
+        }
+        if(passwords==''){
+            message.error('Wrong Password.');
+             setLoadings(false)
+
+            return;
+        }
+        if(tokenAccount==''){
+            message.error('Amount not entered.');
+             setLoadings(false)
+
+            return;
+        }
+        if(tokenAddress==''){
+            message.error('The Address is not entered.');
+             setLoadings(false)
+
+            return;
+        }
+        const ps1={
+            from:account,
+            to:tokenAddress,
+            balance:tokenAccount*decimal,
+            chain:rpc
+        }
+       await postWallet(1,'pol.transferFree',ps1).then(res=>{
+            setLoadings(false)
+             setIsModalVisible(true);
+             setGasfees(res)
+       }).catch(err=>{
+        message.error('Information filling error.');
+        setLoadings(false)
+
+       });
       };    
       const handleCancel = () => {
         setIsModalVisible(false);
@@ -61,6 +101,9 @@ const AssetsTab = (props) => {
         }else{
             return ;
         }
+      }
+      const gasfee = () => {
+
       }
       const GetBlance =  () =>{
         knownSubstrate.map( async(item)=>{
@@ -92,6 +135,7 @@ const AssetsTab = (props) => {
         setIsModalVisible(false);
         setIsModalVisibleLoading(true);
         setIsLoding(0);
+        console.log()
         console.log(tokenAccount*decimal)
         const ps2={
             from:account,
@@ -180,11 +224,12 @@ const AssetsTab = (props) => {
                             <img className={keys=='10'?'':'tokenHidden'} src={aca_Img}></img>
                             <img className={keys=='18'?'':'tokenHidden'}  src={astr_Img}></img>
                             <img className={keys=='1284'?'':'tokenHidden'} src={gkmr_Img}></img>
+                            <img className={keys=='172'?'':'tokenHidden'} src={gkmr_Img}></img>
                             <div className="QR_CODE">
                             <QRCode value={address} size={170}></QRCode>
                             </div>
                             <p> Your Address </p>
-                            <span>{address}</span>
+                            <span className='address_'>{address}</span>
                         </div>
                     </div>
                     <div className={!tabType ? 'active' : 'key'}>
@@ -201,7 +246,7 @@ const AssetsTab = (props) => {
                             <Input type='password'  onChange={passwordChange} placeholder="Password" className='_address_input'></Input>
                             </div>
                             <p className='balance'> Balance:{toeknBalnce} </p>
-                            <Button  onClick={showModal} className='send'>Send</Button>
+                            <Button  onClick={showModal} className='send' loading={loadings} >Send</Button>
                         </div>
                     </div>
                 </div>
@@ -211,7 +256,7 @@ const AssetsTab = (props) => {
             <p><span>Recieve：</span> <a>{account.slice(0, 4)}****{account.slice(account.length - 4, account.length)}</a></p>
             <p><span>Total amount：</span> <a>{tokenAccount}</a></p>
             {/* <p><span>Transaction  amount：</span> <a>12DOT</a></p> */}
-            {/* <p><span>Transaction  Fee：</span> <a>0.03</a></p> */}
+            <p><span>Transaction  Fee：</span> <a>{gasfees}</a></p>
             <div className='modal_footer'>
                 <Button onClick={handleCancel} className='Cancel'>Cancel</Button>
                 <Button onClick={SendToken} className='Confirm'>Confirm</Button>

@@ -33,8 +33,8 @@ const Home = () => {
       <div className='banner'>
         <div className='coinBtn' >
         <p>
-        <Button>coinmarketcap</Button>
-        <Button className='coing'>coinggecko</Button>
+        <Button>CoinMarketCap</Button>
+        <Button className='coing'>CoinGecko</Button>
         </p>
         </div>
       </div>
