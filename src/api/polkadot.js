@@ -51,13 +51,17 @@ function mnemonicGenerate(){
    return seed;
 } 
 // Create address
-function seedCreateAddress(mnemonic,type){
+function seedCreateAddress(data){
+  let {
+    mnemonic,
+    type
+  } = data; 
    var seed = mnemonicGenerate() ;
    if( typeof mnemonic !== 'undefined'){
       seed = mnemonic;
    }
    let address;
-   if(type == 'ethereum'){
+   if(type === 'ethereum'){
      address =  _uiKeyring.createFromUri(getSuri( seed, 'ethereum'), {}, 'ethereum').address;
    }else{
     address =  _uiKeyring.createFromUri(getSuri( seed,_type), {},_type).address;
