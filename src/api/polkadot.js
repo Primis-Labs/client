@@ -51,12 +51,17 @@ function mnemonicGenerate(){
    return seed;
 } 
 // Create address
-function seedCreateAddress(mnemonic){
+function seedCreateAddress(mnemonic,type){
    var seed = mnemonicGenerate() ;
    if( typeof mnemonic !== 'undefined'){
       seed = mnemonic;
    }
-   const address =  _uiKeyring.createFromUri(getSuri( seed, _type), {}, _type).address;
+   let address;
+   if(type == 'ethereum'){
+     address =  _uiKeyring.createFromUri(getSuri( seed, 'ethereum'), {}, 'ethereum').address;
+   }else{
+    address =  _uiKeyring.createFromUri(getSuri( seed,_type), {},_type).address;
+   }
    return {
       address,
       seed
@@ -255,6 +260,7 @@ async function handle(type,data) {
        throw new Error(`Unable to handle message of type ${type}`);
    }
  }
+
 module.exports = {
    handle,
    cryptoWaitReady
