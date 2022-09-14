@@ -14,6 +14,7 @@ import keyDowload from '../../images/keyDowload.png';
 import { postWallet } from '../../api/walletManager';
 import {knownSubstrate} from '../../api/network'
 import { generateFromString } from 'generate-avatar'
+import { isHex, isU8a, u8aToHex, u8aToU8a } from '@polkadot/util';
 const { UserService }  = require("../../store/user_service");
 const { Option } = Select;
 
@@ -84,8 +85,14 @@ const UserInfo = (props) => {
             'prefix':value
           }
         await postWallet(1,'pol.formatAddressByChain',ps3).then(res=>{
-            setSeed(value);
-            setAddress(res);
+            if(value==1284){
+                setSeed(value);
+                setAddress(u8aToHex(res));
+            }else{
+                setSeed(value);
+                setAddress(res);
+            }
+
             // postWallet(1,'pol.closeConnection','').then(res=>{
             //     console.log(res)
             // })

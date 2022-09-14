@@ -148,7 +148,7 @@ const WalletHome = (props) => {
                             <p className={keys=='0'?'':'tokenHidden'}><img src={Dot_IMF}></img></p>
                             <p className={keys=='2'?'':'tokenHidden'} ><img src={Ksm_Img}></img></p>
                             <p className={keys=='10'?'':'tokenHidden'} ><img src={aca_Img}></img></p>
-                            <p className={keys=='18'?'':'tokenHidden'} ><img src={astr_Img}></img></p>
+                            <p className={keys=='5'?'':'tokenHidden'} ><img src={astr_Img}></img></p>
                             <p className={keys=='1284'?'':'tokenHidden'} ><img src={gkmr_Img}></img></p>
                             <p className={keys=='172'?'':'tokenHidden'} ><img src={Ksm_Img}></img></p>
                             <p>{previousFrees && previousFrees.toFixed(4)}</p>

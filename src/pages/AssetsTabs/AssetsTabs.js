@@ -222,7 +222,7 @@ const AssetsTab = (props) => {
                             <img  className={keys=='0'?'':'tokenHidden'} src={Dot_IMF}></img>
                             <img className={keys=='2'?'':'tokenHidden'}  src={Ksm_Img}></img>
                             <img className={keys=='10'?'':'tokenHidden'} src={aca_Img}></img>
-                            <img className={keys=='18'?'':'tokenHidden'}  src={astr_Img}></img>
+                            <img className={keys=='5'?'':'tokenHidden'}  src={astr_Img}></img>
                             <img className={keys=='1284'?'':'tokenHidden'} src={gkmr_Img}></img>
                             <img className={keys=='172'?'':'tokenHidden'} src={gkmr_Img}></img>
                             <div className="QR_CODE">
