@@ -87,7 +87,7 @@ const UserInfo = (props) => {
         await postWallet(1,'pol.formatAddressByChain',ps3).then(res=>{
             if(value==1284){
                 setSeed(value);
-                setAddress(u8aToHex(res));
+                setAddress(res);
             }else{
                 setSeed(value);
                 setAddress(res);

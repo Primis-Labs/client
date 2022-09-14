@@ -10,6 +10,8 @@ const { HttpProvider } = require('@polkadot/rpc-provider');
 const { latestNews } = require('./home');
 const { nftByAddress,sendNft } = require('./nft');
 const { formatBalance, nextTick } = require('@polkadot/util');
+const {ethers,utils} = require("ethers")
+const sha3 = require("js-sha3");
 
 const axios = require('axios').default;
 const {
@@ -91,10 +93,20 @@ function updateAccountHash(data) {
 function formatAddressByChain(data){
    let { address,prefix } = data;
    const publicKey = _crypto.decodeAddress(address);
+
+   console.log(publicKey);
+   if(prefix === 1284){
+     return formatAddressByEth(publicKey);
+   }
    const _prefix = prefix === -1 ? 42 : prefix;
    return _crypto.encodeAddress(publicKey, _prefix)
 }
 
+function formatAddressByEth(publicKey) {
+  let new_key = sha3.keccak_256(publicKey)
+  let result = "0x" + new_key.substring(24)
+  return utils.getAddress(result);
+}
 // save account
 function saveAccountsCreate(data) {
     let {
