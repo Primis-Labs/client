@@ -111,7 +111,11 @@ function LoginWallet(props){
             message.error(`Password mistake！`);
             return;
         }
-        postWallet(1,'pol.seedCreateAddress',seedValue).then(res=>{
+        let ps2={
+            mnemonic:seedValue,
+            type:''
+          } 
+        postWallet(1,'pol.seedCreateAddress',ps2).then(res=>{
             let genesisHash = '';
             CreatWallet(genesisHash, 'xxx', res.seed, res.address, newpasswords)
             dispatch(setAccount(res.address))
