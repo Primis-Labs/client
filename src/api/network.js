@@ -63,6 +63,17 @@ export const knownSubstrate = [
       rpc:'wss://moonbeam.public.blastapi.io'
     },
     {
+      decimals: [18],
+      displayName: 'Astar',
+      network: 'astar',
+      prefix: 5,
+      standardAccount: '*1284',
+      symbols: ['ASTR'],
+      website: 'https://astar.network/',
+      genesis: ['0x9eb76c5184c4ab8679d2d5d819fdf90b9c001403e9e17da2e14b6d8aec4029c6'],
+      rpc:'wss://public-rpc.pinknode.io/astar'
+    },
+    {
       decimals: 1000000000000,
       displayName: 'Rococo Test',
       network: 'rococo',
