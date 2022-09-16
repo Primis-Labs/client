@@ -108,7 +108,7 @@ function LoginWallet(props){
       }
     const Secret=async()=>{
         if(!newpasswords){
-            message.error(`Password mistake！`);
+            message.error(`Wrong Password！`);
             return;
         }
         let ps2={

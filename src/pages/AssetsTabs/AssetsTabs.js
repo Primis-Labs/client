@@ -252,8 +252,8 @@ const AssetsTab = (props) => {
                 </div>
             </div>
             <Modal wrapClassName='ModalSend' title="Transaction Confirm" width='600px' visible={isModalVisible} onCancel={handleCancel}>
-            <p><span>Send：</span> <a>{tokenAddress}</a></p>
-            <p><span>Recieve：</span> <a>{account.slice(0, 4)}****{account.slice(account.length - 4, account.length)}</a></p>
+            <p><span>Send：</span> <a>{address.slice(0, 4)}****{address.slice(address.length - 4, address.length)}</a></p>
+            <p><span>Recieve：</span> <a>{tokenAddress}</a></p>
             <p><span>Total amount：</span> <a>{tokenAccount}</a></p>
             {/* <p><span>Transaction  amount：</span> <a>12DOT</a></p> */}
             <p><span>Transaction  Fee：</span> <a>{gasfees}</a></p>
