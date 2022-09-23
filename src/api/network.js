@@ -52,7 +52,7 @@ export const knownSubstrate = [
       rpc:'wss://acala.polkawallet.io'
     },
     {
-      decimals: [12],
+      decimals: 100000000000,
       displayName: 'Moonbeam',
       network: 'moonbeam',
       prefix: 1284,
@@ -63,7 +63,7 @@ export const knownSubstrate = [
       rpc:'wss://moonbeam.public.blastapi.io'
     },
     {
-      decimals: [18],
+      decimals: 1000000000000000000,
       displayName: 'Astar',
       network: 'astar',
       prefix: 5,
