@@ -1,5 +1,5 @@
 import { createStore } from "redux";
-import { SET_SEED, SET_ACCOUNT, SET_ADDRESS ,SET_USERIMG} from './action'
+import { SET_SEED, SET_ACCOUNT, SET_ADDRESS, SET_USERIMG, SET_ETHADDRESS } from './action'
 import { persistStore, persistReducer } from 'redux-persist';
 //  sessionStorage
 import storageSession from 'redux-persist/lib/storage';
@@ -10,10 +10,10 @@ const storageConfig = {
     storage: storageSession, //
     blacklist: [], // reducer
 };
-const defaultState={
-    keys:0
+const defaultState = {
+    keys: 0
 }
-function user(state=defaultState, action) {
+function user(state = defaultState, action) {
     console.log(state)
     switch (action.type) {
         case SET_ACCOUNT:
@@ -24,8 +24,8 @@ function user(state=defaultState, action) {
         case SET_SEED:
             return {
                 ...state,
-                keys:action.seed,
-                seed:action.seed
+                keys: action.seed,
+                seed: action.seed
             }
         case SET_ADDRESS:
             return {
@@ -35,8 +35,14 @@ function user(state=defaultState, action) {
         case SET_USERIMG:
             return {
                 ...state,
-                url:action.url
+                url: action.url
             }
+        case SET_ETHADDRESS:
+            return {
+                ...state,
+                ethAddress: action.ethAddress
+            }
+
         default:
             return state;
     }

@@ -2,7 +2,7 @@ import React, { useState, useEffect ,createContext} from "react";
 import './CreatWallte.scss';
 //react-redux
 import { connect, useDispatch, useSelector } from 'react-redux';
-import { setAccount, setSeed } from '../../store/action';
+import { setAccount, setSeed ,setethAddress} from '../../store/action';
 import SuperChain from '../SuperChain/SuperChain';
 import { useNavigate } from 'react-router-dom';
 import Top from '../../images/router.png';
@@ -18,7 +18,7 @@ const { Option } = Select;
 export const CreatWalletContext = createContext({});
 function CreatWallte(props) {
     console.log(props)
-    const { setAccount, dispatch } = props
+    const { setAccount,setethAddress, dispatch } = props
     const Navigate = useNavigate();
     const outWalletRouter = (props) => {
         console.log(props)
@@ -38,10 +38,10 @@ function CreatWallte(props) {
             postWallet(1, 'pol.mnemonicGenerate', {}).then(res => {
                 let ps2={
                     mnemonic:res,
-                    type:''
                   } 
                 postWallet(1, 'pol.seedCreateAddress', ps2 ).then(res => {
                     dispatch(setAccount(res.address))
+                    dispatch(setethAddress(res.ethaddress))
                     setSeed(res.seed)
                     let genesisHash = '';
                     CreatWallet(genesisHash, 'xxx', res.seed, res.address, passwordv)
@@ -124,7 +124,8 @@ function CreatWallte(props) {
 }
 const mapDispatchToProps = () => {
     return {
-        setAccount
+        setAccount,
+        setethAddress
     }
 }
 export default connect(mapDispatchToProps)(CreatWallte)
