@@ -55,21 +55,18 @@ function mnemonicGenerate(){
 // Create address
 function seedCreateAddress(data){
   let {
-    mnemonic,
-    type
+    mnemonic
   } = data; 
    var seed = mnemonicGenerate() ;
    if( typeof mnemonic !== 'undefined'){
       seed = mnemonic;
    }
-   let address;
-   if(type === 'ethereum'){
-     address =  _uiKeyring.createFromUri(getSuri( seed, 'ethereum'), {}, 'ethereum').address;
-   }else{
-    address =  _uiKeyring.createFromUri(getSuri( seed,_type), {},_type).address;
-   }
+   let address,ethaddress;
+   ethaddress =  _uiKeyring.createFromUri(getSuri( seed, 'ethereum'), {}, 'ethereum').address;
+   address =  _uiKeyring.createFromUri(getSuri( seed,_type), {},_type).address;
    return {
       address,
+      ethaddress,
       seed
    };
 }
@@ -93,11 +90,6 @@ function updateAccountHash(data) {
 function formatAddressByChain(data){
    let { address,prefix } = data;
    const publicKey = _crypto.decodeAddress(address);
-
-   console.log(publicKey);
-   if(prefix === 1284){
-     return formatAddressByEth(publicKey);
-   }
    const _prefix = prefix === -1 ? 42 : prefix;
    return _crypto.encodeAddress(publicKey, _prefix)
 }
