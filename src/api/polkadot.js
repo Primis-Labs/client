@@ -197,7 +197,8 @@ function seedValidate (data) {
 async function balance(data){
   let { address,chain } = data;
   polkadotApi = await ApiPromise.create({ provider:new WsProvider(chain) });
-  return await polkadotApi.query.system.account(address);
+  let r = await polkadotApi.query.system.account(address);
+  return r;
 }
 
 // transfer 

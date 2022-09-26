@@ -139,13 +139,13 @@ const WalletHome = (props) => {
                     }}
                     >
                         <span className={tabType ? 'active' : ''} >Assets</span>
-                        <img className={tabType ? 'active' : ''} src={tabActive}></img>
+                        < img className={tabType ? 'active' : ''} src={tabActive}></img>
                     </li>
                     <li onClick={() => {
                         setTabType(false)
                     }}>
                         <span className={!tabType ? 'active' : ''} >NFTs</span>
-                        <img className={!tabType ? 'active' : ''} src={tabActive}></img>
+                        < img className={!tabType ? 'active' : ''} src={tabActive}></img>
                     </li>
                     <Button  onClick={RecordBtn} className={tabType ? 'RecordBtn':'key'}>Records</Button>
                 </ul>
@@ -156,22 +156,22 @@ const WalletHome = (props) => {
                     <Spin></Spin>
                     </div>
                         <li className='title'>
-                            <p>Tokens</p>
-                            <p>Amount</p>
-                            <p></p>
+                            <p>Tokens</p >
+                            <p>Amount</p >
+                            <p></p >
                         </li>
                         <li>
-                            <p className={keys=='0'?'':'tokenHidden'}><img src={Dot_IMF}></img></p>
-                            <p className={keys=='2'?'':'tokenHidden'} ><img src={Ksm_Img}></img></p>
-                            <p className={keys=='10'?'':'tokenHidden'} ><img src={aca_Img}></img></p>
-                            <p className={keys=='5'?'':'tokenHidden'} ><img src={astr_Img}></img></p>
-                            <p className={keys=='1284'?'':'tokenHidden'} ><img src={gkmr_Img}></img></p>
-                            <p className={keys=='172'?'':'tokenHidden'} ><img src={Ksm_Img}></img></p>
-                            <p>{previousFrees && previousFrees.toFixed(4)}</p>
+                            <p className={keys=='0'?'':'tokenHidden'}>< img src={Dot_IMF}></img></p >
+                            <p className={keys=='2'?'':'tokenHidden'} >< img src={Ksm_Img}></img></p >
+                            <p className={keys=='10'?'':'tokenHidden'} >< img src={aca_Img}></img></p >
+                            <p className={keys=='5'?'':'tokenHidden'} >< img src={astr_Img}></img></p >
+                            <p className={keys=='1284'?'':'tokenHidden'} >< img src={gkmr_Img}></img></p >
+                            <p className={keys=='172'?'':'tokenHidden'} >< img src={Ksm_Img}></img></p >
+                            <p>{previousFrees && previousFrees.toFixed(4)}</p >
                             <p>
                                 <Button onClick={()=>Recieve_click('1')} className='button'>Recieve</Button>
                                 <Button onClick={()=>Recieve_click('2')} className='button'>Send</Button>
-                            </p>
+                            </p >
                         </li>
                     </ul>
                 </div>
@@ -186,17 +186,17 @@ const WalletHome = (props) => {
 
                                     return <li key={index}>
                                         <div className='setings'>
-                                            <img src={Set_IMG}></img>
+                                            < img src={Set_IMG}></img>
                                             <div className='setting_l'>
-                                                <p onClick={()=>setAvatar(item.metadata_image)}>Set to avatar</p>
-                                                <p>NFT Market</p>
+                                                <p onClick={()=>setAvatar(item.metadata_image)}>Set to avatar</p >
+                                                <p>NFT Market</p >
                                             </div>
                                         </div>
-                                        <img className='bg' src={item.metadata_image ? item.metadata_image : Nft_IMG}></img>
+                                        < img className='bg' src={item.metadata_image ? item.metadata_image : Nft_IMG}></img>
                                         <p className='seting_btn'>
                                             <Button onClick={() => Nft_click(item.metadata_image,1,item.id)} className='btn Recieve'>Recieve</Button>
                                             <Button onClick={() => Nft_click(item.metadata_image,2,item.id)} className='btn'>Send</Button>
-                                        </p>
+                                        </p >
                                     </li>
                                 })
                             }
