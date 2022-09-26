@@ -24,7 +24,7 @@ const handleChange = (value) => {
     console.log(`selected ${value}`);
 };
 const WalletHome = (props) => {
-    const { account, keys, setUserimg ,address} = props;
+    const { account, keys, setUserimg ,address,ethAddress} = props;
     const [tabType, setTabType] = useState(true);
     const [previousFrees, setPreviousFrees] = useState();
     const [tokenName, setTokenName] = useState();
@@ -83,9 +83,24 @@ const WalletHome = (props) => {
         })
     }
     const GetBlance = () => {
+        // console.log(account)
         knownSubstrate.map(async (item) => {
             if (keys == item.prefix) {
                 setTokenName(item.displayName)
+
+                if(keys==1284){
+                    const ps2 = {
+                        address: ethAddress,
+                        chain: item.rpc
+                    }
+                    setLodingL(true)
+                    let { data: { free: previousFree }, nonce: previousNonce } = await postWallet(1, 'pol.balance', ps2)
+                    //  console.log(`${previousFree}`)
+                    setLodingL(false)
+                    setTokenNumber(`${previousFree}`)
+                    setPreviousFrees(`${previousFree}` / item.decimals)
+                }else{
+
                 const ps2 = {
                     address: account,
                     chain: item.rpc
@@ -98,6 +113,7 @@ const WalletHome = (props) => {
                 setTokenNumber(`${previousFree}`)
                 setPreviousFrees(`${previousFree}` / item.decimals)
                 //    })
+            }
             }
         })
     
@@ -206,6 +222,8 @@ const mapStateToProps = (state) => {
         account: state.account,
         keys: state.keys,
         address:state.address,
+        ethAddress:state.ethAddress
+
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(WalletHome)
