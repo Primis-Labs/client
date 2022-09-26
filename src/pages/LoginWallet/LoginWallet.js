@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import './LoginWallet.scss';
 //react-redux
 import { connect, useDispatch, useSelector } from 'react-redux';
-import { setAccount, setSeed } from '../../store/action';
+import { setAccount, setSeed ,setethAddress} from '../../store/action';
 import SuperChain from '../SuperChain/SuperChain';
 import { useNavigate } from 'react-router-dom';
 import Top from '../../images/router.png';
@@ -11,7 +11,7 @@ import { Button, message, Upload,Input } from 'antd';
 import { postWallet, initWallet } from '../../api/walletManager';
 const { TextArea } = Input;
 function LoginWallet(props){
-    const { setAccount, dispatch } = props
+    const { setAccount,setethAddress, dispatch} = props
     const [tabType, setTabType] = useState(true);
     const [filesContent, setFilesContent] = useState('')
     const [fileName, setFileName] = useState('')
@@ -108,13 +108,18 @@ function LoginWallet(props){
       }
     const Secret=async()=>{
         if(!newpasswords){
-            message.error(`Password mistake！`);
+            message.error(`Wrong Password！`);
             return;
         }
-        postWallet(1,'pol.seedCreateAddress',seedValue).then(res=>{
+        let ps2={
+            mnemonic:seedValue,
+          } 
+        postWallet(1,'pol.seedCreateAddress',ps2).then(res=>{
             let genesisHash = '';
             CreatWallet(genesisHash, 'xxx', res.seed, res.address, newpasswords)
             dispatch(setAccount(res.address))
+            dispatch(setethAddress(res.ethaddress))
+
         });
     }
     return (
@@ -177,7 +182,8 @@ function LoginWallet(props){
 const mapDispatchToProps = () => {
     return {
         setAccount,
-        setSeed
+        setSeed,
+        setethAddress
     }
 }
 export default connect(mapDispatchToProps)(LoginWallet)

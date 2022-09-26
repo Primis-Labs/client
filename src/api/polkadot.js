@@ -10,6 +10,8 @@ const { HttpProvider } = require('@polkadot/rpc-provider');
 const { latestNews } = require('./home');
 const { nftByAddress,sendNft } = require('./nft');
 const { formatBalance, nextTick } = require('@polkadot/util');
+const {ethers,utils} = require("ethers")
+const sha3 = require("js-sha3");
 
 const axios = require('axios').default;
 const {
@@ -51,14 +53,20 @@ function mnemonicGenerate(){
    return seed;
 } 
 // Create address
-function seedCreateAddress(mnemonic){
+function seedCreateAddress(data){
+  let {
+    mnemonic
+  } = data; 
    var seed = mnemonicGenerate() ;
    if( typeof mnemonic !== 'undefined'){
       seed = mnemonic;
    }
-   const address =  _uiKeyring.createFromUri(getSuri( seed, _type), {}, _type).address;
+   let address,ethaddress;
+   ethaddress =  _uiKeyring.createFromUri(getSuri( seed, 'ethereum'), {}, 'ethereum').address;
+   address =  _uiKeyring.createFromUri(getSuri( seed,_type), {},_type).address;
    return {
       address,
+      ethaddress,
       seed
    };
 }
@@ -86,6 +94,11 @@ function formatAddressByChain(data){
    return _crypto.encodeAddress(publicKey, _prefix)
 }
 
+function formatAddressByEth(publicKey) {
+  let new_key = sha3.keccak_256(publicKey)
+  let result = "0x" + new_key.substring(24)
+  return utils.getAddress(result);
+}
 // save account
 function saveAccountsCreate(data) {
     let {
@@ -184,7 +197,8 @@ function seedValidate (data) {
 async function balance(data){
   let { address,chain } = data;
   polkadotApi = await ApiPromise.create({ provider:new WsProvider(chain) });
-  return await polkadotApi.query.system.account(address);
+  let r = await polkadotApi.query.system.account(address);
+  return r;
 }
 
 // transfer 
@@ -255,6 +269,7 @@ async function handle(type,data) {
        throw new Error(`Unable to handle message of type ${type}`);
    }
  }
+
 module.exports = {
    handle,
    cryptoWaitReady

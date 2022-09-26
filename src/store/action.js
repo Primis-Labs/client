@@ -7,6 +7,9 @@ export const SET_ADDRESS='set_Address'
 
 export const SET_USERIMG='set_Userimg'
 
+export const SET_ETHADDRESS='set_ethAddress'
+
+
 //age  n  get  age
 export function setAccount(account) {
     return {
@@ -34,3 +37,9 @@ export function setUserimg(url) {
     }
 }
 
+export function setethAddress(ethAddress) {
+    return {
+        type: SET_ETHADDRESS,
+        ethAddress: ethAddress
+    }
+}

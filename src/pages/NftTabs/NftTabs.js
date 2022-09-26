@@ -136,7 +136,8 @@ const NftTabs = (props) => {
                             <div className='_address'>
                                 <Input onChange={addressChange} placeholder="Enter Address"></Input>
                             </div>
-                            <Button onClick={showModal} className='send'>Send</Button>
+                            {/* <Button onClick={showModal} className='send'>Send</Button> */}
+                            <Button className='send'>Coming Soon</Button>
                         </div>
                     </div>
                 </div>

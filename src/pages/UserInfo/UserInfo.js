@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from "react";
 import './UserInfo.scss';
 import { connect, useDispatch, useSelector } from 'react-redux';
-import { setAccount, setSeed,setAddress } from '../../store/action';
+import { setAccount, setSeed,setAddress,setethAddress } from '../../store/action';
 import { useNavigate } from 'react-router-dom';
 import Top from '../../images/QR.png';
 import File from '../../images/file.png';
@@ -14,12 +14,13 @@ import keyDowload from '../../images/keyDowload.png';
 import { postWallet } from '../../api/walletManager';
 import {knownSubstrate} from '../../api/network'
 import { generateFromString } from 'generate-avatar'
+import { isHex, isU8a, u8aToHex, u8aToU8a } from '@polkadot/util';
 const { UserService }  = require("../../store/user_service");
 const { Option } = Select;
 
 const UserInfo = (props) => {
     // console.log(knownSubstrate)
-    const { account, setAccount,setSeed,seed ,setAddress,address,keys,url} = props;
+    const { account, setAccount,setSeed,seed ,setAddress,address,keys,url,ethAddress,setethAddress} = props;
     const Navigate = useNavigate();
     const [tabType, setTabType] = useState(false);
     const [passFILE, setPassFILE] = useState(false);
@@ -50,7 +51,10 @@ const UserInfo = (props) => {
         setPassType(false);
     };
     const logoutConfirm = () => {
-        setAccount('')
+        setAccount('');
+        setAddress('');
+        setethAddress('');
+        setSeed('');
         Navigate('/Wallet')
     };
     const PASS_FILE =(e)=>{
@@ -84,8 +88,14 @@ const UserInfo = (props) => {
             'prefix':value
           }
         await postWallet(1,'pol.formatAddressByChain',ps3).then(res=>{
-            setSeed(value);
-            setAddress(res);
+            if(value==1284){
+                setSeed(value);
+                setAddress(ethAddress);
+            }else{
+                setSeed(value);
+                setAddress(res);
+            }
+
             // postWallet(1,'pol.closeConnection','').then(res=>{
             //     console.log(res)
             // })
@@ -177,7 +187,8 @@ const mapDispatchToProps = (dispatch) => {
    return {
     setAccount:(account) => dispatch(setAccount(account)),
     setSeed:(data) => dispatch(setSeed(data)),
-    setAddress:(address) => dispatch(setAddress(address))
+    setAddress:(address) => dispatch(setAddress(address)),
+    setethAddress:(ethAddress) => dispatch(setethAddress(ethAddress))
     }
 }
 const mapStateToProps = (state) => {
@@ -187,7 +198,8 @@ const mapStateToProps = (state) => {
         address:state.address,
         keys:state.keys,
         userimags:state.userimags,
-        url:state.url
+        url:state.url,
+        ethAddress:state.ethAddress
     }
 }  
 export default  connect(mapStateToProps,mapDispatchToProps)(UserInfo)

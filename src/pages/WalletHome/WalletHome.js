@@ -24,7 +24,7 @@ const handleChange = (value) => {
     console.log(`selected ${value}`);
 };
 const WalletHome = (props) => {
-    const { account, keys, setUserimg ,address} = props;
+    const { account, keys, setUserimg ,address,ethAddress} = props;
     const [tabType, setTabType] = useState(true);
     const [previousFrees, setPreviousFrees] = useState();
     const [tokenName, setTokenName] = useState();
@@ -83,9 +83,24 @@ const WalletHome = (props) => {
         })
     }
     const GetBlance = () => {
+        // console.log(account)
         knownSubstrate.map(async (item) => {
             if (keys == item.prefix) {
                 setTokenName(item.displayName)
+
+                if(keys==1284){
+                    const ps2 = {
+                        address: ethAddress,
+                        chain: item.rpc
+                    }
+                    setLodingL(true)
+                    let { data: { free: previousFree }, nonce: previousNonce } = await postWallet(1, 'pol.balance', ps2)
+                    //  console.log(`${previousFree}`)
+                    setLodingL(false)
+                    setTokenNumber(`${previousFree}`)
+                    setPreviousFrees(`${previousFree}` / item.decimals)
+                }else{
+
                 const ps2 = {
                     address: account,
                     chain: item.rpc
@@ -98,6 +113,7 @@ const WalletHome = (props) => {
                 setTokenNumber(`${previousFree}`)
                 setPreviousFrees(`${previousFree}` / item.decimals)
                 //    })
+            }
             }
         })
     
@@ -123,13 +139,13 @@ const WalletHome = (props) => {
                     }}
                     >
                         <span className={tabType ? 'active' : ''} >Assets</span>
-                        <img className={tabType ? 'active' : ''} src={tabActive}></img>
+                        < img className={tabType ? 'active' : ''} src={tabActive}></img>
                     </li>
                     <li onClick={() => {
                         setTabType(false)
                     }}>
                         <span className={!tabType ? 'active' : ''} >NFTs</span>
-                        <img className={!tabType ? 'active' : ''} src={tabActive}></img>
+                        < img className={!tabType ? 'active' : ''} src={tabActive}></img>
                     </li>
                     <Button  onClick={RecordBtn} className={tabType ? 'RecordBtn':'key'}>Records</Button>
                 </ul>
@@ -140,22 +156,22 @@ const WalletHome = (props) => {
                     <Spin></Spin>
                     </div>
                         <li className='title'>
-                            <p>Tokens</p>
-                            <p>Amount</p>
-                            <p></p>
+                            <p>Tokens</p >
+                            <p>Amount</p >
+                            <p></p >
                         </li>
                         <li>
-                            <p className={keys=='0'?'':'tokenHidden'}><img src={Dot_IMF}></img></p>
-                            <p className={keys=='2'?'':'tokenHidden'} ><img src={Ksm_Img}></img></p>
-                            <p className={keys=='10'?'':'tokenHidden'} ><img src={aca_Img}></img></p>
-                            <p className={keys=='18'?'':'tokenHidden'} ><img src={astr_Img}></img></p>
-                            <p className={keys=='1284'?'':'tokenHidden'} ><img src={gkmr_Img}></img></p>
-                            <p className={keys=='172'?'':'tokenHidden'} ><img src={Ksm_Img}></img></p>
-                            <p>{previousFrees && previousFrees.toFixed(4)}</p>
+                            <p className={keys=='0'?'':'tokenHidden'}>< img src={Dot_IMF}></img></p >
+                            <p className={keys=='2'?'':'tokenHidden'} >< img src={Ksm_Img}></img></p >
+                            <p className={keys=='10'?'':'tokenHidden'} >< img src={aca_Img}></img></p >
+                            <p className={keys=='5'?'':'tokenHidden'} >< img src={astr_Img}></img></p >
+                            <p className={keys=='1284'?'':'tokenHidden'} >< img src={gkmr_Img}></img></p >
+                            <p className={keys=='172'?'':'tokenHidden'} >< img src={Ksm_Img}></img></p >
+                            <p>{previousFrees && previousFrees.toFixed(4)}</p >
                             <p>
                                 <Button onClick={()=>Recieve_click('1')} className='button'>Recieve</Button>
                                 <Button onClick={()=>Recieve_click('2')} className='button'>Send</Button>
-                            </p>
+                            </p >
                         </li>
                     </ul>
                 </div>
@@ -170,17 +186,17 @@ const WalletHome = (props) => {
 
                                     return <li key={index}>
                                         <div className='setings'>
-                                            <img src={Set_IMG}></img>
+                                            < img src={Set_IMG}></img>
                                             <div className='setting_l'>
-                                                <p onClick={()=>setAvatar(item.metadata_image)}>Set to avatar</p>
-                                                <p>NFT Market</p>
+                                                <p onClick={()=>setAvatar(item.metadata_image)}>Set to avatar</p >
+                                                <p>NFT Market</p >
                                             </div>
                                         </div>
-                                        <img className='bg' src={item.metadata_image ? item.metadata_image : Nft_IMG}></img>
+                                        < img className='bg' src={item.metadata_image ? item.metadata_image : Nft_IMG}></img>
                                         <p className='seting_btn'>
                                             <Button onClick={() => Nft_click(item.metadata_image,1,item.id)} className='btn Recieve'>Recieve</Button>
                                             <Button onClick={() => Nft_click(item.metadata_image,2,item.id)} className='btn'>Send</Button>
-                                        </p>
+                                        </p >
                                     </li>
                                 })
                             }
@@ -206,6 +222,8 @@ const mapStateToProps = (state) => {
         account: state.account,
         keys: state.keys,
         address:state.address,
+        ethAddress:state.ethAddress
+
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(WalletHome)
