@@ -24,7 +24,7 @@ const { TransferService }  = require("../../store/transfer_service");
 
 const AssetsTab = (props) => {
     const useLocations=useLocation()
-    console.log(useLocations)
+    // console.log(useLocations)
     const {account,keys,address} = props
     const [tabType, setTabType] = useState(true)
     const Navigate = useNavigate();
@@ -76,7 +76,7 @@ const AssetsTab = (props) => {
         const ps1={
             from:account,
             to:tokenAddress,
-            balance:tokenAccount,
+            balance:tokenAccount*decimal+'',
             chain:rpc
         }
        await postWallet(1,'pol.transferFree',ps1).then(res=>{
@@ -143,12 +143,12 @@ const AssetsTab = (props) => {
         setIsModalVisibleLoading(true);
         setIsLoding(0);
         console.log()
-        console.log(tokenAccount*decimal)
+        // console.log(tokenAccount*decimal)
         const ps2={
             from:account,
             passwd:passwords,
             to:tokenAddress,
-            balance:tokenAccount*decimal,
+            balance:tokenAccount*decimal+'',
             chain:rpc
         }
         try{
@@ -170,7 +170,7 @@ const AssetsTab = (props) => {
                   }
                   var indexdb = new TransferService();
                   var r = indexdb.add(obj);
-              });;
+              })
         }catch(e){
             var obj = {
                 hash:'xxx',

@@ -203,6 +203,7 @@ async function balance(data){
 
 // transfer 
 async function transfer(data){
+
   let { from,passwd,to,balance,chain} = data;
   const pair = _uiKeyring.getPair(from);
   if(pair.isLocked){
