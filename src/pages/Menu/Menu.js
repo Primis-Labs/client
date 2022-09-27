@@ -29,7 +29,6 @@ const SiderMenu = (props) => {
   const [activeMenu, setActiveMenu] = useState('');
 
   useEffect(() => {
-  console.log(Location.pathname)
 
     if(Location.pathname=='/Wallet'||Location.pathname=='/WalletHome'||Location.pathname=='/AssetsTabs'||Location.pathname=='/NftTabs'){
       setActiveMenu('/Wallet')
@@ -84,7 +83,6 @@ const SiderMenu = (props) => {
   );
 };
 const mapStateToProps=(state)=>{
-  // console.log(state)
   return {account:state.account}
 }
 export default connect(mapStateToProps)(SiderMenu);

@@ -26,7 +26,6 @@ const SendRecord = (props) => {
     useEffect(() => {
         var indexdb = new TransferService();
         var query = indexdb.getTransfers(account).then(res=>{
-            console.log(res)
             setRecord(res)
     });
     }, []);

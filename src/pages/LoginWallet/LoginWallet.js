@@ -76,7 +76,6 @@ function LoginWallet(props){
             'newPass':passwords
           }
           await postWallet(1,'pol.jsonRestore',ps4).then(res=>{
-              console.log(res)
               if(res){
                 dispatch(setAccount(JSON.parse(filesContent).address))
                 Navigate('/WalletHome')

@@ -18,7 +18,6 @@ function Header(props) {
     )
 }  
 const mapStateToProps=(state)=>{
-  // console.log(state)
   return {age:state.age,name:state.name}
 }
 export default connect(mapStateToProps)(Header)

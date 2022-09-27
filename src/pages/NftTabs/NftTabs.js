@@ -58,7 +58,7 @@ const NftTabs = (props) => {
         try {
 
             await postWallet(1, 'sendNft', ps2).then((res) => {
-                console.log(res)
+                
                 setIsLoding(1);
 
             }).catch(err => {

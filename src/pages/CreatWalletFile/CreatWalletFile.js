@@ -39,7 +39,6 @@ const CreatWalletFile = (props) => {
             newPass
           }
           postWallet(1,'pol.accountsExport',ps2).then(res=>{
-              console.log(res)
             funDownload(JSON.stringify(res), `keyFile.json`);
 
           });
@@ -89,7 +88,6 @@ const mapDispatchToProps = () => {
     }
 }
 const mapStateToProps=(state)=>{
-    console.log(state)
     return {account:state.account}
   }
 //Link building rudux

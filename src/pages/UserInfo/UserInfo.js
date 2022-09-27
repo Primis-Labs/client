@@ -113,7 +113,6 @@ const UserInfo = (props) => {
     useEffect(()=>{
         var indexdb = new UserService();
             indexdb.getUser(account).then(res=>{
-                console.log(res)
                 if(res.length != 0){
                     setUserImg(res[0].img)
                     return;

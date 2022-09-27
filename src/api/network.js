@@ -52,7 +52,7 @@ export const knownSubstrate = [
       rpc:'wss://acala.polkawallet.io'
     },
     {
-      decimals: 100000000000,
+      decimals: 1000000000000000000,
       displayName: 'Moonbeam',
       network: 'moonbeam',
       prefix: 1284,
@@ -71,7 +71,7 @@ export const knownSubstrate = [
       symbols: ['ASTR'],
       website: 'https://astar.network/',
       genesis: ['0x9eb76c5184c4ab8679d2d5d819fdf90b9c001403e9e17da2e14b6d8aec4029c6'],
-      rpc:'wss://public-rpc.pinknode.io/astar'
+      rpc:'wss://rpc.astar.network'
     },
     {
       decimals: 1000000000000,

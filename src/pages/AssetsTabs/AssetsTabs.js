@@ -79,6 +79,7 @@ const AssetsTab = (props) => {
              setIsModalVisible(true);
              setGasfees(res)
        }).catch(err=>{
+        console.log(err);
         message.error('Information filling error.');
         setLoadings(false)
 
@@ -113,11 +114,12 @@ const AssetsTab = (props) => {
                     address:account,
                     chain:item.rpc
                   }
+                  setDecimal(item.decimals);
+                  setRpc(item.rpc);
+                  setTokenName(item.symbols[0]);
                  let { data: { free: previousFree }, nonce: previousNonce } = await postWallet(1,'pol.balance',ps2);
                  setTokenBalance(`${previousFree}`/item.decimals);
-                 setDecimal(item.decimals);
-                 setRpc(item.rpc);
-                 setTokenName(item.symbols[0]);
+               
             //    })
             }})
     }
@@ -146,7 +148,6 @@ const AssetsTab = (props) => {
         }
         try{
             await postWallet(1,'pol.transfer',ps2).then(async(res)=>{
-                console.log(res)
                 // await initJsStore();
                 GetBlance()
                 setIsLoding(1);
