@@ -24,6 +24,7 @@ const { TransferService }  = require("../../store/transfer_service");
 
 const AssetsTab = (props) => {
     const useLocations=useLocation()
+    console.log(useLocations)
     const {account,keys,address} = props
     const [tabType, setTabType] = useState(true)
     const Navigate = useNavigate();
@@ -68,10 +69,14 @@ const AssetsTab = (props) => {
 
             return;
         }
+        // console.log(account)
+        // console.log(tokenAccount*decimal)
+        // console.log(rpc)
+
         const ps1={
             from:account,
             to:tokenAddress,
-            balance:tokenAccount*decimal,
+            balance:tokenAccount,
             chain:rpc
         }
        await postWallet(1,'pol.transferFree',ps1).then(res=>{
