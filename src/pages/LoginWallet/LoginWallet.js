@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import './LoginWallet.scss';
 //react-redux
 import { connect, useDispatch, useSelector } from 'react-redux';
-import { setAccount, setSeed ,setethAddress} from '../../store/action';
+import { setAccount, setSeed ,setethAddress, setAddress} from '../../store/action';
 import SuperChain from '../SuperChain/SuperChain';
 import { useNavigate } from 'react-router-dom';
 import Top from '../../images/router.png';
@@ -117,6 +117,7 @@ function LoginWallet(props){
             let genesisHash = '';
             CreatWallet(genesisHash, 'xxx', res.seed, res.address, newpasswords)
             dispatch(setAccount(res.address))
+            dispatch(setAddress(res.address))
             dispatch(setethAddress(res.ethaddress))
 
         });

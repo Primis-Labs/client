@@ -1,6 +1,6 @@
-//age
+
 export const SET_ACCOUNT = 'set_Account'
-//name
+
 export const SET_SEED='set_Seed'
 
 export const SET_ADDRESS='set_Address'
@@ -9,8 +9,6 @@ export const SET_USERIMG='set_Userimg'
 
 export const SET_ETHADDRESS='set_ethAddress'
 
-
-//age  n  get  age
 export function setAccount(account) {
     return {
         type: SET_ACCOUNT,

@@ -42,58 +42,66 @@ const rmrk2 = "https://gql-rmrk2-prod.graphcdn.app/"
    * const [_prefix, _op_type, _version, id, recipient] = remark.split("::");
    */
   export async function sendNft(data){
-    let { id,recipient,version } = data;
+    let { id,recipient,version,polkadotApi,sender } = data;
     if(typeof version === 'undefined'){
       version  = '1.0.0';
     }
-    const consolidator = new Consolidator();
-    const remark = 'rmrk::SEND::'+version+'::'+id+'::' + recipient;
-    return consolidator.send(remark);
+    const message = 'rmrk::SEND::'+version+'::'+id+'::' + recipient;
+    const txs = [
+      polkadotApi.tx.system.remark(message)
+    ]
+    // construct the batch and send the transactions
+    polkadotApi.tx.utility
+    .batch(txs)
+    .signAndSend(sender, ({ status }) => {
+      if (!status.isInBlock) {
+        throw new Error(status);
+      }
+    });
   }
 
-
-  export function sendInteraction(
-    remark,
-    sendEntity,
-    nft
-  ){
-    if (!nft) {
-      throw new Error(
-        `[SEND] Attempting to send non-existant NFT ${sendEntity.id}`
-      );
-    }
+  // export function sendInteraction(
+  //   remark,
+  //   sendEntity,
+  //   nft
+  // ){
+  //   if (!nft) {
+  //     throw new Error(
+  //       `[SEND] Attempting to send non-existant NFT ${sendEntity.id}`
+  //     );
+  //   }
   
-    if (Boolean(nft.burned)) {
-      throw new Error(
-        `[SEND] Attempting to send burned NFT ${sendEntity.id}`
-      );
-    }
+  //   if (Boolean(nft.burned)) {
+  //     throw new Error(
+  //       `[SEND] Attempting to send burned NFT ${sendEntity.id}`
+  //     );
+  //   }
   
-    // Check if allowed to issue send - if owner == caller
-    if (nft.owner != remark.caller) {
-      throw new Error(
-        `[SEND}] Attempting to send non-owned NFT ${sendEntity.id}, real owner: ${nft.owner}`
-      );
-    }
+  //   // Check if allowed to issue send - if owner == caller
+  //   if (nft.owner != remark.caller) {
+  //     throw new Error(
+  //       `[SEND}] Attempting to send non-owned NFT ${sendEntity.id}, real owner: ${nft.owner}`
+  //     );
+  //   }
   
-    if (nft.transferable === 0 || nft.transferable >= remark.block) {
-      throw new Error(
-        `[SEND] Attempting to send non-transferable NFT ${sendEntity.id}.`
-      );
-    }
+  //   if (nft.transferable === 0 || nft.transferable >= remark.block) {
+  //     throw new Error(
+  //       `[SEND] Attempting to send non-transferable NFT ${sendEntity.id}.`
+  //     );
+  //   }
   
-    nft.updatedAtBlock = remark.block;
-    nft.addChange({
-      field: "owner",
-      old: nft.owner,
-      new: sendEntity.recipient,
-      caller: remark.caller,
-      block: remark.block,
-      opType: "SEND",
-    });
+  //   nft.updatedAtBlock = remark.block;
+  //   nft.addChange({
+  //     field: "owner",
+  //     old: nft.owner,
+  //     new: sendEntity.recipient,
+  //     caller: remark.caller,
+  //     block: remark.block,
+  //     opType: "SEND",
+  //   });
   
-    nft.owner = sendEntity.recipient;
-  };
+  //   nft.owner = sendEntity.recipient;
+  // };
 
 // module.exports = {
 //     nftByAddress

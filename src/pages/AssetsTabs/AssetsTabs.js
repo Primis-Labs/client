@@ -24,7 +24,6 @@ const { TransferService }  = require("../../store/transfer_service");
 
 const AssetsTab = (props) => {
     const useLocations=useLocation()
-    // console.log(useLocations)
     const {account,keys,address} = props
     const [tabType, setTabType] = useState(true)
     const Navigate = useNavigate();
@@ -46,11 +45,12 @@ const AssetsTab = (props) => {
     
     const showModal = async() => {
         setLoadings(true)
-        if(toeknBalnce==0){
-        setLoadings(false)
-            message.error('Lack of balance.');
+        if(toeknBalnce <= 1  || (toeknBalnce * 1 - tokenAccount * 1) < 1 ){
+            setLoadings(false)
+            message.error('Minimum account amount must be greater than 1.0 ');
             return;
         }
+      
         if(passwords==''){
             message.error('Wrong Password.');
              setLoadings(false)
@@ -97,7 +97,7 @@ const AssetsTab = (props) => {
         setIsModalVisibleLoading(false);
       };
       const Max=()=>{
-        setTokenAccount(toeknBalnce*1-0.03)
+        setTokenAccount( ( toeknBalnce*1 - 1.03 ).toFixed(2))
       }
       const AccountToken=(e)=>{
         const { value: inputValue } = e.target;
@@ -210,7 +210,7 @@ const AssetsTab = (props) => {
                             setTabType(true)
                         }}
                         >
-                            <span className={tabType ? 'active' : ''} >Recieve</span>
+                            <span className={tabType ? 'active' : ''} >Receive</span>
                             <img className={tabType ? 'active' : ''} src={tabActive}></img>
                         </li>
                         <li onClick={() => {
@@ -225,7 +225,7 @@ const AssetsTab = (props) => {
                         <div className='Recieve'>
                             {/* <img src={QR}></img> */}
 
-                            <img  className={keys=='0'?'':'tokenHidden'} src={Dot_IMF}></img>
+                            <img className={keys=='0' ?'':'tokenHidden'} src={Dot_IMF}></img>
                             <img className={keys=='2'?'':'tokenHidden'}  src={Ksm_Img}></img>
                             <img className={keys=='10'?'':'tokenHidden'} src={aca_Img}></img>
                             <img className={keys=='5'?'':'tokenHidden'}  src={astr_Img}></img>
@@ -248,10 +248,14 @@ const AssetsTab = (props) => {
                             <Input onChange={AccountToken} value={tokenAccount}  placeholder="Enter Amount"></Input>
                             <Button onClick={Max}>MAX</Button>
                             </div>
+                            <div className='deposit'>
+                                existential deposit :1.00
+                            </div>
                             <div className='_address'>
                             <Input type='password'  onChange={passwordChange} placeholder="Password" className='_address_input'></Input>
                             </div>
                             <p className='balance'> Balance:{toeknBalnce} </p>
+                            
                             <Button  onClick={showModal} className='send' loading={loadings} >Send</Button>
                         </div>
                     </div>
@@ -259,7 +263,7 @@ const AssetsTab = (props) => {
             </div>
             <Modal wrapClassName='ModalSend' title="Transaction Confirm" width='600px' visible={isModalVisible} onCancel={handleCancel}>
             <p><span>Send：</span> <a>{address.slice(0, 4)}****{address.slice(address.length - 4, address.length)}</a></p>
-            <p><span>Recieve：</span> <a>{tokenAddress}</a></p>
+            <p><span>Receive：</span> <a>{tokenAddress}</a></p>
             <p><span>Total amount：</span> <a>{tokenAccount}</a></p>
             {/* <p><span>Transaction  amount：</span> <a>12DOT</a></p> */}
             <p><span>Transaction  Fee：</span> <a>{gasfees}</a></p>

@@ -19,12 +19,12 @@ import { postWallet } from '../../api/walletManager';
 const NftTabs = (props) => {
     const { account, keys ,address } = props
     const [tabType, setTabType] = useState(true)
-    const [addressT, setAddressT] = useState(true)
+    const [addressT, setAddressT] = useState('')
     const [isLoding, setIsLoding] = useState('3');
-    const [Blances,setBlances] =useState(0)
+    const [Blances,setBlances] =useState(0);
+    const [passwords, setPasswords] = useState('');
     const Navigate = useNavigate();
     const useLocations = useLocation()
-    console.log(useLocations)
     const outWalletRouter = (props) => {
         console.log(props)
         Navigate('/WalletHome')
@@ -33,6 +33,17 @@ const NftTabs = (props) => {
     const [isModalVisibleLoading, setIsModalVisibleLoading] = useState(false);
     const showModal = () => {
         setIsModalVisible(true);
+        if(addressT === ''){
+            message.error('Recipient Address not entered.');
+            setIsModalVisible(false)
+            return;
+        }
+        if(passwords === ''){
+            message.error('Wrong Password.');
+            setIsModalVisible(false)
+            return;
+        }
+       
     };
     const handleCancel = () => {
         setIsModalVisible(false);
@@ -43,6 +54,10 @@ const NftTabs = (props) => {
     const addressChange = (e) => {
         setAddressT(e.target.value)
     }
+    const passwordChange=(e)=>{
+        setPasswords(e.target.value)
+
+      }
     const sends = async () => {
         setIsModalVisible(false);
         setIsModalVisibleLoading(true);
@@ -50,19 +65,25 @@ const NftTabs = (props) => {
         if(Blances==0){
           message.error('Lack of balance！');
         }
+
         let ps2 = {
-            id: useLocations.state.id,
+            from:address,
+            passwd:passwords,
             recipient: addressT,
-            version: useLocations.state.rmrks == 2 ? '2.0.0' : '1.0.0'
+            id: useLocations.state.id,
+            version: useLocations.state.rmrks == 2 ? '2.0.0' : '1.0.0',
+            chain:'wss://kusama-rpc.dwellir.com'
         }
         try {
-
-            await postWallet(1, 'sendNft', ps2).then((res) => {
-                
-                setIsLoding(1);
-
+            await postWallet(1, 'pol.transferNFT', ps2).then((res) => { 
+                console.log(res);
+                if (!res.isInBlock) {
+                    setIsLoding(2)
+                }else{
+                    setIsLoding(1);
+                }
             }).catch(err => {
-            setIsLoding(2)
+                setIsLoding(2)
 
             })
         } catch (e) {
@@ -108,7 +129,7 @@ const NftTabs = (props) => {
                             setTabType(true)
                         }}
                         >
-                            <span className={tabType ? 'active' : ''} >Recieve</span>
+                            <span className={tabType ? 'active' : ''} >Receive</span>
                             <img className={tabType ? 'active' : ''} src={tabActive}></img>
                         </li>
                         <li onClick={() => {
@@ -134,10 +155,14 @@ const NftTabs = (props) => {
                             <img src={useLocations.state.images}></img>
 
                             <div className='_address'>
-                                <Input onChange={addressChange} placeholder="Enter Address"></Input>
+                                <Input onChange={addressChange} placeholder="Recipient Address"></Input>
                             </div>
+                            <div className='_passwd'>
+                            <Input type='password'  onChange={passwordChange} placeholder="Send Wallet Password" className='_address_input'></Input>
+                            </div>
+
                             {/* <Button onClick={showModal} className='send'>Send</Button> */}
-                            <Button className='send'>Coming Soon</Button>
+                            <Button onClick={showModal}  className='send'>Coming Soon</Button>
                         </div>
                     </div>
                 </div>
@@ -152,7 +177,7 @@ const NftTabs = (props) => {
                     </li>
                     <li>
                         <p className='addresst'>{addressT}</p>
-                        <span>Recieve</span>
+                        <span>Receive</span>
                     </li>
 
                 </ul>

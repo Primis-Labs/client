@@ -221,6 +221,31 @@ async function transfer(data){
  
 }
 
+async function transferNFT(data){
+  let { from,passwd,recipient,id,version,chain} = data;
+  const pair = _uiKeyring.getPair(from);
+  if(pair.isLocked){
+    pair.unlock(passwd)
+  }
+  try {
+    polkadotApi = await ApiPromise.create({ provider:new WsProvider(chain) });
+
+    const message = 'rmrk::SEND::'+version+'::'+id+'::' + recipient;
+    const txs = [
+      polkadotApi.tx.system.remark(message)
+    ]
+    polkadotApi.tx.utility
+    .batch(txs)
+    .signAndSend(pair, ({ status }) => {
+      return status;
+    });
+  } catch (error) {
+    throw new Error('trans fail');
+  }
+ 
+}
+
+
 async function transferFree(data){
   let { from,to,balance,chain} = data;
   polkadotApi = await ApiPromise.create({ provider:new WsProvider(chain) });
@@ -262,10 +287,10 @@ async function handle(type,data) {
         return transferFree(data);
       case 'pol.nftByAddress':
        return await nftByAddress(data);
-      case 'latestNews':
+      case 'pol.latestNews':
        return await latestNews();
-      case 'sendNft':
-        return await sendNft(data);
+      case 'pol.transferNFT':
+        return await transferNFT(data);
      default:
        throw new Error(`Unable to handle message of type ${type}`);
    }

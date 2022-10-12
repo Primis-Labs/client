@@ -6,6 +6,7 @@ import { setAccount, setSeed ,setUserimg} from '../../store/action';
 import { useNavigate } from 'react-router-dom';
 import UserInfo from '../UserInfo/UserInfo'
 import tabActive from '../../images/tba_active.png';
+import refresh from '../../images/refresh.png';
 import Nft_IMG from '../../images/nft.png';
 import Set_IMG from '../../images/set.png';
 import { NftAsset } from '../NftAssets/NftAssets'
@@ -17,13 +18,14 @@ import Ksm_Img from '../../images/ksm.png';
 import aca_Img from '../../images/aca.png';
 import astr_Img from '../../images/astr.png';
 import gkmr_Img from '../../images/gkmr.png';
-
+import axios  from 'axios';
 const { UserService }  = require("../../store/user_service");
 
 const handleChange = (value) => {
     console.log(`selected ${value}`);
 };
 const WalletHome = (props) => {
+    const rmrk2 = "https://gql-rmrk2-prod.graphcdn.app/"
     const { account, keys, setUserimg ,address,ethAddress} = props;
     const [tabType, setTabType] = useState(true);
     const [previousFrees, setPreviousFrees] = useState();
@@ -48,7 +50,6 @@ const WalletHome = (props) => {
         GetNfts(rmrks,value)
     }
     const setAvatar=(url)=>{
-        console.log(url)
         var obj = {
             address:account,
             img:url,
@@ -65,12 +66,33 @@ const WalletHome = (props) => {
             rmrk:type,
             page:page
         }
-        postWallet(1, 'pol.nftByAddress', ps4).then(res => {
+        postWallet(1, 'pol.nftByAddress', ps4).then(  res => {
             if(res.data.data){
                 const nftData = res.data.data.nfts
-                nftData.map(item => {
-                    // console.log(item)
-                    item.metadata_image = 'https://' + item.metadata_image.slice(11, item.metadata_image.length) + '.ipfs.cf-ipfs.com'
+                nftData.map( async(item) => {
+                        let _metadata_image = item.metadata_image;
+                        if(item.priority.length > 0){
+                            let param = {};
+                            param.query = "query fetchNftResourcesQuery($where: resources_bool_exp!, $limit: Int) {\n  resources(where: $where, limit: $limit) {\n    base_id\n    id\n    src\n    slot_id\n    metadata\n    thumb\n    theme\n    pending\n    replace\n    base {\n      type\n      parts(limit: 1) {\n        part_id\n        __typename\n      }\n      __typename\n    }\n    base_theme {\n      theme {\n        theme_color_1\n        theme_color_2\n        theme_color_3\n        theme_color_4\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n"
+                            param.operationName = "fetchNftResourcesQuery";
+                            param.variables = {};
+                            param.variables.where = {};
+                            param.variables.where.nft_id = {}
+                            param.variables.where.nft_id._eq = item.id;
+                            param.variables.limit = 12;
+                            let r = await  axios.post(rmrk2,
+                                param, 
+                                {
+                                headers:{
+                                    'Content-Type':'application/json',
+                                    'authority': 'gql-rmrk2-prod.graphcdn.app'
+                                }
+                            })
+                            _metadata_image = r.data.data.resources[0].src;
+                        }
+                        //let imgurl = r.data.data.resources[0].src.length > 0 ? item.metadata_image :item.metadata;
+                        // console.log(item)
+                        item.metadata_image = 'https://' + _metadata_image.slice(11, _metadata_image.length) + '.ipfs.cf-ipfs.com';
                 })
                 // console.log(nftData)
                 setNftRecord(nftData)
@@ -83,10 +105,10 @@ const WalletHome = (props) => {
         })
     }
     const GetBlance = () => {
-        // console.log(account)
         knownSubstrate.map(async (item) => {
             if (keys == item.prefix) {
                 setTokenName(item.displayName)
+
 
                 if(keys==1284){
                     const ps2 = {
@@ -167,9 +189,12 @@ const WalletHome = (props) => {
                             <p className={keys=='5'?'':'tokenHidden'} >< img src={astr_Img}></img></p >
                             <p className={keys=='1284'?'':'tokenHidden'} >< img src={gkmr_Img}></img></p >
                             <p className={keys=='172'?'':'tokenHidden'} >< img src={Ksm_Img}></img></p >
-                            <p>{previousFrees && previousFrees.toFixed(4)}</p >
                             <p>
-                                <Button onClick={()=>Recieve_click('1')} className='button'>Recieve</Button>
+                                {previousFrees && previousFrees.toFixed(4)}
+                                <img onClick={GetBlance} src={refresh} className='refresh'></img>
+                            </p >
+                            <p>
+                                <Button onClick={()=>Recieve_click('1')} className='button'>Receive</Button>
                                 <Button onClick={()=>Recieve_click('2')} className='button'>Send</Button>
                             </p >
                         </li>
@@ -194,7 +219,7 @@ const WalletHome = (props) => {
                                         </div>
                                         < img className='bg' src={item.metadata_image ? item.metadata_image : Nft_IMG}></img>
                                         <p className='seting_btn'>
-                                            <Button onClick={() => Nft_click(item.metadata_image,1,item.id)} className='btn Recieve'>Recieve</Button>
+                                            <Button onClick={() => Nft_click(item.metadata_image,1,item.id)} className='btn Recieve'>Receive</Button>
                                             <Button onClick={() => Nft_click(item.metadata_image,2,item.id)} className='btn'>Send</Button>
                                         </p >
                                     </li>

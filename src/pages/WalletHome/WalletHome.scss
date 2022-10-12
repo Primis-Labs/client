@@ -1,4 +1,7 @@
 .WalletHome{
+    .refresh{
+        width: 20px !important;height: 20px;margin-left: 5px;cursor: pointer;
+    }
     .x{
         display: none;
     }
@@ -140,6 +143,7 @@
                     color: #fff;
                     float: left;
                     text-align: center;
+
                 }
                 .button{
                 height: 37px;

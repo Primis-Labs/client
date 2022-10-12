@@ -94,6 +94,22 @@
                     }
            
                 }
+                ._passwd{
+                    width: 90%;
+                    margin: 0 auto;
+                    padding-top: 28px;
+                    padding-bottom: 28px;
+                    input{
+                        height: 60px;
+                        background: #1A1C1E;
+                        opacity: 1;
+                        border:none;
+                        color: #fff;    
+                        
+                        border-radius: 16px; 
+                    }
+           
+                }
                 ._Amount{
                     width: 90%;
                     margin: 0 auto;
