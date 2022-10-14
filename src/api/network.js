@@ -24,7 +24,8 @@ export const knownSubstrate = [
       symbols: ['DOT'],
       website: 'https://polkadot.network',
       genesis: ['0x91b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3'],
-      rpc:'wss://rpc.polkadot.io'
+      rpc:'wss://rpc.polkadot.io',
+      exdeposit:1
     },
     {
       decimals: 1000000000000,
@@ -38,7 +39,8 @@ export const knownSubstrate = [
       '0xe3777fa922cafbff200cadeaea1a76bd7898ad5b89f7848999058b50e715f636', // Kusama CC2
       '0x3fd7b9eb6a00376e5be61f01abb429ffb0b104be05eaff4d458da48fcd425baf' // Kusama CC1
       ],
-      rpc:'wss://kusama-rpc.dwellir.com'
+      rpc:'wss://kusama-rpc.dwellir.com',
+      exdeposit:0.000033
     },
     {
       decimals: 1000000000000,
@@ -49,7 +51,8 @@ export const knownSubstrate = [
       symbols: ['ACA'],
       website: 'https://acala.network/',
       genesis: ['0xfc41b9bd8ef8fe53d58c7ea67c794c7ec9a73daf05e6d54b14ff6342c99ba64c'],
-      rpc:'wss://acala.polkawallet.io'
+      rpc:'wss://acala.polkawallet.io',
+      exdeposit:0.001
     },
     {
       decimals: 1000000000000000000,
@@ -82,6 +85,7 @@ export const knownSubstrate = [
       symbols: ['ROC'],
       website: 'https://rococo.subscan.io/',
       genesis: [],
-      rpc:'wss://rococo-rpc.polkadot.io'
+      rpc:'wss://rococo-rpc.polkadot.io',
+      exdeposit:1
     },
   ]

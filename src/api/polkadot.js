@@ -229,7 +229,7 @@ async function transferNFT(data){
   }
   try {
     polkadotApi = await ApiPromise.create({ provider:new WsProvider(chain) });
-
+    // let nft = consolidatedNFTtoInstance(item);
     const message = 'rmrk::SEND::'+version+'::'+id+'::' + recipient;
     const txs = [
       polkadotApi.tx.system.remark(message)

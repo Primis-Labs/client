@@ -14,8 +14,6 @@ const defaultState = {
     keys: 0
 }
 function user(state = defaultState, action) {
-
-    console.log(state)
     switch (action.type) {
         case SET_ACCOUNT:
             return {

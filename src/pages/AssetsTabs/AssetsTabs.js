@@ -38,6 +38,7 @@ const AssetsTab = (props) => {
     const [isLoding, setIsLoding] = useState('3');
     const [toeknBalnce, setTokenBalance] = useState(true);
     const [decimal, setDecimal] = useState(true);
+    const [depositBalnce, setDepositBalnce] = useState(1);
     const [rpc, setRpc] = useState('');
     const [gasfees, setGasfees] = useState('');
     const [loadings, setLoadings] = useState(false);
@@ -45,9 +46,9 @@ const AssetsTab = (props) => {
     
     const showModal = async() => {
         setLoadings(true)
-        if(toeknBalnce <= 1  || (toeknBalnce * 1 - tokenAccount * 1) < 1 ){
+        if(toeknBalnce <= depositBalnce  || (toeknBalnce * 1 - tokenAccount * 1) < depositBalnce ){
             setLoadings(false)
-            message.error('Minimum account amount must be greater than 1.0 ');
+            message.error('Minimum account amount must be greater than ' + depositBalnce);
             return;
         }
       
@@ -97,7 +98,7 @@ const AssetsTab = (props) => {
         setIsModalVisibleLoading(false);
       };
       const Max=()=>{
-        setTokenAccount( ( toeknBalnce*1 - 1.03 ).toFixed(2))
+        setTokenAccount( ( toeknBalnce*1 - depositBalnce ).toFixed(2))
       }
       const AccountToken=(e)=>{
         const { value: inputValue } = e.target;
@@ -122,6 +123,7 @@ const AssetsTab = (props) => {
                   setDecimal(item.decimals);
                   setRpc(item.rpc);
                   setTokenName(item.symbols[0]);
+                  setDepositBalnce(item.exdeposit);
                  let { data: { free: previousFree }, nonce: previousNonce } = await postWallet(1,'pol.balance',ps2);
                  setTokenBalance(`${previousFree}`/item.decimals);
                
@@ -249,7 +251,7 @@ const AssetsTab = (props) => {
                             <Button onClick={Max}>MAX</Button>
                             </div>
                             <div className='deposit'>
-                                existential deposit :1.00
+                                existential deposit :{depositBalnce}
                             </div>
                             <div className='_address'>
                             <Input type='password'  onChange={passwordChange} placeholder="Password" className='_address_input'></Input>

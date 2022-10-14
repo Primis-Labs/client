@@ -23,6 +23,7 @@ const NftTabs = (props) => {
     const [isLoding, setIsLoding] = useState('3');
     const [Blances,setBlances] =useState(0);
     const [passwords, setPasswords] = useState('');
+    const [depositBalnce, setDepositBalnce] = useState(1);
     const Navigate = useNavigate();
     const useLocations = useLocation()
     const outWalletRouter = (props) => {
@@ -33,6 +34,20 @@ const NftTabs = (props) => {
     const [isModalVisibleLoading, setIsModalVisibleLoading] = useState(false);
     const showModal = () => {
         setIsModalVisible(true);
+
+        if(Blances <= 0 ){
+            message.error('Amount not entered.');
+            setIsModalVisible(false)
+            return;
+        }
+
+        if(Blances <= depositBalnce){
+            setIsModalVisible(false)
+            message.error('Minimum account amount must be greater than ' + depositBalnce);
+            return;
+        }
+
+
         if(addressT === ''){
             message.error('Recipient Address not entered.');
             setIsModalVisible(false)
@@ -72,16 +87,12 @@ const NftTabs = (props) => {
             recipient: addressT,
             id: useLocations.state.id,
             version: useLocations.state.rmrks == 2 ? '2.0.0' : '1.0.0',
-            chain:'wss://kusama-rpc.dwellir.com'
+            chain:'wss://kusama-rpc.polkadot.io'
         }
         try {
             await postWallet(1, 'pol.transferNFT', ps2).then((res) => { 
                 console.log(res);
-                if (!res.isInBlock) {
-                    setIsLoding(2)
-                }else{
-                    setIsLoding(1);
-                }
+                setIsLoding(1);
             }).catch(err => {
                 setIsLoding(2)
 
@@ -96,13 +107,16 @@ const NftTabs = (props) => {
     const GetBlance =  () =>{
         knownSubstrate.map( async(item)=>{
             if(keys==item.prefix){
+                setDepositBalnce(item.exdeposit);
                 // postWallet(1,'pol.openConnnect',item.rpc).then(async (res)=>{
                 const ps2 = {
                     address:account,
                     chain:item.rpc
                   }
+                
                  let { data: { free: previousFree }, nonce: previousNonce } = await postWallet(1,'pol.balance',ps2);
                  setBlances(`${previousFree}`/item.decimals);
+                
             //    })
             }})
     }
@@ -160,9 +174,11 @@ const NftTabs = (props) => {
                             <div className='_passwd'>
                             <Input type='password'  onChange={passwordChange} placeholder="Send Wallet Password" className='_address_input'></Input>
                             </div>
-
+                            <div className='deposit'>
+                                Balance:{Blances} , existential deposit:{depositBalnce}
+                            </div>
                             {/* <Button onClick={showModal} className='send'>Send</Button> */}
-                            <Button onClick={showModal}  className='send'>Coming Soon</Button>
+                            <Button onClick={showModal}  className='send'>Send</Button>
                         </div>
                     </div>
                 </div>
@@ -173,7 +189,7 @@ const NftTabs = (props) => {
                         <p>
                             <img src={useLocations.state.images}></img>
                         </p>
-                        <span>Send</span>
+                        <span></span>
                     </li>
                     <li>
                         <p className='addresst'>{addressT}</p>
