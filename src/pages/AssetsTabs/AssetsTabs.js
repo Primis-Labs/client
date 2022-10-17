@@ -154,13 +154,10 @@ const AssetsTab = (props) => {
             chain:rpc
         }
         try{
-            await postWallet(1,'pol.transfer',ps2).then(async(res)=>{
-                // await initJsStore();
-                GetBlance()
-                setIsLoding(1);
-                GetBlance();
+            const promise =  postWallet(1,'pol.transfer',ps2);
+            promise.then((resolve) => {
                 var obj = {
-                    hash:res.toString(),
+                    hash:resolve,
                     from:account,
                     to:tokenAddress,
                     formatFrom:account,
@@ -169,10 +166,22 @@ const AssetsTab = (props) => {
                     status:'1',
                     desc:'',
                     createTime:new Date(),
-                  }
-                  var indexdb = new TransferService();
-                  var r = indexdb.add(obj);
-              })
+                }
+                if(resolve !== 0 ){
+                    var indexdb = new TransferService();
+                    var r = indexdb.add(obj);
+                    console.log('ruku')
+                    GetBlance()
+                    setIsLoding(1);
+                }else{
+                    obj.hash = 'xxx';
+                    obj.status = '2';
+                    var indexdb = new TransferService();
+                    var r = indexdb.add(obj);
+                    setIsLoding(2);
+                }
+             
+            })
         }catch(e){
             var obj = {
                 hash:'xxx',
@@ -187,7 +196,7 @@ const AssetsTab = (props) => {
               }
               var indexdb = new TransferService();
               var r = indexdb.add(obj);
-            setIsLoding(2)
+              setIsLoding(2)
         }
       
       }
