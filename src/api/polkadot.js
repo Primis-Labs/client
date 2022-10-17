@@ -213,7 +213,25 @@ async function transfer(data){
     polkadotApi = await ApiPromise.create({ provider:new WsProvider(chain) });
     const txHash = await polkadotApi.tx.balances
     .transfer(to, balance)
-    .signAndSend(pair);
+    // .signAndSend(pair);
+    .signAndSend(pair, ({ status, events, dispatchError }) => {
+      // status would still be set, but in the case of error we can shortcut
+      // to just check it (so an error would indicate InBlock or Finalized)
+      if (dispatchError) {
+        if (dispatchError.isModule) {
+          // for module errors, we have the section indexed, lookup
+          const decoded = polkadotApi.registry.findMetaError(dispatchError.asModule);
+          const { docs, name, section } = decoded;
+          
+          console.log(`${section}.${name}: ${docs.join(' ')}`);   
+        } else {
+          // Other, CannotLookup, BadOrigin, no extra info
+          console.log(dispatchError.toString());
+        }
+        throw new Error('trans fail');
+      }
+    }
+    )
     return txHash;
   } catch (error) {
     throw new Error('trans fail');
