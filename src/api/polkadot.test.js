@@ -70,7 +70,7 @@ describe(' polkadot wallet manager ',()=>{
 describe(' account transaction ',()=>{
 
   beforeAll( async() => {
- 
+    jest.setTimeout(60000);
   });
 
   test(' Account balance inquiry ',async() => {
@@ -91,7 +91,7 @@ describe(' account transaction ',()=>{
       balance:money,
       chain:rpc
     }
-    await postWallet(1,'pol.transfer',data);
+    //await postWallet(1,'pol.transfer',data);
   }) 
 
 } )
