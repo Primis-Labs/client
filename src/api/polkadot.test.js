@@ -70,7 +70,7 @@ describe(' polkadot wallet manager ',()=>{
 describe(' account transaction ',()=>{
 
   beforeAll( async() => {
-    jest.setTimeout(60000);
+    jest.setTimeout(120000);
   });
 
   test(' Account balance inquiry ',async() => {

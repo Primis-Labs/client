@@ -22,7 +22,7 @@
       "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
       "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"
     ],
-    "testEnvironment": "jsdom",
+    "testEnvironment": "node",
     "transform": {
       "^.+\\.(js|jsx|mjs|cjs|ts|tsx)$": "<rootDir>/config/jest/babelTransform.js",
       "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
@@ -35,7 +35,8 @@
     "modulePaths": [],
     "moduleNameMapper": {
       "^react-native$": "react-native-web",
-      "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy"
+      "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy",
+      "!file-loader!(.*)": "<rootDir>/node_modules/jsstore/dist/jsstore.worker.min.js"
     },
     "moduleFileExtensions": [
       "web.js",
@@ -105,7 +106,7 @@
     "jsstore": "^4.4.3",
     "mini-css-extract-plugin": "^2.4.5",
     "node-fetch": "^3.2.10",
-    "node-gyp": "^9.1.0",
+    "node-gyp": "^9.3.0",
     "node-sass": "^7.0.1",
     "postcss": "^8.4.4",
     "postcss-flexbugs-fixes": "^5.0.2",
@@ -142,7 +143,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "jest",
+    "test": "jest src/api/polkadot.test.js",
     "electron": "concurrently \"node scripts/start.js\" \"wait-on http://localhost:3000 && electron .\"",
     "dist-win32": "electron-builder --win --ia32",
     "dist-win64": "electron-builder --win --x64",
